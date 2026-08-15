@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>青甘环线自驾旅行规划</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --accent: #c0542b;
+    --accent2: #2a7a6b;
+    --accent3: #b8860b;
+    --red: #d64545;
+    --green: #3a9d6e;
+    --text: #1a1816;
+    --text2: #4a4540;
+    --muted: #9a9288;
+    --border: #e8e4de;
+    --border-light: #f0ece6;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+    --shadow-lg: 0 4px 20px rgba(0,0,0,0.06);
+    --radius: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 16px; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    min-height: 100dvh;
+    line-height: 1.6;
+  }
+
+  /* ===== Header ===== */
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.92);
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px 20px 0;
+  }
+  .site-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .site-sub {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  /* ===== Tab Nav ===== */
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 4px;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    background: none;
+    border: none;
+    padding: 10px 16px 12px;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.25s;
+    border-bottom: 2px solid transparent;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+  }
+  .tab-btn:hover { color: var(--text2); }
+  .tab-btn.active {
+    color: var(--accent);
+    font-weight: 600;
+    border-bottom-color: var(--accent);
+  }
+
+  /* ===== Content Area ===== */
+  .content-area {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+  }
+  .tab-panel {
+    display: none;
+    animation: fadeIn 0.35s ease;
+  }
+  .tab-panel.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== Common Cards ===== */
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .card-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  /* ===== Section 1: Route Overview ===== */
+  .route-list { position: relative; }
+  .route-line {
+    position: absolute;
+    left: 15px;
+    top: 18px;
+    bottom: 18px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--accent2), var(--accent3), var(--red), var(--green));
+    border-radius: 2px;
+  }
+  .route-stop {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+    position: relative;
+  }
+  .route-dot {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .route-dot span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--surface);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .route-dot span.g { background: var(--accent2); box-shadow: 0 0 0 2px var(--accent2); }
+  .route-dot span.r { background: var(--red); box-shadow: 0 0 0 2px var(--red); }
+  .route-dot span.gold { background: var(--accent3); box-shadow: 0 0 0 2px var(--accent3); }
+  .route-dot span.grn { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+
+  .route-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border-light);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .route-info:hover { background: #f5f0ea; border-color: var(--border); }
+  .route-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .route-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+  .route-date {
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+    padding-left: 12px;
+    border-left: 1px solid var(--border-light);
+  }
+
+  .meta-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .pill {
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    font-weight: 500;
+  }
+  .pill.accent { border-color: rgba(192,84,43,0.3); color: var(--accent); background: rgba(192,84,43,0.05); }
+
+  /* ===== Section 2: Daily Itinerary ===== */
+  .day-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 0;
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: background 0.2s;
+  }
+  .day-header:hover { background: var(--bg); }
+  .day-date-block {
+    text-align: center;
+    flex-shrink: 0;
+    width: 56px;
+  }
+  .day-date-block .month {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .day-date-block .num {
+    font-family: 'DM Mono', monospace;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+  .day-date-block .label {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .day-date-block.warn .num { color: var(--red); }
+
+  .day-mid {
+    flex: 1;
+    min-width: 0;
+  }
+  .day-title-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .day-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .dtag {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-weight: 500;
+  }
+  .dtag.o { background: rgba(192,84,43,0.08); color: var(--accent); }
+  .dtag.t { background: rgba(42,122,107,0.08); color: var(--accent2); }
+  .dtag.g { background: rgba(184,134,11,0.08); color: var(--accent3); }
+  .dtag.r { background: rgba(214,69,69,0.08); color: var(--red); }
+
+  .day-strength {
+    flex-shrink: 0;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: right;
+    width: 70px;
+  }
+  .day-strength .stars { font-size: 14px; letter-spacing: 1px; }
+  .day-strength .lbl { font-size: 10px; color: var(--muted); }
+
+  .day-chevron {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+    color: var(--muted);
+  }
+  .day-card.open .day-chevron { transform: rotate(180deg); }
+
+  .day-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+  .day-card.open .day-body {
+    max-height: 600px;
+  }
+  .day-body-inner {
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border-light);
+    margin: 0 -20px;
+    padding: 16px 20px 20px;
+  }
+  .day-desc {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.9;
+  }
+  .day-desc strong { color: var(--text); font-weight: 600; }
+  .day-desc em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .day-accom {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-light);
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .day-accom span { display: flex; align-items: center; gap: 4px; }
+
+  /* ===== Section 3: Driving Intensity ===== */
+  .bar-chart { display: flex; flex-direction: column; gap: 14px; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .bar-label {
+    width: 60px;
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 34px;
+    background: var(--bg);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    position: relative;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    min-width: 48px;
+  }
+  .bar-fill.l1 { width: 20%; background: linear-gradient(90deg, #6ec89b, #8ad4b0); }
+  .bar-fill.l2 { width: 40%; background: linear-gradient(90deg, #f0a848, #f5bf6a); }
+  .bar-fill.l3 { width: 60%; background: linear-gradient(90deg, #e88840, #eda060); }
+  .bar-fill.l4 { width: 80%; background: linear-gradient(90deg, #e06050, #e88070); }
+  .bar-fill.l5 {
+    width: 100%;
+    background: linear-gradient(90deg, #d04040, #e06050);
+    animation: barPulse 2s ease infinite;
+  }
+  @keyframes barPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+  }
+  .bar-route {
+    width: 180px;
+    font-size: 12px;
+    color: var(--text2);
+    flex-shrink: 0;
+    padding-left: 4px;
+  }
+  .bar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-light);
+  }
+  .bar-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .bar-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+  }
+
+  /* ===== Section 4: Priority ===== */
+  .tier {
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .tier.s { border-left: 4px solid var(--accent); }
+  .tier.a { border-left: 4px solid var(--accent2); }
+  .tier.b { border-left: 4px solid var(--border); }
+
+  .tier-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .tier-badge {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 900;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .tier.s .tier-badge { background: var(--accent); }
+  .tier.a .tier-badge { background: var(--accent2); }
+  .tier.b .tier-badge { background: var(--muted); }
+  .tier-label-text {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .tier.s .tier-label-text { color: var(--accent); }
+  .tier.a .tier-label-text { color: var(--accent2); }
+  .tier.b .tier-label-text { color: var(--muted); }
+  .tier-sub-text {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .spots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .spot {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: transform 0.2s;
+  }
+  .spot:hover { transform: scale(1.03); }
+  .tier.s .spot { background: rgba(192,84,43,0.06); color: var(--accent); border: 1px solid rgba(192,84,43,0.15); }
+  .tier.a .spot { background: rgba(42,122,107,0.06); color: var(--accent2); border: 1px solid rgba(42,122,107,0.15); }
+  .tier.b .spot { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+  .spot-icon { font-size: 16px; }
+  .tier-note {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--muted);
+    padding-left: 12px;
+    border-left: 3px solid var(--border-light);
+    line-height: 1.7;
+  }
+
+  /* ===== Section 5: Key Dates ===== */
+  .timeline { position: relative; padding-left: 36px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 13px;
+    top: 16px;
+    bottom: 16px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent3), var(--green), var(--accent), var(--red), var(--green));
+    border-radius: 2px;
+  }
+  .tl-node {
+    position: relative;
+    padding: 14px 0;
+  }
+  .tl-node::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 22px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 3px solid var(--accent3);
+    background: var(--surface);
+    z-index: 2;
+  }
+  .tl-node.red::before { border-color: var(--red); }
+  .tl-node.green::before { border-color: var(--green); }
+  .tl-node.orange::before { border-color: var(--accent); }
+
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent3);
+    font-weight: 500;
+    margin-bottom: 3px;
+    letter-spacing: 0.5px;
+  }
+  .tl-node.red .tl-date { color: var(--red); }
+  .tl-node.green .tl-date { color: var(--green); }
+  .tl-node.orange .tl-date { color: var(--accent); }
+
+  .tl-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .tl-desc {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+  .tl-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-top: 6px;
+    letter-spacing: 0.5px;
+  }
+  .tl-badge.warn { background: rgba(214,69,69,0.08); color: var(--red); border: 1px solid rgba(214,69,69,0.2); }
+  .tl-badge.ok { background: rgba(58,157,110,0.08); color: var(--green); border: 1px solid rgba(58,157,110,0.2); }
+  .tl-badge.info { background: rgba(192,84,43,0.06); color: var(--accent); border: 1px solid rgba(192,84,43,0.15); }
+
+  /* ===== Ten Principles ===== */
+  .principles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .principle {
+    display: flex;
+    gap: 10px;
+    padding: 12px 14px;
+    background: var(--bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+  }
+  .principle-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    flex-shrink: 0;
+    width: 22px;
+  }
+  .principle-text {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  /* ===== Mobile Responsive ===== */
+  @media (max-width: 640px) {
+    .header-inner { padding: 16px 16px 0; }
+    .site-title { font-size: 18px; letter-spacing: 2px; }
+    .site-sub { font-size: 11px; }
+    .tab-btn { font-size: 12px; padding: 8px 12px 10px; }
+    .content-area { padding: 16px 12px 48px; }
+    .card { padding: 20px 16px; }
+    .route-info { padding: 8px 12px; gap: 8px; }
+    .route-name { font-size: 13px; }
+    .route-date { font-size: 10px; padding-left: 8px; }
+    .route-num { font-size: 12px; width: 24px; }
+
+    .day-header { padding: 14px 14px; gap: 10px; }
+    .day-date-block { width: 44px; }
+    .day-date-block .num { font-size: 20px; }
+    .day-title-text { font-size: 14px; }
+    .day-strength { width: auto; font-size: 11px; }
+    .day-strength .lbl { display: none; }
+    .day-body-inner { padding: 14px 14px 16px; margin: 0 -14px; }
+    .day-desc { font-size: 12px; }
+    .day-accom { flex-direction: column; gap: 4px; }
+    .day-chevron { display: none; }
+
+    .bar-row { gap: 8px; }
+    .bar-label { width: 48px; font-size: 12px; }
+    .bar-track { height: 28px; }
+    .bar-fill { font-size: 11px; padding-right: 8px; }
+    .bar-route { width: 100px; font-size: 11px; }
+    .bar-legend { gap: 10px; flex-wrap: wrap; }
+    .bar-legend-item { font-size: 10px; }
+
+    .tier { padding: 18px 16px; }
+    .spot { font-size: 12px; padding: 6px 12px; }
+
+    .timeline { padding-left: 30px; }
+    .tl-node::before { left: -22px; width: 12px; height: 12px; }
+    .tl-title { font-size: 15px; }
+    .tl-desc { font-size: 12px; }
+
+    .principles-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 380px) {
+    .tab-btn { font-size: 11px; padding: 7px 10px 9px; }
+    .site-title { font-size: 16px; }
+    .bar-route { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Header & Nav ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="site-title">青甘环线 · 自驾旅行</div>
+    <div class="site-sub">西安 → 西宁 → 青甘环线 → 西安 → 深圳 | 9月29日 — 10月7日 | 4人 · SUV</div>
+    <nav class="tab-nav" id="tabNav">
+      <button class="tab-btn active" data-tab="route">路线总览</button>
+      <button class="tab-btn" data-tab="daily">每日行程</button>
+      <button class="tab-btn" data-tab="drive">驾驶强度</button>
+      <button class="tab-btn" data-tab="priority">景点优先级</button>
+      <button class="tab-btn" data-tab="timeline">关键节点</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== Content ===== -->
+<main class="content-area">
+
+  <!-- === Tab 1: Route Overview === -->
+  <section class="tab-panel active" id="panel-route">
+    <div class="meta-pills">
+      <span class="pill">📅 9月29日 — 10月7日</span>
+      <span class="pill">👥 4人</span>
+      <span class="pill accent">🚗 SUV自驾</span>
+      <span class="pill">🏔️ 第一次高原自驾</span>
+      <span class="pill">🔄 2人轮换驾驶</span>
+    </div>
+    <div class="card">
+      <div class="route-list">
+        <div class="route-line"></div>
+
+        <div class="route-stop">
+          <div class="route-dot"><span></span></div>
+          <div class="route-info">
+            <div class="route-num">01</div>
+            <div class="route-name">西安 → 西宁（火车夜行）</div>
+            <div class="route-date">9月29日晚</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span class="g"></span></div>
+          <div class="route-info">
+            <div class="route-num">02</div>
+            <div class="route-name">西宁 · 租车采购 → 祁连方向</div>
+            <div class="route-date">9月30日</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span></span></div>
+          <div class="route-info">
+            <div class="route-num">03</div>
+            <div class="route-name">祁连山草原</div>
+            <div class="route-date">10月1日</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span class="gold"></span></div>
+          <div class="route-info">
+            <div class="route-num">04</div>
+            <div class="route-name">张掖 · 七彩丹霞</div>
+            <div class="route-date">10月1—2日</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span></span></div>
+          <div class="route-info">
+            <div class="route-num">05</div>
+            <div class="route-name">大地之子（戈壁雕塑）</div>
+            <div class="route-date">10月2日</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span class="r"></span></div>
+          <div class="route-info">
+            <div class="route-num">06</div>
+            <div class="route-name">敦煌 · 莫高窟 · 鸣沙山月牙泉</div>
+            <div class="route-date">10月2—3日</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span class="g"></span></div>
+          <div class="route-info">
+            <div class="route-num">07</div>
+            <div class="route-name">翡翠湖</div>
+            <div class="route-date">10月4日</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span></span></div>
+          <div class="route-info">
+            <div class="route-num">08</div>
+            <div class="route-name">大柴旦（住宿中转）</div>
+            <div class="route-date">10月4日</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span class="gold"></span></div>
+          <div class="route-info">
+            <div class="route-num">09</div>
+            <div class="route-name">茶卡盐湖</div>
+            <div class="route-date">10月5日</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span class="r"></span></div>
+          <div class="route-info">
+            <div class="route-num">10</div>
+            <div class="route-name">青海湖</div>
+            <div class="route-date">10月5日</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span class="r"></span></div>
+          <div class="route-info">
+            <div class="route-num">11</div>
+            <div class="route-name">西宁（当晚必须抵达）</div>
+            <div class="route-date">10月5日晚</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span class="g"></span></div>
+          <div class="route-info">
+            <div class="route-num">12</div>
+            <div class="route-name">西宁还车 → 西安（高铁/飞机）</div>
+            <div class="route-date">10月6日</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="route-dot"><span class="grn"></span></div>
+          <div class="route-info">
+            <div class="route-num">13</div>
+            <div class="route-name">西安 → 深圳（返程）</div>
+            <div class="route-date">10月7日</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Tab 2: Daily Itinerary === -->
+  <section class="tab-panel" id="panel-daily">
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-date-block"><div class="month">9月</div><div class="num">29</div><div class="label">DAY 1</div></div>
+        <div class="day-mid">
+          <div class="day-title-text">西安 → 西宁（火车夜行）</div>
+          <div class="day-tags"><span class="dtag o">🚂 火车</span><span class="dtag o">😴 休息</span></div>
+        </div>
+        <div class="day-strength"><div class="stars">—</div><div class="lbl">无驾驶</div></div>
+        <div class="day-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="day-body"><div class="day-body-inner">
+        <div class="day-desc">22:00 左右西安乘火车前往西宁，晚上火车上休息。不安排其他行程，主要休息，为第二天高原自驾做准备。</div>
+        <div class="day-accom"><span>🛏 住宿：火车</span></div>
+      </div></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-date-block"><div class="month">9月</div><div class="num">30</div><div class="label">DAY 2</div></div>
+        <div class="day-mid">
+          <div class="day-title-text">抵达西宁 · 租车采购 → 祁连方向</div>
+          <div class="day-tags"><span class="dtag t">🚗 租车</span><span class="dtag t">🛒 采购</span><span class="dtag t">🏔️ 适应高原</span></div>
+        </div>
+        <div class="day-strength"><div class="stars">⭐⭐</div><div class="lbl">轻松</div></div>
+        <div class="day-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="day-body"><div class="day-body-inner">
+        <div class="day-desc">早上抵达西宁。<strong>09:00–10:00</strong> 车辆检查（轮胎、备胎、刹车、灯光等）；<strong>10:00–12:00</strong> 采购自驾物资；<strong>12:00–13:00</strong> 午餐；<strong>13:00–14:00</strong> 整理车辆。14:00 左右正式出发，今天不安排必须打卡的景点，重点是<em>熟悉SUV、适应高原环境、熟悉高原道路</em>，欣赏沿途风景（草原、山谷、公路、牛羊）。傍晚根据状态选择住宿点。</div>
+        <div class="day-accom"><span>🛏 住宿：祁连方向 / 祁连县</span><span>📊 驾驶强度 ⭐⭐</span></div>
+      </div></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-date-block"><div class="month">10月</div><div class="num">01</div><div class="label">DAY 3</div></div>
+        <div class="day-mid">
+          <div class="day-title-text">祁连山草原 → 张掖</div>
+          <div class="day-tags"><span class="dtag o">🌾 祁连山草原</span><span class="dtag o">📸 沿途拍摄</span></div>
+        </div>
+        <div class="day-strength"><div class="stars">⭐⭐⭐</div><div class="lbl">适中</div></div>
+        <div class="day-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="day-body"><div class="day-body-inner">
+        <div class="day-desc"><strong>08:30</strong> 出发进入祁连山草原区域。<strong>09:00–13:00</strong> 重点体验祁连山、草原、雪山、牛羊、河谷、公路，拍摄草原公路、雪山远景、人物照。<em>今天不要追求景点数量，重在享受沿途风景</em>。13:00 沿途午餐，14:00 前往张掖，18:00 左右抵达。</div>
+        <div class="day-accom"><span>🛏 住宿：张掖</span><span>📊 驾驶强度 ⭐⭐⭐</span></div>
+      </div></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-date-block"><div class="month">10月</div><div class="num">02</div><div class="label">DAY 4</div></div>
+        <div class="day-mid">
+          <div class="day-title-text">七彩丹霞 → 大地之子 → 敦煌</div>
+          <div class="day-tags"><span class="dtag g">🌈 七彩丹霞</span><span class="dtag g">🗿 大地之子</span><span class="dtag g">🏜️ 戈壁</span></div>
+        </div>
+        <div class="day-strength"><div class="stars">⭐⭐⭐⭐</div><div class="lbl">较重</div></div>
+        <div class="day-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="day-body"><div class="day-body-inner">
+        <div class="day-desc"><strong>08:30–12:00</strong> 游览七彩丹霞，重点拍摄彩色丹霞山体、观景台、山谷、远景、人物照。建议重点游览主要观景台，不每个都久留，控制时间。12:00 午餐。13:00 出发前往大地之子，约16:00到达，停留30–60分钟，拍摄大地之子、戈壁、荒漠、公路、人物合影。17:00 继续前往敦煌，约20:00–21:00抵达。</div>
+        <div class="day-accom"><span>🛏 住宿：敦煌</span><span>📊 驾驶强度 ⭐⭐⭐⭐</span></div>
+      </div></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-date-block"><div class="month">10月</div><div class="num">03</div><div class="label">DAY 5</div></div>
+        <div class="day-mid">
+          <div class="day-title-text">莫高窟 · 鸣沙山月牙泉</div>
+          <div class="day-tags"><span class="dtag t">🏛️ 莫高窟</span><span class="dtag t">🐫 鸣沙山</span><span class="dtag t">🌅 沙漠日落</span></div>
+        </div>
+        <div class="day-strength"><div class="stars">⭐</div><div class="lbl">轻松</div></div>
+        <div class="day-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="day-body"><div class="day-body-inner">
+        <div class="day-desc">上午游览莫高窟（需提前预约，具体时间以票为准），建议3–4小时，重点数字展示、石窟、壁画、佛像、敦煌文化。12:30 返回市区午餐，13:30–15:00 酒店休息。<strong>15:30–18:30</strong> 鸣沙山月牙泉，拍摄沙漠、月牙泉、沙丘、驼队。<em>傍晚重点：鸣沙山日落，不要提前离开</em>，根据日落时间调整停留。19:00 返回，19:30 晚餐（敦煌特色美食）。</div>
+        <div class="day-accom"><span>🛏 住宿：敦煌</span><span>📊 驾驶强度 ⭐（市区）</span></div>
+      </div></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-date-block"><div class="month">10月</div><div class="num">04</div><div class="label">DAY 6</div></div>
+        <div class="day-mid">
+          <div class="day-title-text">敦煌 → 翡翠湖 → 大柴旦</div>
+          <div class="day-tags"><span class="dtag o">💎 翡翠湖</span><span class="dtag o">🧂 盐湖</span></div>
+        </div>
+        <div class="day-strength"><div class="stars">⭐⭐⭐⭐</div><div class="lbl">较重</div></div>
+        <div class="day-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="day-body"><div class="day-body-inner">
+        <div class="day-desc"><strong>08:00</strong> 退房出发。上午至下午前往翡翠湖，驾驶原则：两人轮换，每2小时休息，不疲劳驾驶，沿途需停则停。12:00 左右途中午餐。<strong>14:00–17:00</strong> 游览翡翠湖，拍摄翡翠湖、盐湖、倒影、盐滩、戈壁、远山、人物照，预留充足拍照时间。17:00 出发前往大柴旦，18:00–19:00 抵达。</div>
+        <div class="day-accom"><span>🛏 住宿：大柴旦</span><span>📊 驾驶强度 ⭐⭐⭐⭐</span></div>
+      </div></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-date-block warn"><div class="month">10月</div><div class="num">05</div><div class="label">DAY 7 ⚠️</div></div>
+        <div class="day-mid">
+          <div class="day-title-text">茶卡盐湖 → 青海湖 → 西宁</div>
+          <div class="day-tags"><span class="dtag r">🪞 茶卡盐湖</span><span class="dtag r">🏞️ 青海湖</span><span class="dtag r">⚡ 硬目标</span></div>
+        </div>
+        <div class="day-strength"><div class="stars">⭐⭐⭐⭐⭐</div><div class="lbl" style="color:var(--red)">最重</div></div>
+        <div class="day-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="day-body"><div class="day-body-inner">
+        <div class="day-desc"><strong>07:30</strong> 大柴旦出发。上午前往茶卡盐湖。<strong>11:00</strong> 到达，11:00–13:00 游览，拍摄盐湖、倒影、天空、盐地、远山。茶卡依赖天气，若不好不建议久等。13:00 午餐。<strong>14:00</strong> 茶卡→青海湖，15:30–17:00 游览青海湖。<strong>17:00</strong> 直接前往西宁，不再增加景点，约20:00–21:00抵达。<em>今日硬目标：10月5日晚必须回到西宁。</em></div>
+        <div class="day-accom"><span>🛏 住宿：西宁</span><span>📊 驾驶强度 ⭐⭐⭐⭐⭐（全程最重）</span></div>
+      </div></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-date-block"><div class="month">10月</div><div class="num">06</div><div class="label">DAY 8</div></div>
+        <div class="day-mid">
+          <div class="day-title-text">西宁还车 → 西安</div>
+          <div class="day-tags"><span class="dtag t">🚗 还车</span><span class="dtag t">🚄 高铁/飞机</span></div>
+        </div>
+        <div class="day-strength"><div class="stars">⭐⭐</div><div class="lbl">轻松</div></div>
+        <div class="day-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="day-body"><div class="day-body-inner">
+        <div class="day-desc"><strong>09:30</strong> 前往租车点，<strong>10:00</strong> 完成还车（加油、清理车辆、检查行李、检查车内物品）。交通推荐：首选高铁（西宁→西安北），时间稳定、行李方便、不易延误。<em>今日不安排景点，不逛街，不夜间活动</em>，提前准备次日返程。建议住宿选西安机场附近或交通方便位置。</div>
+        <div class="day-accom"><span>🛏 住宿：西安（机场附近）</span><span>📊 驾驶强度 ⭐⭐</span></div>
+      </div></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-date-block"><div class="month">10月</div><div class="num">07</div><div class="label">DAY 9</div></div>
+        <div class="day-mid">
+          <div class="day-title-text">西安 → 深圳</div>
+          <div class="day-tags"><span class="dtag g">✈️ 返程</span><span class="dtag g">🏠 旅行结束</span></div>
+        </div>
+        <div class="day-strength"><div class="stars">—</div><div class="lbl">返程</div></div>
+        <div class="day-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="day-body"><div class="day-body-inner">
+        <div class="day-desc">上午早餐、退房、前往机场，根据航班时间提前办理值机，飞往深圳。旅行结束。</div>
+        <div class="day-accom"><span>🏠 旅行结束</span></div>
+      </div></div>
+    </div>
+
+  </section>
+
+  <!-- === Tab 3: Driving Intensity === -->
+  <section class="tab-panel" id="panel-drive">
+    <div class="card">
+      <div class="card-title">每日驾驶强度对比</div>
+      <div class="card-sub">9月30日 — 10月6日 · 颜色越红 = 驾驶强度越大</div>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label">9/30</div>
+          <div class="bar-track"><div class="bar-fill l2">⭐⭐</div></div>
+          <div class="bar-route">西宁 → 祁连方向</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">10/1</div>
+          <div class="bar-track"><div class="bar-fill l3">⭐⭐⭐</div></div>
+          <div class="bar-route">祁连 → 张掖</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">10/2</div>
+          <div class="bar-track"><div class="bar-fill l4">⭐⭐⭐⭐</div></div>
+          <div class="bar-route">张掖 → 敦煌</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">10/3</div>
+          <div class="bar-track"><div class="bar-fill l1">⭐</div></div>
+          <div class="bar-route">敦煌市区</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">10/4</div>
+          <div class="bar-track"><div class="bar-fill l4">⭐⭐⭐⭐</div></div>
+          <div class="bar-route">敦煌 → 翡翠湖 → 大柴旦</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">10/5</div>
+          <div class="bar-track"><div class="bar-fill l5">⭐⭐⭐⭐⭐</div></div>
+          <div class="bar-route">大柴旦 → 茶卡 → 青海湖 → 西宁</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">10/6</div>
+          <div class="bar-track"><div class="bar-fill l2">⭐⭐</div></div>
+          <div class="bar-route">西宁 → 西安（高铁/飞机）</div>
+        </div>
+      </div>
+      <div class="bar-legend">
+        <div class="bar-legend-item"><div class="bar-legend-dot" style="background:#7dd4a8"></div> 轻松</div>
+        <div class="bar-legend-item"><div class="bar-legend-dot" style="background:#f0a848"></div> 适中</div>
+        <div class="bar-legend-item"><div class="bar-legend-dot" style="background:#e88840"></div> 较重</div>
+        <div class="bar-legend-item"><div class="bar-legend-dot" style="background:#e06050"></div> 重</div>
+        <div class="bar-legend-item"><div class="bar-legend-dot" style="background:#d04040"></div> 最重</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-title">自驾十条原则</div>
+      <div class="card-sub">第一次高原自驾，安全第一</div>
+      <div class="principles-grid">
+        <div class="principle"><div class="principle-num">01</div><div class="principle-text">两名司机轮换驾驶</div></div>
+        <div class="principle"><div class="principle-num">02</div><div class="principle-text">单人连续驾驶控制在2–3小时</div></div>
+        <div class="principle"><div class="principle-num">03</div><div class="principle-text">每隔约2小时安排休息</div></div>
+        <div class="principle"><div class="principle-num">04</div><div class="principle-text">不疲劳驾驶</div></div>
+        <div class="principle"><div class="principle-num">05</div><div class="principle-text">不为增加景点强行赶夜路</div></div>
+        <div class="principle"><div class="principle-num">06</div><div class="principle-text">以身体状态为准调整行程</div></div>
+        <div class="principle"><div class="principle-num">07</div><div class="principle-text">明显不适及时休息并寻求医疗</div></div>
+        <div class="principle"><div class="principle-num">08</div><div class="principle-text">10月5日优先保证回到西宁</div></div>
+        <div class="principle"><div class="principle-num">09</div><div class="principle-text">10月6日不再安排景点</div></div>
+        <div class="principle"><div class="principle-num">10</div><div class="principle-text">10月7日正常返程</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Tab 4: Priority === -->
+  <section class="tab-panel" id="panel-priority">
+    <div class="tier s">
+      <div class="tier-head">
+        <div class="tier-badge">S</div>
+        <div><div class="tier-label-text">S 级 · 核心景点</div><div class="tier-sub-text">必须优先保证时间，不可跳过</div></div>
+      </div>
+      <div class="spots">
+        <div class="spot"><span class="spot-icon">🌾</span> 祁连山草原</div>
+        <div class="spot"><span class="spot-icon">🌈</span> 七彩丹霞</div>
+        <div class="spot"><span class="spot-icon">🗿</span> 大地之子</div>
+        <div class="spot"><span class="spot-icon">🏛️</span> 莫高窟</div>
+        <div class="spot"><span class="spot-icon">🐫</span> 鸣沙山月牙泉</div>
+        <div class="spot"><span class="spot-icon">💎</span> 翡翠湖</div>
+        <div class="spot"><span class="spot-icon">🏞️</span> 青海湖</div>
+      </div>
+    </div>
+
+    <div class="tier a">
+      <div class="tier-head">
+        <div class="tier-badge">A</div>
+        <div><div class="tier-label-text">A 级 · 时间允许即可前往</div><div class="tier-sub-text">天气好、状态好时顺路游览</div></div>
+      </div>
+      <div class="spots">
+        <div class="spot"><span class="spot-icon">🪞</span> 茶卡盐湖</div>
+        <div class="spot"><span class="spot-icon">🌿</span> 沿途草原</div>
+        <div class="spot"><span class="spot-icon">🏔️</span> 沿途雪山</div>
+        <div class="spot"><span class="spot-icon">🛣️</span> 西北公路</div>
+      </div>
+      <div class="tier-note">茶卡盐湖依赖天气，天气不好不建议久等</div>
+    </div>
+
+    <div class="tier b">
+      <div class="tier-head">
+        <div class="tier-badge">B</div>
+        <div><div class="tier-label-text">B 级 · 不建议为它们赶路</div><div class="tier-sub-text">路过看看即可，不要因此耽误主行程</div></div>
+      </div>
+      <div class="spots">
+        <div class="spot"><span class="spot-icon">📍</span> 其他小景点</div>
+        <div class="spot"><span class="spot-icon">📍</span> 临时增加的打卡点</div>
+        <div class="spot"><span class="spot-icon">📍</span> 非核心观景台</div>
+      </div>
+      <div class="tier-note">第一次高原自驾，以身体状态为准。若出现明显不适，及时休息并寻求医疗帮助。</div>
+    </div>
+  </section>
+
+  <!-- === Tab 5: Key Timeline === -->
+  <section class="tab-panel" id="panel-timeline">
+    <div class="card">
+      <div class="card-title">五个关键时间节点</div>
+      <div class="card-sub">行程中不可变动的硬性时间要求</div>
+      <div class="timeline">
+
+        <div class="tl-node orange">
+          <div class="tl-date">09/29 · 22:00</div>
+          <div class="tl-title">西安乘火车前往西宁</div>
+          <div class="tl-desc">晚上火车上休息，为第二天高原自驾做准备。提前准备好租车、采购所需证件和物品。</div>
+          <div class="tl-badge info">出发起点</div>
+        </div>
+
+        <div class="tl-node">
+          <div class="tl-date">09/30 · 14:00</div>
+          <div class="tl-title">西宁采购完成，正式开始自驾</div>
+          <div class="tl-desc">完成车辆检查、物资采购、行李装车，14:00 左右从西宁出发前往祁连方向。</div>
+          <div class="tl-badge ok">自驾正式启动</div>
+        </div>
+
+        <div class="tl-node red">
+          <div class="tl-date">10/05 · 晚</div>
+          <div class="tl-title">必须回到西宁住宿</div>
+          <div class="tl-desc">全天行程最重（大柴旦→茶卡盐湖→青海湖→西宁），驾驶强度五星。不临时增加远距离景点，17:00 后直接前往西宁，约20:00–21:00 抵达。</div>
+          <div class="tl-badge warn">硬目标 · 不可违反</div>
+        </div>
+
+        <div class="tl-node red">
+          <div class="tl-date">10/06 · 晚</div>
+          <div class="tl-title">必须到达西安</div>
+          <div class="tl-desc">10:00 左右还车，首选高铁（西宁→西安北）。今日不安排任何景点，不逛街，不夜间活动。建议住宿选西安机场附近。</div>
+          <div class="tl-badge warn">硬目标 · 不可违反</div>
+        </div>
+
+        <div class="tl-node green">
+          <div class="tl-date">10/07 · 上午</div>
+          <div class="tl-title">西安 → 深圳 · 飞机返程</div>
+          <div class="tl-desc">上午早餐、退房、前往机场，根据航班时间提前办理值机，飞往深圳。旅行结束。</div>
+          <div class="tl-badge ok">旅行结束</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Tab switching
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      panels.forEach(p => {
+        p.classList.remove('active');
+        if (p.id === 'panel-' + target) {
+          p.classList.add('active');
+          // re-trigger animations
+          p.style.animation = 'none';
+          p.offsetHeight; // reflow
+          p.style.animation = '';
+        }
+      });
+      // scroll active tab into view on mobile
+      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+  });
+
+  // Day card toggle
+  function toggleDay(header) {
+    const card = header.parentElement;
+    card.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
