@@ -150,7 +150,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <span class="pill">🔄 2人轮换</span>
 </div>
 <div class="dashboard">
-<div class="dash-card urgent"><div class="dash-kicker">下一项行动 · 票务</div><div class="dash-title"><span class="dash-time">9/3 07:00</span> 抢莫高窟</div><div class="dash-detail">仅通过“莫高窟参观预约网”实名分时预约。</div></div>
+<div class="dash-card urgent"><div class="dash-kicker" id="nextActionKicker">下一项行动 · 票务</div><div class="dash-title" id="nextActionTitle"><span class="dash-time">9/3 07:00</span> 抢莫高窟</div><div class="dash-detail" id="nextActionDetail">仅通过“莫高窟参观预约网”实名分时预约。</div></div>
 <div class="dash-card"><div class="dash-kicker">行程起点</div><div class="dash-title">9/29 西安 → 西宁</div><div class="dash-detail">22:00 左右乘火车，今晚以休息为主。</div></div>
 <div class="dash-card"><div class="dash-kicker">住宿确认</div><div class="dash-title">首晚 · 火车</div><div class="dash-detail">9/30 抵达西宁后租车、采购并前往祁连。</div></div>
 </div>
@@ -956,6 +956,21 @@ t.classList.add("active");
 window.scrollTo(0,sp[t.id]||0);
 });
 function toggleDay(h){h.closest(".day-card").classList.toggle("open")}
+var ticketTasks=[
+  {at:"2026-09-03T07:00:00",time:"9/3 07:00",title:"抢莫高窟",detail:"仅通过“莫高窟参观预约网”实名分时预约。"},
+  {at:"2026-09-18T00:00:00",time:"9/18 起",title:"预约鸣沙山月牙泉",detail:"通过“鸣沙山月牙泉”公众号或“游敦煌”小程序锁定下午入园。"},
+  {at:"2026-09-28T00:00:00",time:"9/28 起",title:"核对茶卡盐湖放票",detail:"查看“茶卡盐湖 / 西矿智旅”官方渠道。"},
+  {at:"2026-09-29T00:00:00",time:"9/29 00:00",title:"预约青海湖二郎剑",detail:"通过“智游青海湖”小程序预约。"},
+  {at:"2026-09-30T00:00:00",time:"9/30 起",title:"核对七彩丹霞放票",detail:"查看官方公众号或正规 OTA，最迟10/1锁定。"},
+  {at:"2026-10-01T00:00:00",time:"10/1",title:"核验翡翠湖与道路",detail:"复核景区和道路公告后再购票。"}
+];
+function updateNextAction(){
+  var now=new Date(),next=ticketTasks.find(function(task){return now<new Date(task.at)}),k=document.getElementById("nextActionKicker"),t=document.getElementById("nextActionTitle"),d=document.getElementById("nextActionDetail");
+  if(next){k.textContent="下一项行动 · 票务";t.innerHTML='<span class="dash-time">'+next.time+'</span> '+next.title;d.textContent=next.detail;return}
+  if(now<new Date("2026-10-08T00:00:00")){k.textContent="行程进行中";t.textContent="查看今日行程";d.textContent="根据当天时间、天气与路况调整安排。";return}
+  k.textContent="旅行结束";t.textContent="青甘环线已完成";d.textContent="保留行程与票务记录，方便回顾。";
+}
+updateNextAction();setInterval(updateNextAction,60000);
 </script>
 </body>
 </html>
