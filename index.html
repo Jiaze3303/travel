@@ -31,6 +31,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:20px 16px;box-shadow:var(--shadow);margin-bottom:14px}
 .card-title{font-size:16px;font-weight:700;margin-bottom:14px;color:var(--text)}
 .route-list{position:relative}
+.route-list{display:none}
 .route-line{position:absolute;left:14px;top:16px;bottom:16px;width:2px;background:linear-gradient(180deg,var(--accent),var(--accent2),var(--accent3),var(--red),var(--green));border-radius:2px}
 .route-stop{display:flex;align-items:center;gap:12px;padding:7px 0;position:relative}
 .route-dot{width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:2}
@@ -114,6 +115,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .ticket-table td:first-child{font-weight:700;color:var(--text)}
 .ticket-table .buy-date{color:var(--accent);font-weight:800;white-space:nowrap}
 .ticket-risk{margin-top:12px;padding:11px 12px;border-radius:10px;background:rgba(214,69,69,.06);border:1px solid rgba(214,69,69,.16);font-size:12px;color:var(--text2);line-height:1.7}
+.dashboard{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.dash-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;box-shadow:var(--shadow)}.dash-card.urgent{grid-column:1/-1;border-color:rgba(192,84,43,.34);background:linear-gradient(135deg,#fff,#fff7f2)}.dash-kicker{font-size:10px;color:var(--muted);letter-spacing:.8px;font-weight:700}.dash-title{font-size:15px;font-weight:800;margin:3px 0;color:var(--text)}.dash-detail{font-size:12px;color:var(--text2);line-height:1.55}.dash-time{color:var(--accent);font-weight:800}.day-route{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;overflow:hidden;box-shadow:var(--shadow)}.day-route summary{list-style:none;display:flex;align-items:center;gap:10px;padding:14px;cursor:pointer}.day-route summary::-webkit-details-marker{display:none}.route-day{width:40px;height:40px;display:grid;place-items:center;border-radius:10px;background:rgba(192,84,43,.09);color:var(--accent);font-size:11px;font-weight:800;line-height:1.2;text-align:center;flex-shrink:0}.route-copy{min-width:0;flex:1}.route-head{font-size:13px;font-weight:800;line-height:1.35}.route-sub{font-size:11px;color:var(--muted);margin-top:2px}.route-chevron{color:var(--muted);font-size:12px;transition:transform .2s}.day-route[open] .route-chevron{transform:rotate(180deg)}.route-points{padding:0 14px 13px 64px;color:var(--text2);font-size:12px;line-height:1.7}.ticket-table{display:none}.ticket-stack{display:grid;gap:9px}.ticket-card{background:var(--bg);border:1px solid var(--border-light);border-radius:11px;padding:12px}.ticket-card.critical{border-color:rgba(192,84,43,.3);background:rgba(192,84,43,.05)}.ticket-top{display:flex;align-items:flex-start;gap:10px}.ticket-date{min-width:68px;color:var(--accent);font-size:13px;font-weight:900;line-height:1.25}.ticket-place{font-size:13px;font-weight:800;flex:1}.ticket-visit{display:block;color:var(--muted);font-size:10px;font-weight:500;margin-top:1px}.ticket-action{font-size:12px;color:var(--text2);line-height:1.6;margin:8px 0 0 78px}.ticket-channel{font-size:11px;color:var(--accent2);font-weight:700;margin:6px 0 0 78px}
 @media(max-width:420px){
   .site-title{font-size:17px;letter-spacing:2px}.site-sub{font-size:10px}
   .content-area{padding:10px 8px 80px}.card{padding:16px 12px}
@@ -124,6 +126,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   .day-accom{flex-direction:column;gap:5px}.day-chevron{display:none}
   .tier{padding:14px 12px}.spot{font-size:11px;padding:5px 10px}
   .principles-row{grid-template-columns:1fr}
+  .dashboard{grid-template-columns:1fr}.dash-card.urgent{grid-column:auto}.ticket-action,.ticket-channel{margin-left:0}
 }
 </style>
 </head>
@@ -146,8 +149,20 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <span class="pill">🏔️ 高原自驾</span>
 <span class="pill">🔄 2人轮换</span>
 </div>
+<div class="dashboard">
+<div class="dash-card urgent"><div class="dash-kicker">下一项行动 · 票务</div><div class="dash-title"><span class="dash-time">9/3 07:00</span> 抢莫高窟</div><div class="dash-detail">仅通过“莫高窟参观预约网”实名分时预约。</div></div>
+<div class="dash-card"><div class="dash-kicker">行程起点</div><div class="dash-title">9/29 西安 → 西宁</div><div class="dash-detail">22:00 左右乘火车，今晚以休息为主。</div></div>
+<div class="dash-card"><div class="dash-kicker">住宿确认</div><div class="dash-title">首晚 · 火车</div><div class="dash-detail">9/30 抵达西宁后租车、采购并前往祁连。</div></div>
+</div>
 <div class="card">
-<div class="card-title">🗺️ 完整路线</div>
+<div class="card-title">🗺️ 路线总览</div>
+<details class="day-route" open><summary><span class="route-day">D1<br>–D2</span><span class="route-copy"><span class="route-head">西安 → 西宁 → 祁连</span><span class="route-sub">9/29–9/30 · 火车抵达后开始自驾</span></span><span class="route-chevron">▼</span></summary><div class="route-points">西安 → 西宁 → 祁连方向</div></details>
+<details class="day-route"><summary><span class="route-day">D3</span><span class="route-copy"><span class="route-head">祁连山草原 → 张掖</span><span class="route-sub">10/1 · 沿途风景与草原</span></span><span class="route-chevron">▼</span></summary><div class="route-points">祁连山草原 → 张掖</div></details>
+<details class="day-route"><summary><span class="route-day">D4</span><span class="route-copy"><span class="route-head">七彩丹霞 → 大地之子 → 敦煌</span><span class="route-sub">10/2 · 最迟 15:15 离开大地之子</span></span><span class="route-chevron">▼</span></summary><div class="route-points">七彩丹霞 → 大地之子 → 敦煌</div></details>
+<details class="day-route"><summary><span class="route-day">D5</span><span class="route-copy"><span class="route-head">莫高窟 → 鸣沙山月牙泉</span><span class="route-sub">10/3 · 敦煌市区游览</span></span><span class="route-chevron">▼</span></summary><div class="route-points">莫高窟 → 鸣沙山月牙泉</div></details>
+<details class="day-route"><summary><span class="route-day">D6</span><span class="route-copy"><span class="route-head">敦煌 → 翡翠湖 → 大柴旦</span><span class="route-sub">10/4 · 出发前复核景区与道路公告</span></span><span class="route-chevron">▼</span></summary><div class="route-points">敦煌 → 翡翠湖 → 大柴旦</div></details>
+<details class="day-route"><summary><span class="route-day">D7</span><span class="route-copy"><span class="route-head">大柴旦 → 茶卡 → 青海湖 → 西宁</span><span class="route-sub">10/5 · 硬目标：当晚抵达西宁</span></span><span class="route-chevron">▼</span></summary><div class="route-points">大柴旦 → 茶卡盐湖 → 青海湖 → 西宁</div></details>
+<details class="day-route"><summary><span class="route-day">D8<br>–D9</span><span class="route-copy"><span class="route-head">西宁 → 西安 → 深圳</span><span class="route-sub">10/6–10/7 · 返程，不安排景点</span></span><span class="route-chevron">▼</span></summary><div class="route-points">西宁 → 西安 → 深圳</div></details>
 <div class="route-list">
 <div class="route-line">
 </div>
@@ -884,6 +899,14 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="card">
 <div class="card-title">🎫 2026 国庆票务日历</div>
 <p class="ticket-note">以行程日期计算的最早可买日。节假日规则可能临时调整：请在放票前一周再次核对官方小程序/公众号，不通过“代抢”或非官方渠道购买莫高窟。</p>
+<div class="ticket-stack">
+<article class="ticket-card critical"><div class="ticket-top"><div class="ticket-date">9/3<br>07:00</div><div class="ticket-place">莫高窟<span class="ticket-visit">10/3 游览</span></div></div><div class="ticket-action">提前30天实名分时预约；旺季参观时段以订单为准，建议把鸣沙山安排在下午。</div><div class="ticket-channel">官方：莫高窟参观预约网小程序 / 官网</div></article>
+<article class="ticket-card"><div class="ticket-top"><div class="ticket-date">9/18<br>起</div><div class="ticket-place">鸣沙山月牙泉<span class="ticket-visit">10/3 游览</span></div></div><div class="ticket-action">当前常规提前15天线上实名预约；优先锁定下午入园。若国庆公告改规则，以公告为准。</div><div class="ticket-channel">官方：鸣沙山月牙泉公众号 / 游敦煌小程序</div></article>
+<article class="ticket-card"><div class="ticket-top"><div class="ticket-date">平台放票<br>即买</div><div class="ticket-place">七彩丹霞<span class="ticket-visit">10/2 游览</span></div></div><div class="ticket-action">官方未公布固定提前天数；建议9/30起每天查看，最迟10/1锁定。2026年门票价已调为70元，区间车另计。</div><div class="ticket-channel">官方公众号 / 正规 OTA</div></article>
+<article class="ticket-card"><div class="ticket-top"><div class="ticket-date">10/1<br>核验后</div><div class="ticket-place">翡翠湖<span class="ticket-visit">10/4 游览</span></div></div><div class="ticket-action">不记录固定提前天数；须在出发前72小时和当天复核景区、道路公告，再购票。</div><div class="ticket-channel">景区官方公告</div></article>
+<article class="ticket-card"><div class="ticket-top"><div class="ticket-date">平台放票<br>即买</div><div class="ticket-place">茶卡盐湖<span class="ticket-visit">10/5 游览</span></div></div><div class="ticket-action">官方支持线上实名购票，但未公布固定提前天数；建议9/28起每日查看官方渠道。</div><div class="ticket-channel">官方：茶卡盐湖 / 西矿智旅</div></article>
+<article class="ticket-card"><div class="ticket-top"><div class="ticket-date">9/29<br>00:00</div><div class="ticket-place">青海湖二郎剑<span class="ticket-visit">10/5 游览</span></div></div><div class="ticket-action">常规可提前7天预约；如当天项目或车流不理想，按行程预案取消，确保回西宁。</div><div class="ticket-channel">官方：智游青海湖小程序</div></article>
+</div>
 <table class="ticket-table">
 <thead><tr><th>景点 / 游览日</th><th>最早购买时间</th><th>渠道与执行提示</th></tr></thead>
 <tbody>
