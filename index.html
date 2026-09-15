@@ -130,258 +130,37 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   .dashboard{grid-template-columns:1fr}.dash-card.urgent{grid-column:auto}.ticket-action,.ticket-channel{margin-left:0}
 }
 
-.plan-switch{display:flex;gap:6px;padding:5px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin:0 0 14px;box-shadow:var(--shadow)}
-.plan-switch button{flex:1;border:0;background:transparent;color:var(--muted);font-family:inherit;font-size:12px;font-weight:700;padding:9px 8px;border-radius:8px;cursor:pointer}
-.plan-switch button.active{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(192,84,43,.18)}
-.plan-view{display:none}.plan-view.active{display:block}
-.plan-note{font-size:12px;line-height:1.7;padding:11px 12px;margin-bottom:12px;border-radius:10px;background:rgba(42,122,107,.06);border:1px solid rgba(42,122,107,.15);color:var(--text2)}
-.plan-note strong{color:var(--accent2)}
 .hotel-badge.cancelled{background:rgba(214,69,69,.07);border-color:rgba(214,69,69,.18);color:var(--red);text-decoration:line-through}
-.diff-badge{display:inline-flex;margin-left:6px;padding:2px 7px;border-radius:10px;background:rgba(192,84,43,.1);color:var(--accent);font-size:10px;font-weight:800;vertical-align:middle}
 </style>
-<link rel="preload" as="image" href="assets/images/img-768dae7df7eb.jpg" fetchpriority="high">
+<link as="image" fetchpriority="high" href="assets/images/img-768dae7df7eb.jpg" rel="preload"/>
 </head>
 <body>
 <header class="site-header">
 <div class="header-inner">
 <div class="site-title">青甘环线 · 自驾旅行</div>
-<div class="site-sub" id="siteSub">西安→西宁→青甘环线→西安→深圳 ｜ 2026.9.29—10.7 ｜ 4人·SUV</div>
+<div class="site-sub" id="siteSub">西安→张掖→敦煌→大柴旦→茶卡→青海湖→西宁→西安→深圳 ｜ 2026.9.30—10.7 ｜ 4人·SUV</div>
 </div>
 </header>
 <main class="content-area">
 <section class="tab-panel active" id="panel-route">
 <div class="hero-banner">
-<img alt="青甘风光" / src="assets/images/img-768dae7df7eb.jpg" loading="eager" decoding="async" fetchpriority="high">
-</div><div class="plan-switch" id="planSwitch"><button class="active" data-plan="new" type="button">✨ 新计划</button><button data-plan="original" type="button">📋 原计划</button></div>
+<img alt="青甘风光" decoding="async" fetchpriority="high" loading="eager" src="assets/images/img-768dae7df7eb.jpg"/>
+</div>
 <div class="meta-pills">
-<span class="pill" id="tripDatePill">📅 2026.9.29—10.7</span>
+<span class="pill" id="tripDatePill">📅 2026.9.30—10.7</span>
 <span class="pill">👥 4人</span>
 <span class="pill accent">🚗 SUV自驾</span>
 <span class="pill">🏔️ 高原自驾</span>
 <span class="pill">🔄 2人轮换</span>
 </div>
-<div class="plan-view active" data-plan-view="new">
-<div class="plan-note"><strong>新版调整：</strong>9/30 晚西安出发，10/1 早到西宁后直接取车、采购，经祁连草原前往张掖。取消祁连住宿；10/2 起重新接回原计划。10/5 以回西宁为硬目标，茶卡与青海湖最多二选一。</div>
 <div class="dashboard">
 <div class="dash-card urgent"><div class="dash-kicker" id="nextActionKickerNew">下一项行动 · 票务</div><div class="dash-title" id="nextActionTitleNew"><span class="dash-time">9/3 07:00</span> 抢莫高窟</div><div class="dash-detail" id="nextActionDetailNew">仅通过“莫高窟参观预约网”实名分时预约。</div></div>
-<div class="dash-card"><div class="dash-kicker">行程起点</div><div class="dash-title">9/30 西安 → 西宁</div><div class="dash-detail">晚上乘火车前往西宁，10/1 早上到达后正式开始自驾。</div></div>
-<div class="dash-card"><div class="dash-kicker">关键调整</div><div class="dash-title">10/1 西宁 → 张掖</div><div class="dash-detail">取车采购后经祁连草原直接到张掖；祁连吉缘饭店不再入住。</div></div>
+<div class="dash-card"><div class="dash-kicker">行程起点</div><div class="dash-title">9/30 22:00 · T269</div><div class="dash-detail">西安直接坐到张掖西，10/1 11:31 到站；西宁后继续留在车上看祁连山沿线风景。</div></div>
+<div class="dash-card"><div class="dash-kicker">关键优化</div><div class="dash-title">10/5–10/6 拆分回西宁</div><div class="dash-detail">10/5 住黑马河/青海湖附近；10/6 早上回西宁还车，再乘动车到西安。</div></div>
 </div>
 <div class="card">
-<div class="card-title">🗺️ 路线总览 <span class="diff-badge">新版</span></div>
-<details class="day-route" open=""><summary><span class="route-day">D1</span><span class="route-copy"><span class="route-head">西安 → 西宁</span><span class="route-sub">9/30 · 夜间火车，车上休息</span></span><span class="route-chevron">▼</span></summary><div class="route-points">西安 → 西宁</div></details>
-<details class="day-route"><summary><span class="route-day">D2</span><span class="route-copy"><span class="route-head">西宁 → 祁连草原 → 张掖</span><span class="route-sub">10/1 · 取车采购后直接到张掖，当天较累</span></span><span class="route-chevron">▼</span></summary><div class="route-points">西宁 → 祁连草原（沿途停留）→ 张掖</div></details>
-<details class="day-route"><summary><span class="route-day">D3</span><span class="route-copy"><span class="route-head">七彩丹霞 → 大地之子 → 敦煌</span><span class="route-sub">10/2 · 最迟 15:15 离开大地之子</span></span><span class="route-chevron">▼</span></summary><div class="route-points">张掖 → 七彩丹霞 → 大地之子 → 敦煌</div></details>
-<details class="day-route"><summary><span class="route-day">D4</span><span class="route-copy"><span class="route-head">莫高窟 → 鸣沙山月牙泉</span><span class="route-sub">10/3 · 莫高窟 13:15 已预约，12:45 左右到数字展示中心</span></span><span class="route-chevron">▼</span></summary><div class="route-points">敦煌 → 莫高窟 → 鸣沙山月牙泉</div></details>
-<details class="day-route"><summary><span class="route-day">D5</span><span class="route-copy"><span class="route-head">敦煌 → 翡翠湖 → 大柴旦</span><span class="route-sub">10/4 · 下午游翡翠湖，晚上住大柴旦</span></span><span class="route-chevron">▼</span></summary><div class="route-points">敦煌 → 大柴旦翡翠湖 → 大柴旦</div></details>
-<details class="day-route"><summary><span class="route-day">D6</span><span class="route-copy"><span class="route-head">大柴旦 → 西宁</span><span class="route-sub">10/5 · 茶卡/青海湖仅在时间充裕时二选一</span></span><span class="route-chevron">▼</span></summary><div class="route-points">大柴旦 →（茶卡盐湖 / 青海湖 二选一可选）→ 西宁</div></details>
-<details class="day-route"><summary><span class="route-day">D7<br/>–D8</span><span class="route-copy"><span class="route-head">西宁 → 西安 → 深圳</span><span class="route-sub">10/6–10/7 · 返程，不安排景点</span></span><span class="route-chevron">▼</span></summary><div class="route-points">西宁还车 → 西安 → 深圳</div></details>
-</div></div><div class="plan-view" data-plan-view="original"><div class="dashboard">
-<div class="dash-card urgent"><div class="dash-kicker" id="nextActionKicker">下一项行动 · 票务</div><div class="dash-title" id="nextActionTitle"><span class="dash-time">9/3 07:00</span> 抢莫高窟</div><div class="dash-detail" id="nextActionDetail">仅通过“莫高窟参观预约网”实名分时预约。</div></div>
-<div class="dash-card"><div class="dash-kicker">行程起点</div><div class="dash-title">9/29 西安 → 西宁</div><div class="dash-detail">22:00 左右乘火车，今晚以休息为主。</div></div>
-<div class="dash-card"><div class="dash-kicker">住宿确认</div><div class="dash-title">首晚 · 火车</div><div class="dash-detail">9/30 抵达西宁后租车、采购并前往祁连。</div></div>
-</div><div class="card">
-<div class="card-title">🗺️ 路线总览</div>
-<details class="day-route" open=""><summary><span class="route-day">D1<br/>–D2</span><span class="route-copy"><span class="route-head">西安 → 西宁 → 祁连</span><span class="route-sub">9/29–9/30 · 火车抵达后开始自驾</span></span><span class="route-chevron">▼</span></summary><div class="route-points">西安 → 西宁 → 祁连方向</div></details>
-<details class="day-route"><summary><span class="route-day">D3</span><span class="route-copy"><span class="route-head">祁连山草原 → 张掖</span><span class="route-sub">10/1 · 沿途风景与草原</span></span><span class="route-chevron">▼</span></summary><div class="route-points">祁连山草原 → 张掖</div></details>
-<details class="day-route"><summary><span class="route-day">D4</span><span class="route-copy"><span class="route-head">七彩丹霞 → 大地之子 → 敦煌</span><span class="route-sub">10/2 · 最迟 15:15 离开大地之子</span></span><span class="route-chevron">▼</span></summary><div class="route-points">七彩丹霞 → 大地之子 → 敦煌</div></details>
-<details class="day-route"><summary><span class="route-day">D5</span><span class="route-copy"><span class="route-head">莫高窟 → 鸣沙山月牙泉</span><span class="route-sub">10/3 · 莫高窟 13:15 参观；视结束时间安排日落</span></span><span class="route-chevron">▼</span></summary><div class="route-points">莫高窟 → 鸣沙山月牙泉</div></details>
-<details class="day-route"><summary><span class="route-day">D6</span><span class="route-copy"><span class="route-head">敦煌 → 翡翠湖 → 大柴旦</span><span class="route-sub">10/4 · 未赶上日落时，清晨补看鸣沙山后出发</span></span><span class="route-chevron">▼</span></summary><div class="route-points">敦煌 → 翡翠湖 → 大柴旦</div></details>
-<details class="day-route"><summary><span class="route-day">D7</span><span class="route-copy"><span class="route-head">大柴旦 → 茶卡 → 青海湖 → 西宁</span><span class="route-sub">10/5 · 硬目标：当晚抵达西宁</span></span><span class="route-chevron">▼</span></summary><div class="route-points">大柴旦 → 茶卡盐湖 → 青海湖 → 西宁</div></details>
-<details class="day-route"><summary><span class="route-day">D8<br/>–D9</span><span class="route-copy"><span class="route-head">西宁 → 西安 → 深圳</span><span class="route-sub">10/6–10/7 · 返程，不安排景点</span></span><span class="route-chevron">▼</span></summary><div class="route-points">西宁 → 西安 → 深圳</div></details>
-<div class="route-list">
-<div class="route-line">
+<div class="card-title">🗺️ 路线总览 </div><details class="day-route" open=""><summary><span class="route-day">D1</span><span class="route-copy"><span class="route-head">西安 → 张掖西</span><span class="route-sub">9/30 · 22:00 T269 夜间火车，铁路约1171km · 无自驾</span></span><span class="route-chevron">▼</span></summary><div class="route-points">西安 → T269 → 张掖西</div></details><details class="day-route"><summary><span class="route-day">D2</span><span class="route-copy"><span class="route-head">张掖西 → 七彩丹霞 → 嘉峪关</span><span class="route-sub">10/1 · 11:31 到张掖西 · 自驾约280km / 约4–4.5h</span></span><span class="route-chevron">▼</span></summary><div class="route-points">张掖西 → 取车 → 七彩丹霞 → 嘉峪关</div></details><details class="day-route"><summary><span class="route-day">D3</span><span class="route-copy"><span class="route-head">嘉峪关 → 大地之子 → 敦煌</span><span class="route-sub">10/2 · 自驾约390km / 约5–6h（含大地之子停留）</span></span><span class="route-chevron">▼</span></summary><div class="route-points">嘉峪关 → 大地之子 → 敦煌</div></details><details class="day-route"><summary><span class="route-day">D4</span><span class="route-copy"><span class="route-head">莫高窟 → 鸣沙山月牙泉</span><span class="route-sub">10/3 · 敦煌市内自驾约50km / 约1–1.5h</span></span><span class="route-chevron">▼</span></summary><div class="route-points">敦煌 → 莫高窟 → 鸣沙山月牙泉</div></details><details class="day-route"><summary><span class="route-day">D5</span><span class="route-copy"><span class="route-head">敦煌 → 翡翠湖 → 大柴旦</span><span class="route-sub">10/4 · 自驾约380km / 约5–6h</span></span><span class="route-chevron">▼</span></summary><div class="route-points">敦煌 → 大柴旦翡翠湖 → 大柴旦</div></details><details class="day-route"><summary><span class="route-day">D6</span><span class="route-copy"><span class="route-head">大柴旦 → 茶卡 → 黑马河</span><span class="route-sub">10/5 · 自驾约480km / 约6.5–7h</span></span><span class="route-chevron">▼</span></summary><div class="route-points">大柴旦 → 茶卡盐湖 → 黑马河/青海湖西侧</div></details><details class="day-route"><summary><span class="route-day">D7</span><span class="route-copy"><span class="route-head">黑马河 → 西宁 → 西安</span><span class="route-sub">10/6 · 黑马河→西宁自驾约220km / 约3.5h</span></span><span class="route-chevron">▼</span></summary><div class="route-points">黑马河 → 西宁还车 → 西安北</div></details><details class="day-route"><summary><span class="route-day">D8</span><span class="route-copy"><span class="route-head">西安 → 深圳</span><span class="route-sub">10/7 · 飞机返程</span></span><span class="route-chevron">▼</span></summary><div class="route-points">西安 → 深圳</div></details>
 </div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">01</div>
-<div class="route-name">西安</div>
-<div class="route-date">9/29</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">02</div>
-<div class="route-name">西宁</div>
-<div class="route-date">9/30</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">03</div>
-<div class="route-name">祁连方向</div>
-<div class="route-date">9/30</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">04</div>
-<div class="route-name">祁连山草原</div>
-<div class="route-date">10/1</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">05</div>
-<div class="route-name">张掖</div>
-<div class="route-date">10/1</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">06</div>
-<div class="route-name">七彩丹霞</div>
-<div class="route-date">10/2</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">07</div>
-<div class="route-name">大地之子</div>
-<div class="route-date">10/2</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">08</div>
-<div class="route-name">敦煌</div>
-<div class="route-date">10/2-4</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">09</div>
-<div class="route-name">莫高窟</div>
-<div class="route-date">10/3</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">10</div>
-<div class="route-name">鸣沙山月牙泉</div>
-<div class="route-date">10/3</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">11</div>
-<div class="route-name">翡翠湖</div>
-<div class="route-date">10/4</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">12</div>
-<div class="route-name">大柴旦</div>
-<div class="route-date">10/4</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">13</div>
-<div class="route-name">茶卡盐湖</div>
-<div class="route-date">10/5</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">14</div>
-<div class="route-name">青海湖</div>
-<div class="route-date">10/5</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">15</div>
-<div class="route-name">西宁</div>
-<div class="route-date">10/5晚</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">16</div>
-<div class="route-name">西安</div>
-<div class="route-date">10/6晚</div>
-</div>
-</div>
-<div class="route-stop">
-<div class="route-dot">
-<span class="grn">
-</span>
-</div>
-<div class="route-info">
-<div class="route-num">17</div>
-<div class="route-name">深圳</div>
-<div class="route-date">10/7</div>
-</div>
-</div>
-</div>
-</div></div>
-
 <div class="card">
 <div class="card-title">⚠️ 自驾原则</div>
 <div class="principles-row">
@@ -415,11 +194,11 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 </div>
 <div class="principle">
 <div class="principle-num">08</div>
-<div class="principle-text">10/5晚必须回西宁</div>
+<div class="principle-text"><strong>回程拆分</strong><br/>10/5住黑马河/青海湖附近，10/6早回西宁</div>
 </div>
 <div class="principle">
 <div class="principle-num">09</div>
-<div class="principle-text">10/6不安排景点只赶路</div>
+<div class="principle-text"><strong>10/6返程优先</strong><br/>07:30左右黑马河出发，西宁还车后乘动车到西安</div>
 </div>
 <div class="principle">
 <div class="principle-num">10</div>
@@ -470,7 +249,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 </div>
 </section>
 <section class="tab-panel" id="panel-daily">
-<div class="plan-view active" data-plan-view="new"><div class="plan-note"><strong>新版每日安排：</strong>少掉 9/30 白天后，把“西宁→祁连”和“祁连→张掖”压缩到 10/1 一天。后续核心酒店与景点基本不动。</div><div class="day-card">
+<div class="day-card">
 <div class="day-header" onclick="toggleDay(this)">
 <div class="day-date-block">
 <div class="month">SEP</div>
@@ -478,21 +257,21 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="label">周三</div>
 </div>
 <div class="day-mid">
-<div class="day-title-text">西安 → 西宁（夜间火车）</div>
+<div class="day-title-text">西安 → 张掖西（T269 夜间火车）</div>
 <div class="day-tags"><span class="dtag o">🚂 火车</span><span class="dtag t">休整</span></div>
 </div>
 <div class="day-chevron">▼</div>
 </div>
 <div class="day-body">
 <div class="day-img">
-<img alt="西安 → 西宁" / src="assets/images/img-8e082af6d332.jpg" loading="lazy" decoding="async" fetchpriority="low">
+<img alt="西安 → 西宁" decoding="async" fetchpriority="low" loading="lazy" src="assets/images/img-8e082af6d332.jpg"/>
 </div>
 <div class="day-body-inner">
-<div class="day-desc"><span class="t"><strong>晚上</strong> 西安乘火车前往西宁。</span><span class="t"><strong>住宿</strong>：火车。</span><span class="t"><strong>今日重点</strong>：尽量休息，10/1 早到西宁后直接开始自驾。</span></div>
+<div class="day-desc"><span class="t"><strong>22:00</strong> 西安站乘 T269，直接前往张掖西。</span><span class="t"><strong>车上住宿</strong>：建议硬卧，尽量保证睡眠。</span><span class="t"><strong>10/1 08:34左右</strong> 列车到西宁后不要下车，继续乘坐；西宁→张掖段为白天，可看祁连山沿线秋季景色。</span><span class="t"><strong>10/1 11:31左右</strong> 抵达张掖西。</span></div>
 <div class="drv-row">
 <span class="drv-icon">🚗</span>
 <span class="drv-label">驾驶强度</span>
-<span class="drv-route">火车</span>
+<span class="drv-route">T269 · 西安→张掖西 · 铁路约1171km · 自驾0km</span>
 <span class="drv-badge easy">轻松</span>
 </div>
 </div>
@@ -505,25 +284,25 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="label">周四</div>
 </div>
 <div class="day-mid">
-<div class="day-title-text">西宁 → 祁连草原 → 张掖</div>
-<div class="day-tags"><span class="dtag o">🚗 取车</span><span class="dtag t">🏔️ 祁连草原</span><span class="dtag r">⚠️ 长途</span></div>
+<div class="day-title-text">张掖西 → 七彩丹霞 → 嘉峪关</div>
+<div class="day-tags"><span class="dtag o">🚗 取车</span><span class="dtag t">🎨 七彩丹霞</span></div>
 </div>
 <div class="day-chevron">▼</div>
 </div>
 <div class="day-body">
 <div class="day-img">
-<img alt="祁连山草原 → 张掖" / src="assets/images/img-5952f8f5e2f8.jpg" loading="lazy" decoding="async" fetchpriority="low">
+<img alt="祁连山草原 → 张掖" decoding="async" fetchpriority="low" loading="lazy" src="assets/images/img-5952f8f5e2f8.jpg"/>
 </div>
 <div class="day-body-inner">
-<div class="day-desc"><span class="t"><strong>早上</strong> 抵达西宁，尽快取车并完成车辆检查。</span><span class="t"><strong>约08:30–10:00</strong> 集中采购物资、早餐/简餐，减少市区停留。</span><span class="t"><strong>约10:00</strong> 西宁出发，沿祁连方向前往张掖。</span><span class="t"><strong>途中</strong> 祁连草原以沿途观景、短暂停车拍照为主，不安排耗时较长的正式景区。</span><span class="t"><strong>19:00–20:30左右</strong> 抵达张掖；国庆车流较大时允许顺延，两个司机轮换。</span><span class="t"><em>调整重点：</em>原祁连住宿取消，今天直接住张掖。</span></div>
+<div class="day-desc"><span class="t"><strong>11:31</strong> 抵达张掖西。</span><span class="t"><strong>11:40–13:00</strong> 午饭、取车、验车，确认张掖取车/西宁异地还车手续。</span><span class="t"><strong>13:00左右</strong> 前往七彩丹霞；张掖西到景区按约40km、约50分钟预留。</span><span class="t"><strong>14:00–17:00左右</strong> 七彩丹霞，优先保证核心观景；国庆期间按实际排队和景区闭园时间调整。</span><span class="t"><strong>17:00左右</strong> 离开七彩丹霞，向嘉峪关方向继续前进；途中两位司机轮换，必要时服务区休息。</span><span class="t"><strong>20:00左右</strong> 抵达嘉峪关，晚饭后入住休息。</span></div>
 <div class="drv-row">
 <span class="drv-icon">🚗</span>
 <span class="drv-label">驾驶强度</span>
-<span class="drv-route">西宁→祁连草原→张掖</span>
-<span class="drv-badge heavy">较重</span>
+<span class="drv-route">张掖西→七彩丹霞→嘉峪关 · 约280km / 约4–4.5h</span>
+<span class="drv-badge medium">适中</span>
 </div>
-<div class="day-accom"><span>📍 住宿：张掖</span></div>
-<div class="hotel-badge">🏨 已订：金蒂梵尔国际酒店</div><div class="hotel-badge cancelled">❌ 原订取消：祁连吉缘饭店</div>
+<div class="day-accom"><span>📍 住宿：嘉峪关</span></div>
+<div class="hotel-badge">🏨 住宿：嘉峪关酒店（需新订）</div>
 </div>
 </div>
 </div><div class="day-card">
@@ -534,36 +313,22 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="label">周五</div>
 </div>
 <div class="day-mid">
-<div class="day-title-text">七彩丹霞 → 大地之子 → 敦煌</div>
-<div class="day-tags">
-<span class="dtag o">🎨 七彩丹霞</span>
-<span class="dtag t">🗿 大地之子</span>
-</div>
+<div class="day-title-text">嘉峪关 → 大地之子 → 敦煌</div>
+<div class="day-tags"><span class="dtag t">🗿 大地之子</span></div>
 </div>
 <div class="day-chevron">▼</div>
 </div>
 <div class="day-body">
 <div class="day-img">
-<img alt="七彩丹霞 → 大地之子 → 敦煌" / src="assets/images/img-940ae8eea58e.jpg" loading="lazy" decoding="async" fetchpriority="low">
+<img alt="七彩丹霞 → 大地之子 → 敦煌" decoding="async" fetchpriority="low" loading="lazy" src="assets/images/img-940ae8eea58e.jpg"/>
 </div>
 <div class="day-body-inner">
-<div class="day-desc">
-<span class="t">
-<strong>07:00</strong> 起床。</span>
-<span class="t">
-<strong>07:30–10:30 七彩丹霞</strong>：国庆客流日，提前线上实名购票并按当日指引入园。</span>
-<span class="t">
-<strong>10:30–11:15</strong> 简餐后立即出发。</span>
-<span class="t">
-<strong>约14:30</strong> 大地之子（控制在30–40分钟）。</span>
-<span class="t">
-<strong>最迟15:15</strong> 前往敦煌；国庆预留至少7.5小时（含休息与拥堵缓冲），不把“17:00 才出发”作为可执行方案。</span>
-</div>
+<div class="day-desc"><span class="t"><strong>08:30左右</strong> 早餐后从嘉峪关出发。</span><span class="t"><strong>途中</strong> 沿连霍高速向瓜州方向行驶，每约2小时休息一次，两位司机轮换。</span><span class="t"><strong>11:30–12:15左右</strong> 抵达瓜州大地之子，停留约30–45分钟。</span><span class="t"><strong>12:15–13:15</strong> 瓜州附近午饭、休整。</span><span class="t"><strong>13:15左右</strong> 继续前往敦煌。</span><span class="t"><strong>15:00–16:00左右</strong> 抵达敦煌，入住方所酒店；下午和晚上以休息、敦煌市区为主，为10/3莫高窟留体力。</span></div>
 <div class="drv-row">
 <span class="drv-icon">🚗</span>
 <span class="drv-label">驾驶强度</span>
-<span class="drv-route">张掖→敦煌</span>
-<span class="drv-badge hard">较重</span>
+<span class="drv-route">嘉峪关→大地之子→敦煌 · 约390km / 约5–6h</span>
+<span class="drv-badge medium">适中</span>
 </div>
 <div class="day-accom">
 <span>📍 住宿：敦煌</span>
@@ -589,7 +354,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 </div>
 <div class="day-body">
 <div class="day-img">
-<img alt="莫高窟 → 鸣沙山月牙泉" / src="assets/images/img-4b538e40119f.jpg" loading="lazy" decoding="async" fetchpriority="low">
+<img alt="莫高窟 → 鸣沙山月牙泉" decoding="async" fetchpriority="low" loading="lazy" src="assets/images/img-4b538e40119f.jpg"/>
 </div>
 <div class="day-body-inner">
 <div class="day-desc">
@@ -607,7 +372,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="drv-row">
 <span class="drv-icon">🚗</span>
 <span class="drv-label">驾驶强度</span>
-<span class="drv-route">敦煌市区</span>
+<span class="drv-route">敦煌市区→莫高窟→鸣沙山→酒店 · 约50km / 约1–1.5h</span>
 <span class="drv-badge easy">轻松</span>
 </div>
 <div class="day-accom">
@@ -633,7 +398,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 </div>
 <div class="day-body">
 <div class="day-img">
-<img alt="敦煌 → 翡翠湖 → 大柴旦" / src="assets/images/img-c7d0376f4361.jpg" loading="lazy" decoding="async" fetchpriority="low">
+<img alt="敦煌 → 翡翠湖 → 大柴旦" decoding="async" fetchpriority="low" loading="lazy" src="assets/images/img-c7d0376f4361.jpg"/>
 </div>
 <div class="day-body-inner">
 <div class="day-desc">
@@ -649,7 +414,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="drv-row">
 <span class="drv-icon">🚗</span>
 <span class="drv-label">驾驶强度</span>
-<span class="drv-route">敦煌→翡翠湖→大柴旦</span>
+<span class="drv-route">敦煌→翡翠湖→大柴旦 · 约380km / 约5–6h</span>
 <span class="drv-badge hard">较重</span>
 </div>
 <div class="day-accom">
@@ -666,28 +431,27 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="label">周一</div>
 </div>
 <div class="day-mid">
-<div class="day-title-text">大柴旦 → 西宁（茶卡 / 青海湖二选一可选）</div>
-<div class="day-tags"><span class="dtag o">⚠️ 回西宁</span><span class="dtag t">🌊 茶卡可选</span><span class="dtag g">💧 青海湖可选</span></div>
+<div class="day-title-text">大柴旦 → 茶卡盐湖 → 黑马河 / 青海湖</div>
+<div class="day-tags"><span class="dtag o">🧂 茶卡盐湖</span><span class="dtag g">🌊 青海湖</span><span class="dtag t">🏨 黑马河</span></div>
 </div>
 <div class="day-chevron">▼</div>
 </div>
 <div class="day-body">
 <div class="day-img">
-<img alt="大柴旦→茶卡→青海湖→西宁" / src="assets/images/img-03d2fbc80873.jpg" loading="lazy" decoding="async" fetchpriority="low">
+<img alt="大柴旦→茶卡→青海湖→西宁" decoding="async" fetchpriority="low" loading="lazy" src="assets/images/img-03d2fbc80873.jpg"/>
 </div>
 <div class="day-body-inner">
-<div class="day-desc"><span class="t"><strong>06:30–07:00</strong> 起床、早餐、检查车辆。</span><span class="t"><strong>07:00–07:30</strong> 尽早从大柴旦出发。</span><span class="t"><strong>默认方案</strong>：直接返西宁，把“当晚回到西宁”放在第一优先级。</span><span class="t"><strong>可选方案</strong>：当天路况顺畅、时间明显富余且人员状态良好时，茶卡盐湖或青海湖 <em>最多二选一</em>，不要两个都塞。</span><span class="t"><strong>建议</strong>：下午尽早进入西宁方向，给国庆堵车、加油和休息预留缓冲。</span></div>
+<div class="day-desc"><span class="t"><strong>06:30</strong> 起床、早餐、退房。</span><span class="t"><strong>07:30</strong> 大柴旦出发。</span><span class="t"><strong>09:30左右</strong> 中途休息15–20分钟。</span><span class="t"><strong>12:30左右</strong> 抵达茶卡镇，先吃午饭。</span><span class="t"><strong>13:30–16:00</strong> 茶卡盐湖。</span><span class="t"><strong>16:00</strong> 茶卡出发前往黑马河/青海湖西侧。</span><span class="t"><strong>17:30–18:00左右</strong> 抵达，天气和时间合适可看青海湖日落。</span><span class="t"><strong>晚上</strong> 黑马河/青海湖附近住宿，不再硬赶西宁。</span></div>
 <div class="drv-row">
 <span class="drv-icon">🚗</span>
 <span class="drv-label">驾驶强度</span>
-<span class="drv-route">大柴旦→（茶卡/青海湖可选）→西宁</span>
-<span class="drv-badge heavy">较重</span>
+<span class="drv-route">大柴旦→茶卡→黑马河 · 约480km / 约6.5–7h</span>
+<span class="drv-badge hard">较重</span>
 </div>
-<div class="key-node warn">🚨 硬目标：当晚必须回西宁</div>
+<div class="key-node">✅ 核心调整：10/5 不赶西宁，拆成两天返程</div>
 <div class="day-accom">
-<span>📍 住宿：西宁</span>
+<span>📍 住宿：黑马河 / 青海湖附近（待订）</span>
 </div>
-<div class="hotel-badge">🏨 已订：宜合酒店</div>
 </div>
 </div>
 </div><div class="day-card">
@@ -698,33 +462,24 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="label">周二</div>
 </div>
 <div class="day-mid">
-<div class="day-title-text">西宁 → 西安</div>
-<div class="day-tags">
-<span class="dtag o">🚄 高铁/飞机</span>
-</div>
+<div class="day-title-text">黑马河 → 西宁还车 → 西安</div>
+<div class="day-tags"><span class="dtag o">🚗 回西宁</span><span class="dtag t">🚄 动车</span></div>
 </div>
 <div class="day-chevron">▼</div>
 </div>
 <div class="day-body">
 <div class="day-img">
-<img alt="西宁 → 西安" / src="assets/images/img-60ba34afc30b.jpg" loading="lazy" decoding="async" fetchpriority="low">
+<img alt="西宁 → 西安" decoding="async" fetchpriority="low" loading="lazy" src="assets/images/img-60ba34afc30b.jpg"/>
 </div>
 <div class="day-body-inner">
-<div class="day-desc">
-<span class="t">
-<strong>08:00</strong> 起床。</span>
-<span class="t">
-<strong>09:30</strong> 还车。</span>
-<span class="t">
-<strong>交通推荐</strong>：首选高铁。</span>
-</div>
+<div class="day-desc"><span class="t"><strong>06:30</strong> 起床、早餐；简单看湖景即可，不安排正式景点。</span><span class="t"><strong>07:30</strong> 黑马河出发前往西宁。</span><span class="t"><strong>11:00左右</strong> 抵达西宁，先加满油。</span><span class="t"><strong>11:30–12:00</strong> 完成还车。</span><span class="t"><strong>12:00–13:30</strong> 午饭并前往西宁站，给国庆交通留缓冲。</span><span class="t"><strong>首选 D2739</strong>：计划 14:51 西宁出发，19:13 到西安北。</span><span class="t"><strong>备选 D2570</strong>：计划 15:25 西宁出发，19:36 到西安北，缓冲更大。</span><span class="t"><em>车次最终以12306开售后的当日运行图和实际车票为准。</em></span></div>
 <div class="drv-row">
 <span class="drv-icon">🚗</span>
 <span class="drv-label">驾驶强度</span>
-<span class="drv-route">西宁→西安</span>
-<span class="drv-badge easy">轻松</span>
+<span class="drv-route">黑马河→西宁 · 自驾约220km / 约3.5h；之后动车</span>
+<span class="drv-badge hard">适中</span>
 </div>
-<div class="key-node warn">🚨 硬目标：当晚必须到西安</div>
+<div class="key-node warn">🚨 硬目标：当晚到西安；优先保证还车和赶车时间</div>
 </div>
 </div>
 </div><div class="day-card">
@@ -744,7 +499,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 </div>
 <div class="day-body">
 <div class="day-img">
-<img alt="西安 → 深圳" / src="assets/images/img-60ba34afc30b.jpg" loading="lazy" decoding="async" fetchpriority="low">
+<img alt="西安 → 深圳" decoding="async" fetchpriority="low" loading="lazy" src="assets/images/img-60ba34afc30b.jpg"/>
 </div>
 <div class="day-body-inner">
 <div class="day-desc">
@@ -756,405 +511,13 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="drv-row">
 <span class="drv-icon">🚗</span>
 <span class="drv-label">驾驶强度</span>
-<span class="drv-route">飞机</span>
+<span class="drv-route">飞机 · 无自驾</span>
 <span class="drv-badge easy">轻松</span>
 </div>
 <div class="key-node end">🎉 旅行结束</div>
 </div>
 </div>
-</div></div><div class="plan-view" data-plan-view="original"><div class="day-card">
-<div class="day-header" onclick="toggleDay(this)">
-<div class="day-date-block">
-<div class="month">SEP</div>
-<div class="num">29</div>
-<div class="label">周二</div>
 </div>
-<div class="day-mid">
-<div class="day-title-text">西安 → 西宁</div>
-<div class="day-tags">
-<span class="dtag o">🚂 火车</span>
-<span class="dtag t">休整</span>
-</div>
-</div>
-<div class="day-chevron">▼</div>
-</div>
-<div class="day-body">
-<div class="day-img">
-<img alt="西安 → 西宁" / src="assets/images/img-8e082af6d332.jpg" loading="lazy" decoding="async" fetchpriority="low">
-</div>
-<div class="day-body-inner">
-<div class="day-desc">
-<span class="t">
-<strong>22:00左右</strong> 西安乘火车前往西宁。</span>
-<span class="t">
-<strong>住宿</strong>：火车。</span>
-<span class="t">
-<strong>今日重点</strong>：休息，为高原自驾做准备。</span>
-</div>
-<div class="drv-row">
-<span class="drv-icon">🚗</span>
-<span class="drv-label">驾驶强度</span>
-<span class="drv-route">火车</span>
-<span class="drv-badge easy">轻松</span>
-</div>
-</div>
-</div>
-</div><div class="day-card">
-<div class="day-header" onclick="toggleDay(this)">
-<div class="day-date-block">
-<div class="month">SEP</div>
-<div class="num">30</div>
-<div class="label">周三</div>
-</div>
-<div class="day-mid">
-<div class="day-title-text">抵达西宁 → 租车采购 → 祁连</div>
-<div class="day-tags">
-<span class="dtag o">🚗 租车</span>
-<span class="dtag t">采购</span>
-<span class="dtag g">适应高原</span>
-</div>
-</div>
-<div class="day-chevron">▼</div>
-</div>
-<div class="day-body">
-<div class="day-img">
-<img alt="抵达西宁 → 租车采购 → 祁连" / src="assets/images/img-222d3b19f10a.jpg" loading="lazy" decoding="async" fetchpriority="low">
-</div>
-<div class="day-body-inner">
-<div class="day-desc">
-<span class="t">
-<strong>早上</strong> 抵达西宁，租车。</span>
-<span class="t">
-<strong>09:00–10:00 车辆检查</strong>。</span>
-<span class="t">
-<strong>10:00–12:00 采购物资</strong>。</span>
-<span class="t">
-<strong>12:00–13:00</strong> 午餐。</span>
-<span class="t">
-<strong>13:00–14:00</strong> 整理车辆。</span>
-<span class="t">
-<strong>14:00左右</strong> 出发，西宁→祁连方向。<em>今日目标：不用赶到张掖</em>。</span>
-</div>
-<div class="drv-row">
-<span class="drv-icon">🚗</span>
-<span class="drv-label">驾驶强度</span>
-<span class="drv-route">西宁→祁连方向</span>
-<span class="drv-badge easy">轻松</span>
-</div>
-<div class="key-node start">🚀 自驾开始</div>
-<div class="day-accom">
-<span>📍 住宿：祁连方向 / 祁连县</span>
-</div>
-<div class="hotel-badge">🏨 已订：祁连吉缘饭店</div>
-</div>
-</div>
-</div><div class="day-card">
-<div class="day-header" onclick="toggleDay(this)">
-<div class="day-date-block">
-<div class="month">OCT</div>
-<div class="num">01</div>
-<div class="label">周四</div>
-</div>
-<div class="day-mid">
-<div class="day-title-text">祁连山草原 → 张掖</div>
-<div class="day-tags">
-<span class="dtag o">🏔️ 祁连山</span>
-<span class="dtag t">草原</span>
-</div>
-</div>
-<div class="day-chevron">▼</div>
-</div>
-<div class="day-body">
-<div class="day-img">
-<img alt="祁连山草原 → 张掖" / src="assets/images/img-5952f8f5e2f8.jpg" loading="lazy" decoding="async" fetchpriority="low">
-</div>
-<div class="day-body-inner">
-<div class="day-desc">
-<span class="t">
-<strong>07:30</strong> 起床。</span>
-<span class="t">
-<strong>08:30</strong> 出发。</span>
-<span class="t">
-<strong>09:00–13:00 祁连山草原</strong>：<em>重在享受沿途风景</em>。</span>
-<span class="t">
-<strong>13:00</strong> 午餐。</span>
-<span class="t">
-<strong>14:00</strong> 前往张掖。</span>
-<span class="t">
-<strong>18:00左右</strong> 抵达张掖。</span>
-</div>
-<div class="drv-row">
-<span class="drv-icon">🚗</span>
-<span class="drv-label">驾驶强度</span>
-<span class="drv-route">祁连→张掖</span>
-<span class="drv-badge mid">适中</span>
-</div>
-<div class="day-accom">
-<span>📍 住宿：张掖</span>
-</div>
-<div class="hotel-badge">🏨 已订：金蒂梵尔国际酒店</div>
-</div>
-</div>
-</div><div class="day-card">
-<div class="day-header" onclick="toggleDay(this)">
-<div class="day-date-block">
-<div class="month">OCT</div>
-<div class="num">02</div>
-<div class="label">周五</div>
-</div>
-<div class="day-mid">
-<div class="day-title-text">七彩丹霞 → 大地之子 → 敦煌</div>
-<div class="day-tags">
-<span class="dtag o">🎨 七彩丹霞</span>
-<span class="dtag t">🗿 大地之子</span>
-</div>
-</div>
-<div class="day-chevron">▼</div>
-</div>
-<div class="day-body">
-<div class="day-img">
-<img alt="七彩丹霞 → 大地之子 → 敦煌" / src="assets/images/img-940ae8eea58e.jpg" loading="lazy" decoding="async" fetchpriority="low">
-</div>
-<div class="day-body-inner">
-<div class="day-desc">
-<span class="t">
-<strong>07:00</strong> 起床。</span>
-<span class="t">
-<strong>07:30–10:30 七彩丹霞</strong>：国庆客流日，提前线上实名购票并按当日指引入园。</span>
-<span class="t">
-<strong>10:30–11:15</strong> 简餐后立即出发。</span>
-<span class="t">
-<strong>约14:30</strong> 大地之子（控制在30–40分钟）。</span>
-<span class="t">
-<strong>最迟15:15</strong> 前往敦煌；国庆预留至少7.5小时（含休息与拥堵缓冲），不把“17:00 才出发”作为可执行方案。</span>
-</div>
-<div class="drv-row">
-<span class="drv-icon">🚗</span>
-<span class="drv-label">驾驶强度</span>
-<span class="drv-route">张掖→敦煌</span>
-<span class="drv-badge hard">较重</span>
-</div>
-<div class="day-accom">
-<span>📍 住宿：敦煌</span>
-</div>
-<div class="hotel-badge">🏨 已订：方所酒店</div>
-</div>
-</div>
-</div><div class="day-card">
-<div class="day-header" onclick="toggleDay(this)">
-<div class="day-date-block">
-<div class="month">OCT</div>
-<div class="num">03</div>
-<div class="label">周六</div>
-</div>
-<div class="day-mid">
-<div class="day-title-text">莫高窟 → 鸣沙山月牙泉</div>
-<div class="day-tags">
-<span class="dtag o">🏛️ 莫高窟</span>
-<span class="dtag t">🏜️ 鸣沙山</span>
-</div>
-</div>
-<div class="day-chevron">▼</div>
-</div>
-<div class="day-body">
-<div class="day-img">
-<img alt="莫高窟 → 鸣沙山月牙泉" / src="assets/images/img-4b538e40119f.jpg" loading="lazy" decoding="async" fetchpriority="low">
-</div>
-<div class="day-body-inner">
-<div class="day-desc">
-<span class="t">
-<strong>08:30–10:45</strong> 早餐后在市区轻松活动，预留返程与集合时间。</span>
-<span class="t">
-<strong>11:00–11:45</strong> 提前午餐。</span>
-<span class="t">
-<strong>12:45</strong> 抵达莫高窟数字展示中心，完成检票与候场。</span>
-<span class="t">
-<strong>13:15–约17:30</strong> 莫高窟参观（以现场结束时间为准）。</span>
-<span class="t">
-<strong>17:30后</strong> 若能及时结束，直接前往鸣沙山月牙泉看日落；若结束较晚，不硬赶，回市区晚餐休息。</span>
-</div>
-<div class="drv-row">
-<span class="drv-icon">🚗</span>
-<span class="drv-label">驾驶强度</span>
-<span class="drv-route">敦煌市区</span>
-<span class="drv-badge easy">轻松</span>
-</div>
-<div class="day-accom">
-<span>📍 住宿：敦煌</span>
-</div>
-<div class="hotel-badge">🏨 已订：方所酒店</div>
-</div>
-</div>
-</div><div class="day-card">
-<div class="day-header" onclick="toggleDay(this)">
-<div class="day-date-block">
-<div class="month">OCT</div>
-<div class="num">04</div>
-<div class="label">周日</div>
-</div>
-<div class="day-mid">
-<div class="day-title-text">敦煌 → 翡翠湖 → 大柴旦</div>
-<div class="day-tags">
-<span class="dtag o">💎 翡翠湖</span>
-</div>
-</div>
-<div class="day-chevron">▼</div>
-</div>
-<div class="day-body">
-<div class="day-img">
-<img alt="敦煌 → 翡翠湖 → 大柴旦" / src="assets/images/img-c7d0376f4361.jpg" loading="lazy" decoding="async" fetchpriority="low">
-</div>
-<div class="day-body-inner">
-<div class="day-desc">
-<span class="t">
-<strong>06:00–07:30</strong> 备用：若前一日未赶上鸣沙山日落，清晨补看；若已游览，则用于休息与整理。</span>
-<span class="t">
-<strong>07:45–08:00</strong> 出发。</span>
-<span class="t">
-<strong>14:00–17:00</strong> 翡翠湖。</span>
-<span class="t">
-<strong>18:00–19:00</strong> 抵达大柴旦。</span>
-</div>
-<div class="drv-row">
-<span class="drv-icon">🚗</span>
-<span class="drv-label">驾驶强度</span>
-<span class="drv-route">敦煌→翡翠湖→大柴旦</span>
-<span class="drv-badge hard">较重</span>
-</div>
-<div class="day-accom">
-<span>📍 住宿：大柴旦</span>
-</div>
-<div class="hotel-badge">🏨 已订：美豪丽致酒店</div>
-</div>
-</div>
-</div><div class="day-card warn-card">
-<div class="day-header" onclick="toggleDay(this)">
-<div class="day-date-block warn">
-<div class="month">OCT</div>
-<div class="num">05</div>
-<div class="label">周一</div>
-</div>
-<div class="day-mid">
-<div class="day-title-text">大柴旦→茶卡→青海湖→西宁</div>
-<div class="day-tags">
-<span class="dtag o">⚠️ 硬目标</span>
-<span class="dtag t">🌊 茶卡</span>
-<span class="dtag g">💧 青海湖</span>
-</div>
-</div>
-<div class="day-chevron">▼</div>
-</div>
-<div class="day-body">
-<div class="day-img">
-<img alt="大柴旦→茶卡→青海湖→西宁" / src="assets/images/img-03d2fbc80873.jpg" loading="lazy" decoding="async" fetchpriority="low">
-</div>
-<div class="day-body-inner">
-<div class="day-desc">
-<span class="t">
-<strong>06:30</strong> 起床。</span>
-<span class="t">
-<strong>07:30</strong> 出发。</span>
-<span class="t">
-<strong>11:00左右</strong> 茶卡盐湖（提前实名购票；大风、雨雪时以景区当天公告为准）。</span>
-<span class="t">
-<strong>14:00</strong> 青海湖二郎剑（仅路过式停留；若车流或茶卡排队超过30分钟，直接取消本点）。</span>
-<span class="t">
-<strong>最迟15:30</strong> 离开青海湖前往西宁。此日约700公里，国庆实际到店可能晚于22:00；为确保10/5住西宁，建议二选一：保留茶卡、取消青海湖；或保留青海湖、取消茶卡。</span>
-</div>
-<div class="drv-row">
-<span class="drv-icon">🚗</span>
-<span class="drv-label">驾驶强度</span>
-<span class="drv-route">大柴旦→茶卡→青海湖→西宁</span>
-<span class="drv-badge extreme">最重</span>
-</div>
-<div class="key-node warn">🚨 硬目标：当晚必须回西宁</div>
-<div class="day-accom">
-<span>📍 住宿：西宁</span>
-</div>
-<div class="hotel-badge">🏨 已订：宜合酒店</div>
-</div>
-</div>
-</div><div class="day-card">
-<div class="day-header" onclick="toggleDay(this)">
-<div class="day-date-block">
-<div class="month">OCT</div>
-<div class="num">06</div>
-<div class="label">周二</div>
-</div>
-<div class="day-mid">
-<div class="day-title-text">西宁 → 西安</div>
-<div class="day-tags">
-<span class="dtag o">🚄 高铁/飞机</span>
-</div>
-</div>
-<div class="day-chevron">▼</div>
-</div>
-<div class="day-body">
-<div class="day-img">
-<img alt="西宁 → 西安" / src="assets/images/img-60ba34afc30b.jpg" loading="lazy" decoding="async" fetchpriority="low">
-</div>
-<div class="day-body-inner">
-<div class="day-desc">
-<span class="t">
-<strong>08:00</strong> 起床。</span>
-<span class="t">
-<strong>09:30</strong> 还车。</span>
-<span class="t">
-<strong>交通推荐</strong>：首选高铁。</span>
-</div>
-<div class="drv-row">
-<span class="drv-icon">🚗</span>
-<span class="drv-label">驾驶强度</span>
-<span class="drv-route">西宁→西安</span>
-<span class="drv-badge easy">轻松</span>
-</div>
-<div class="key-node warn">🚨 硬目标：当晚必须到西安</div>
-</div>
-</div>
-</div><div class="day-card">
-<div class="day-header" onclick="toggleDay(this)">
-<div class="day-date-block">
-<div class="month">OCT</div>
-<div class="num">07</div>
-<div class="label">周三</div>
-</div>
-<div class="day-mid">
-<div class="day-title-text">西安 → 深圳</div>
-<div class="day-tags">
-<span class="dtag o">✈️ 飞机</span>
-</div>
-</div>
-<div class="day-chevron">▼</div>
-</div>
-<div class="day-body">
-<div class="day-img">
-<img alt="西安 → 深圳" / src="assets/images/img-60ba34afc30b.jpg" loading="lazy" decoding="async" fetchpriority="low">
-</div>
-<div class="day-body-inner">
-<div class="day-desc">
-<span class="t">飞往深圳。</span>
-<span class="t">
-<strong>旅行结束。</strong>
-</span>
-</div>
-<div class="drv-row">
-<span class="drv-icon">🚗</span>
-<span class="drv-label">驾驶强度</span>
-<span class="drv-route">飞机</span>
-<span class="drv-badge easy">轻松</span>
-</div>
-<div class="key-node end">🎉 旅行结束</div>
-</div>
-</div>
-</div></div>
-
-
-
-
-
-
-
-
 </section>
 <section class="tab-panel" id="panel-priority">
 <div class="tier s">
@@ -1221,23 +584,23 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="ticket-stack">
 <article class="ticket-card critical"><div class="ticket-top"><div class="ticket-date">9/3<br/>07:00</div><div class="ticket-place">莫高窟<span class="ticket-visit">10/3 13:15 已预约</span></div></div><div class="ticket-action">请在 12:45 抵达数字展示中心。参观结束后视时间决定是否直接前往鸣沙山，不硬赶日落。</div><div class="ticket-channel">官方：莫高窟参观预约网小程序 / 官网</div></article>
 <article class="ticket-card"><div class="ticket-top"><div class="ticket-date">9/18<br/>起</div><div class="ticket-place">鸣沙山月牙泉<span class="ticket-visit">10/3 游览</span></div></div><div class="ticket-action">当前常规提前15天线上实名预约；优先锁定下午入园。若国庆公告改规则，以公告为准。</div><div class="ticket-channel">官方：鸣沙山月牙泉公众号 / 游敦煌小程序</div></article>
-<article class="ticket-card"><div class="ticket-top"><div class="ticket-date">平台放票<br/>即买</div><div class="ticket-place">七彩丹霞<span class="ticket-visit">10/2 游览</span></div></div><div class="ticket-action">官方未公布固定提前天数；建议9/30起每天查看，最迟10/1锁定。2026年门票价已调为70元，区间车另计。</div><div class="ticket-channel">官方公众号 / 正规 OTA</div></article>
+<article class="ticket-card"><div class="ticket-top"><div class="ticket-date">平台放票<br/>即买</div><div class="ticket-place">七彩丹霞<span class="ticket-visit">10/1 游览</span></div></div><div class="ticket-action">行程已调整到10/1下午；国庆客流大，建议尽早锁定门票，并在出发前复核当日入园和闭园时间。</div><div class="ticket-channel">官方公众号 / 正规 OTA</div></article>
 <article class="ticket-card"><div class="ticket-top"><div class="ticket-date">10/1<br/>核验后</div><div class="ticket-place">翡翠湖<span class="ticket-visit">10/4 游览</span></div></div><div class="ticket-action">不记录固定提前天数；须在出发前72小时和当天复核景区、道路公告，再购票。</div><div class="ticket-channel">景区官方公告</div></article>
 <article class="ticket-card"><div class="ticket-top"><div class="ticket-date">平台放票<br/>即买</div><div class="ticket-place">茶卡盐湖<span class="ticket-visit">10/5 游览</span></div></div><div class="ticket-action">官方支持线上实名购票，但未公布固定提前天数；建议9/28起每日查看官方渠道。</div><div class="ticket-channel">官方：茶卡盐湖 / 西矿智旅</div></article>
-<article class="ticket-card"><div class="ticket-top"><div class="ticket-date">9/29<br/>00:00</div><div class="ticket-place">青海湖二郎剑<span class="ticket-visit">10/5 游览</span></div></div><div class="ticket-action">常规可提前7天预约；如当天项目或车流不理想，按行程预案取消，确保回西宁。</div><div class="ticket-channel">官方：智游青海湖小程序</div></article>
+<article class="ticket-card"><div class="ticket-top"><div class="ticket-date">9/29<br/>00:00</div><div class="ticket-place">青海湖二郎剑<span class="ticket-visit">10/5 沿湖（不强制进二郎剑）</span></div></div><div class="ticket-action">10/5重点是茶卡后前往黑马河/青海湖住宿；二郎剑不作为硬性景点，避免增加绕行和排队。</div><div class="ticket-channel">官方：智游青海湖小程序</div></article>
 </div>
 <table class="ticket-table">
 <thead><tr><th>景点 / 游览日</th><th>最早购买时间</th><th>渠道与执行提示</th></tr></thead>
 <tbody>
 <tr><td>莫高窟<br/>10/3 13:15</td><td class="buy-date">9/3 07:00</td><td>已预约 13:15 场；请 12:45 抵达数字展示中心。参观结束后视时间决定是否前往鸣沙山，不硬赶日落。</td></tr>
 <tr><td>鸣沙山月牙泉<br/>10/3</td><td class="buy-date">9/18 起</td><td>当前常规提前15天线上实名预约；用“鸣沙山月牙泉”公众号或“游敦煌”小程序，优先锁定下午入园。若国庆公告改规则，以公告为准。</td></tr>
-<tr><td>七彩丹霞<br/>10/2</td><td class="buy-date">平台放票即买</td><td>官方未公布固定提前天数；建议9/30起每天查看官方公众号/正规 OTA，最迟10/1锁定。2026年门票价已调为70元，区间车另计。</td></tr>
+<tr><td>七彩丹霞<br/>10/1</td><td class="buy-date">平台放票即买</td><td>行程调整为10/1下午游览；建议尽早购票，并在出发前复核国庆期间当日入园与闭园时间。</td></tr>
 <tr><td>翡翠湖<br/>10/4</td><td class="buy-date">10/1 核验后购买</td><td>不记录固定提前天数。大柴旦8月仍有地震活动；目前正常开放，但须在出发前72小时和当天复核景区、道路公告，再购票。</td></tr>
 <tr><td>茶卡盐湖<br/>10/5</td><td class="buy-date">平台放票即买</td><td>官方支持线上实名购票，但未公布固定提前天数；建议9/28起每日查看“茶卡盐湖/西矿智旅”官方渠道，勿购买非“天空之镜·茶卡盐湖”票。</td></tr>
-<tr><td>青海湖二郎剑<br/>10/5</td><td class="buy-date">9/29 00:00</td><td>“智游青海湖”小程序常规可提前7天预约；如当天项目或车流不理想，按行程预案取消，确保回西宁。</td></tr>
+<tr><td>青海湖沿湖<br/>10/5</td><td class="buy-date">9/29 00:00</td><td>10/5茶卡后前往黑马河/青海湖住宿；二郎剑不作为硬性景点，优先保证抵达住宿点。</td></tr>
 </tbody>
 </table>
-<div class="ticket-risk"><strong>行前必做：</strong>9/2 抢莫高窟；9/18 查鸣沙山；9/29 查二郎剑；10/1 最后确认翡翠湖开放与路况。莫高窟遇强降雨、沙尘等可能启动应急预案并停开洞窟，购票后仍要关注官方通知。</div>
+<div class="ticket-risk"><strong>行前必做：</strong>9/2 抢莫高窟；9/18 查鸣沙山；10/1 最后确认翡翠湖开放与路况。莫高窟遇强降雨、沙尘等可能启动应急预案并停开洞窟，购票后仍要关注官方通知。</div>
 </div>
 </section>
 </main>
@@ -1280,12 +643,11 @@ var ticketTasks=[
   {at:"2026-09-18T00:00:00",time:"9/18 起",title:"预约鸣沙山月牙泉",detail:"通过“鸣沙山月牙泉”公众号或“游敦煌”小程序锁定下午入园。"},
   {at:"2026-09-28T00:00:00",time:"9/28 起",title:"核对茶卡盐湖放票",detail:"查看“茶卡盐湖 / 西矿智旅”官方渠道。"},
   {at:"2026-09-29T00:00:00",time:"9/29 00:00",title:"预约青海湖二郎剑",detail:"通过“智游青海湖”小程序预约。"},
-  {at:"2026-09-30T00:00:00",time:"9/30 起",title:"核对七彩丹霞放票",detail:"查看官方公众号或正规 OTA，最迟10/1锁定。"},
+  {at:"2026-09-30T00:00:00",time:"9/30 起",title:"核对七彩丹霞放票",detail:"行程调整为10/1下午游览，建议尽早锁定并复核当日入园时间。"},
   {at:"2026-10-01T00:00:00",time:"10/1",title:"核验翡翠湖与道路",detail:"复核景区和道路公告后再购票。"}
 ];
 function updateNextAction(){
   var now=new Date(),next=ticketTasks.find(function(task){return now<new Date(task.at)}),targets=[
-    [document.getElementById("nextActionKicker"),document.getElementById("nextActionTitle"),document.getElementById("nextActionDetail")],
     [document.getElementById("nextActionKickerNew"),document.getElementById("nextActionTitleNew"),document.getElementById("nextActionDetailNew")]
   ];
   targets.forEach(function(a){var k=a[0],t=a[1],d=a[2];if(!k||!t||!d)return;
@@ -1295,18 +657,6 @@ function updateNextAction(){
   });
 }
 updateNextAction();setInterval(updateNextAction,60000);
-var currentPlan="new";
-function setPlan(plan){
-  currentPlan=plan;
-  document.querySelectorAll("[data-plan-view]").forEach(function(v){v.classList.toggle("active",v.dataset.planView===plan)});
-  document.querySelectorAll("#planSwitch button").forEach(function(b){b.classList.toggle("active",b.dataset.plan===plan)});
-  var sub=document.getElementById("siteSub"),pill=document.getElementById("tripDatePill");
-  if(plan==="new"){sub.textContent="西安→西宁→青甘环线→西安→深圳 ｜ 2026.9.30—10.7 ｜ 4人·SUV";pill.textContent="📅 2026.9.30—10.7";}
-  else{sub.textContent="西安→西宁→青甘环线→西安→深圳 ｜ 2026.9.29—10.7 ｜ 4人·SUV";pill.textContent="📅 2026.9.29—10.7";}
-  try{localStorage.setItem("travelPlanVersion",plan)}catch(e){}
-}
-document.getElementById("planSwitch").addEventListener("click",function(e){var b=e.target.closest("button[data-plan]");if(b)setPlan(b.dataset.plan)});
-try{setPlan(localStorage.getItem("travelPlanVersion")||"new")}catch(e){setPlan("new")}
 
 </script>
 </body>
