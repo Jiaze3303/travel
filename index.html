@@ -1,115 +1,603 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f5faf6"><title>2026 国庆 · 青甘自驾行程</title><style>
-:root{--bg:#f5faf6;--card:#fff;--ink:#243a34;--muted:#788a84;--line:#dfeae4;--green:#699b87;--green2:#e9f3ee;--sand:#f5eee2;--shadow:0 8px 28px rgba(63,96,83,.08)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#f5faf6,#fbfcfa);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}.wrap{max-width:760px;margin:auto;padding:24px 16px 72px}.hero{padding:10px 4px 22px}.eyebrow{font-size:11px;letter-spacing:.14em;color:var(--green);font-weight:800}.hero h1{font-size:28px;line-height:1.2;margin:7px 0 8px}.hero p{margin:0;color:var(--muted)}.summary{display:flex;gap:8px;overflow:auto;padding:0 2px 20px;scrollbar-width:none}.summary::-webkit-scrollbar{display:none}.sum{flex:0 0 auto;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:#5e746c;font-size:12px}.sum b{color:var(--green)}.panel{background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:22px}.panel-title{padding:18px 18px 5px;font-size:18px;font-weight:800}.panel-sub{padding:0 18px 16px;color:var(--muted);font-size:12px}.calendar{padding:0 12px 16px}.week,.dates{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.week div{text-align:center;color:#91a09b;font-size:10px;padding:5px 0}.daybtn{border:0;background:transparent;border-radius:14px;min-height:64px;padding:8px 3px;color:var(--ink);font:inherit;position:relative}.daybtn .n{display:block;font-weight:800;font-size:15px}.daybtn .city{display:block;font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.daybtn.trip{background:#f3f8f5}.daybtn.active{background:var(--green);color:#fff;box-shadow:0 5px 14px rgba(78,128,107,.2)}.daybtn.active .city{color:#eef7f3}.daybtn:focus-visible{outline:2px solid var(--green);outline-offset:2px}.blank{min-height:59px}.brief{padding:2px 18px 18px}.brief-row{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:12px 0;border-top:1px solid #edf2ef}.brief-date{font-weight:800;color:var(--green)}.brief-main b{display:block;font-size:13px}.brief-main span{font-size:11px;color:var(--muted)}.detail{display:none}.detail.show{display:block}.cover{position:relative;height:218px;background:#e8eee9}.cover.duo{display:grid;grid-template-columns:1fr 1fr;gap:2px}.cover img{width:100%;height:100%;object-fit:cover;display:block}.cover .label{position:absolute;left:12px;bottom:10px;background:rgba(32,53,46,.72);color:#fff;border-radius:999px;padding:5px 9px;font-size:11px;backdrop-filter:blur(6px)}.detail-head{padding:18px 18px 12px}.date-line{color:var(--green);font-size:11px;font-weight:800;letter-spacing:.08em}.detail h2{font-size:22px;line-height:1.3;margin:5px 0 7px}.route{color:var(--muted);font-size:12px}.chips{display:flex;gap:7px;flex-wrap:wrap;padding:0 18px 17px}.chip{background:var(--green2);color:#56776b;border-radius:999px;padding:6px 9px;font-size:11px}.timeline{margin:2px 18px 20px;padding-left:19px;border-left:2px solid #dcebe4}.event{position:relative;padding:0 0 17px}.event:last-child{padding-bottom:0}.event:before{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:#7eaa98;left:-22px;top:7px;box-shadow:0 0 0 4px #f0f7f3}.time{font-weight:800;color:#527d6c;margin-right:5px}.stay{margin:0 18px 20px;background:#f6faf7;border-radius:16px;padding:13px 14px}.stay b{color:#527565}.roadbox{margin:0 18px 20px;padding:15px 14px;background:#fbfcf9;border:1px solid #e6eee9;border-radius:16px}.roadtitle{font-weight:800;color:#527565;margin-bottom:8px}.roadline{font-size:12px;font-weight:700;color:#526b62;margin-bottom:8px}.roadnotes{margin:0;padding-left:18px;color:#687b74;font-size:12px}.roadnotes li{margin:6px 0}.scenery{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.scene{background:#f1f6f2;border-radius:999px;padding:5px 8px;font-size:10px;color:#668078}.navdays{display:flex;justify-content:space-between;gap:10px;padding:0 18px 18px}.navdays button{border:1px solid var(--line);background:#fff;color:#5d746b;border-radius:13px;min-height:44px;padding:10px 14px;font:inherit}.footer{text-align:center;color:#98a59f;font-size:10px;padding:12px}.section-label{font-size:18px;font-weight:800;margin:28px 4px 12px}@media(max-width:390px){.wrap{padding:20px 12px 64px}.calendar{padding-left:9px;padding-right:9px}.dates,.week{gap:4px}.daybtn{min-height:58px;padding:7px 2px}.daybtn .city{font-size:8px}.cover{height:195px}.hero h1{font-size:26px}.panel{margin-bottom:18px}.panel-title{padding-left:15px;padding-right:15px}.panel-sub{padding-left:15px;padding-right:15px}.brief{padding-left:15px;padding-right:15px}.detail-head,.chips{padding-left:15px;padding-right:15px}.timeline{margin-left:15px;margin-right:15px}.stay{margin-left:15px;margin-right:15px}.navdays{padding-left:15px;padding-right:15px}}@media(min-width:620px){.cover{height:280px}.brief{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.brief-row:nth-child(2){border-top:1px solid #edf2ef}}
-
-/* Calendar-first mobile behavior */
-.calendar-panel{position:sticky;top:0;z-index:50;box-shadow:0 8px 22px rgba(63,96,83,.10);will-change:transform}
-.calendar-panel .panel-title{padding-top:13px;padding-bottom:2px;font-size:15px}
-.calendar-panel .panel-sub{padding-bottom:8px;font-size:10px}
-.calendar-panel .calendar{padding-bottom:10px}
-.calendar-panel .daybtn{min-height:52px}
-#overview{display:none}
-body.show-overview #overview{display:block}
-@media(max-width:390px){.calendar-panel{border-radius:0 0 18px 18px;margin-left:-12px;margin-right:-12px}.calendar-panel .panel-title,.calendar-panel .panel-sub{padding-left:15px;padding-right:15px}.calendar-panel .daybtn{min-height:50px}}
-.ticketbox{margin-top:18px;padding:16px;border-radius:18px;background:#f5faf7;border:1px solid #dfece5}.ticket-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.ticket-item{padding:12px 13px;border-radius:14px;background:#fff;display:flex;flex-direction:column;gap:4px}.ticket-item b{font-size:16px;color:#486b5c}.ticket-item span{font-size:12px;line-height:1.55;color:#6f7f78}.ticket-tip{margin-top:10px;font-size:11px;line-height:1.65;color:#87958f}@media(max-width:420px){.ticket-grid{grid-template-columns:1fr 1fr;gap:8px}.ticket-item{padding:10px}.ticket-item b{font-size:15px}}
-/* Compact one-row itinerary date selector */
-.calendar-panel .week{display:none}
-.calendar-panel .dates{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
-.calendar-panel .calendar{padding:0 8px 8px}
-.calendar-panel .daybtn{min-width:0;min-height:46px;padding:5px 1px;border-radius:11px}
-.calendar-panel .daybtn .n{font-size:14px;line-height:1.25}
-.calendar-panel .daybtn .city{font-size:7.5px;line-height:1.2;margin-top:2px}
-@media(max-width:390px){.calendar-panel .dates{gap:3px}.calendar-panel .calendar{padding-left:6px;padding-right:6px}.calendar-panel .daybtn{min-height:44px;padding-left:0;padding-right:0}.calendar-panel .daybtn .city{font-size:7px}}
-.quicktips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0 4px}.quicktip{border:1px solid var(--line);background:#fbfdfb;border-radius:13px;padding:10px 11px;min-width:0}.quicktip b{display:block;font-size:11px;color:var(--green);margin-bottom:3px}.quicktip span{display:block;font-size:12px;line-height:1.45;color:#536a62}.daynote{margin-top:12px;padding:10px 12px;border-radius:12px;background:var(--sand);font-size:12px;color:#6f6555;line-height:1.55}@media(max-width:380px){.quicktips{grid-template-columns:1fr}}
-/* 2026-09-16 visual refinement: compact calendar + hero-first day cards + unified timeline */
-.calendar-panel .panel-title{display:none}.calendar-panel .panel-sub{display:none}.calendar-panel .calendar{padding:8px 10px}.calendar-panel .daybtn{min-height:48px;background:transparent;border:0;box-shadow:none}.calendar-panel .daybtn.active{background:var(--green2);border:1px solid #cfe2d8}.calendar-panel .daybtn .n{font-size:15px;font-weight:800}.calendar-panel .daybtn .city{font-size:8px;font-weight:600;color:var(--muted)}
-.detail.show{overflow:hidden}.detail.show .cover{margin:0 0 0;height:220px;border-radius:0}.detail.show .cover img{width:100%;height:100%;object-fit:cover}.detail-head{padding-top:18px}.detail-head .date-line{font-size:12px;letter-spacing:.08em;color:var(--green);font-weight:800}.detail-head h2{font-size:23px;line-height:1.25;margin:5px 0 5px}.detail-head .route{font-size:12px;color:var(--muted)}
-.chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-top:12px;padding-bottom:5px}.chips::-webkit-scrollbar{display:none}.chip{flex:0 0 auto;background:#f3f8f5;border:1px solid #e1ece6;padding:7px 10px;border-radius:999px;font-size:11px}
-.timeline{position:relative;margin-top:18px;padding-left:0}.timeline:before{content:'';position:absolute;left:66px;top:9px;bottom:9px;width:1px;background:#dbe8e1}.event{position:relative;display:grid;grid-template-columns:54px 1fr;gap:25px;padding:0 0 18px;border:0;line-height:1.6;font-size:13px}.event:after{content:'';position:absolute;left:62px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--green);border:2px solid #fff;box-shadow:0 0 0 1px #bfd5ca}.event .time{display:block;font-size:11px;font-weight:800;color:var(--green);white-space:normal;line-height:1.35;padding-top:1px}
-.quicktips{display:flex;overflow-x:auto;gap:8px;padding-bottom:4px;scroll-snap-type:x proximity;scrollbar-width:none}.quicktips::-webkit-scrollbar{display:none}.quicktip{flex:0 0 72%;scroll-snap-align:start;background:#f8fbf9}.quicktip b{font-size:10px;text-transform:uppercase;letter-spacing:.04em}.quicktip span{font-size:12px}
-.roadbox{margin-top:18px;background:#fbfaf6;border-color:#eee7d9}.roadtitle{font-size:13px}.roadline{font-size:12px;font-weight:700;line-height:1.55}.roadnotes{font-size:12px;line-height:1.7;padding-left:18px}.scenery{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}.scenery::-webkit-scrollbar{display:none}.scene{flex:0 0 auto}
-.stay{margin-top:14px}.navdays{margin-top:18px}.footer{margin-top:28px}
-@media(max-width:390px){.calendar-panel .calendar{padding:7px 6px}.calendar-panel .daybtn{min-height:45px}.detail.show .cover{height:205px}.detail-head h2{font-size:21px}.timeline:before{left:60px}.event{grid-template-columns:49px 1fr;gap:22px}.event:after{left:56px}.quicktip{flex-basis:82%}}
-
-/* 2026-09 layout audit: calmer Apple-inspired rhythm, retaining the green travel theme */
-:root{--page-gutter:clamp(14px,4.5vw,22px);--section-gap:16px}
-body{overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-.wrap{width:100%;max-width:760px;padding:18px var(--page-gutter) 64px}
-.hero{padding:8px 2px 16px}.hero h1{font-size:clamp(25px,7vw,31px);letter-spacing:-.035em;margin:5px 0 6px}.hero p{line-height:1.55}
-.summary{padding:0 0 14px;gap:6px}.sum{padding:7px 10px}
-.panel{border-radius:20px;margin-bottom:var(--section-gap);box-shadow:0 5px 20px rgba(63,96,83,.065)}
-.panel-title{padding:16px 16px 4px}.panel-sub{padding:0 16px 12px}
-.calendar-panel{top:0;margin-left:calc(var(--page-gutter)*-1);margin-right:calc(var(--page-gutter)*-1);border-radius:0 0 18px 18px;border-left:0;border-right:0;background:rgba(248,252,249,.92);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px)}
-.calendar-panel .calendar{padding:7px max(8px,var(--page-gutter)) 9px}.calendar-panel .dates{gap:4px}.calendar-panel .daybtn{min-height:43px;padding:4px 1px;border-radius:12px}.calendar-panel .daybtn .n{font-size:14px}.calendar-panel .daybtn .city{font-size:7.5px;margin-top:1px}
-.section-label{margin:18px 2px 8px}.cover{height:clamp(190px,52vw,255px)}.cover.duo{height:clamp(190px,52vw,255px)}
-.detail-head{padding:16px 16px 10px}.detail h2{font-size:clamp(21px,6vw,25px);letter-spacing:-.025em;margin:4px 0 5px}.route{line-height:1.5}
-.chips{padding:0 16px 14px;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{flex:0 0 auto;padding:6px 9px}
-.timeline{margin:2px 16px 16px;padding-left:18px}.event{padding-bottom:14px;line-height:1.62}.event:last-child{padding-bottom:1px}
-.quicktips{margin:0 16px 16px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;overflow:visible;padding:0}.quicktip{min-width:0;width:auto;padding:11px 12px;border-radius:14px}.quicktip b{margin-bottom:2px}.quicktip span{line-height:1.45}
-.roadbox,.stay{margin-left:16px;margin-right:16px;margin-bottom:16px}.roadbox{padding:13px 13px}.roadnotes{padding-left:17px}.roadnotes li+li{margin-top:5px}
-.scenery{gap:6px;margin-top:10px}.scene{padding:5px 8px}
-.ticketbox{margin:0 16px 16px}.ticket-grid{gap:8px}.ticket-item{padding:11px 12px}.ticket-tip{line-height:1.55}
-.brief{padding:0 16px 14px}.brief-row{grid-template-columns:44px minmax(0,1fr);gap:10px;padding:10px 0}.brief-main span{line-height:1.45;display:block}
-@media(max-width:430px){.wrap{padding-top:12px}.quicktips{grid-template-columns:1fr 1fr}.cover .label{left:10px;bottom:9px}.panel{border-radius:18px}.calendar-panel{border-radius:0 0 16px 16px}}
-@media(max-width:350px){.calendar-panel .daybtn .city{display:none}.quicktips{grid-template-columns:1fr}.calendar-panel .daybtn{min-height:39px}.hero h1{font-size:24px}}
-</style></head><body><main class="wrap">
-<header class="hero"><div class="eyebrow">2026 · NATIONAL DAY ROAD TRIP</div><h1>青甘自驾 · 8天行程</h1><p>西安 → 张掖 → 嘉峪关 → 敦煌 → 大柴旦 → 青海湖 → 西宁 → 西安</p></header>
-<div class="summary"><div class="sum"><b>9/30—10/7</b> · 8天</div><div class="sum"><b>4人</b> · SUV</div><div class="sum"><b>张掖取车</b> · 西宁还车</div><div class="sum"><b>2人</b> · 轮换驾驶</div></div>
-<section class="panel calendar-panel"><div class="panel-title">📅 行程日历</div><div class="panel-sub">点击日期，查看当天景色与完整安排</div><div class="calendar"><div class="dates">
-<button class="daybtn trip" data-day="0"><span class="n">30</span><span class="city">西安</span></button><button class="daybtn trip" data-day="1"><span class="n">1</span><span class="city">张掖</span></button><button class="daybtn trip" data-day="2"><span class="n">2</span><span class="city">嘉峪关</span></button><button class="daybtn trip" data-day="3"><span class="n">3</span><span class="city">敦煌</span></button><button class="daybtn trip" data-day="4"><span class="n">4</span><span class="city">大柴旦</span></button><button class="daybtn trip" data-day="5"><span class="n">5</span><span class="city">青海湖</span></button>
-<button class="daybtn trip" data-day="6"><span class="n">6</span><span class="city">西宁</span></button></div></div></section>
-<section class="panel" id="overview"><div class="panel-title">🧭 完整行程</div><div class="brief">
-<div class="brief-row"><div class="brief-date">9/30</div><div class="brief-main"><b>西安 → 张掖西</b><span>T269 · 22:00出发 · 夜间火车</span></div></div>
-<div class="brief-row"><div class="brief-date">10/1</div><div class="brief-main"><b>张掖西 → 七彩丹霞 → 嘉峪关</b><span>取SUV · 约250–280km</span></div></div>
-<div class="brief-row"><div class="brief-date">10/2</div><div class="brief-main"><b>嘉峪关关城 → 敦煌</b><span>约370–376km · 约4h</span></div></div>
-<div class="brief-row"><div class="brief-date">10/3</div><div class="brief-main"><b>莫高窟 → 鸣沙山月牙泉</b><span>敦煌轻松游 · 市内短途</span></div></div>
-<div class="brief-row"><div class="brief-date">10/4</div><div class="brief-main"><b>敦煌 → 翡翠湖 → 大柴旦</b><span>约350km级</span></div></div>
-<div class="brief-row"><div class="brief-date">10/5</div><div class="brief-main"><b>大柴旦 → 黑马河</b><span>约430–470km级 · 两人轮换驾驶</span></div></div>
-<div class="brief-row"><div class="brief-date">10/6</div><div class="brief-main"><b>青海湖 → 西宁 → 西安</b><span>西宁还车 · 动车返西安</span></div></div>
-<div class="brief-row"><div class="brief-date">10/7</div><div class="brief-main"><b>西安 → 深圳</b><span>飞机返程</span></div></div>
-</div>
-<div class="daynote"><b>旅行节奏：</b>前半程以河西走廊与敦煌为主，10/3作为轻松日；10/4起进入柴达木与高原湖区。长途日坚持两人轮换、约2小时休息一次，国庆车流和天气变化时以实际导航为准。</div><div class="ticketbox"><div class="roadtitle">🎫 票务时间</div><div class="ticket-grid">
-<div class="ticket-item"><b>9月16日</b><span>抢 9/30 西安 → 张掖西 · T269</span></div>
-<div class="ticket-item"><b>现在处理</b><span>10/1 七彩丹霞、10/2 嘉峪关关城：国庆客流集中，建议提前通过景区官方渠道购票/预约；具体分时库存以购票页为准</span></div>
-<div class="ticket-item"><b>已购买</b><span>10/3 莫高窟 · 13:15 场次；官方要求至少提前30分钟抵达数字展示中心；建议12:30–12:45到达</span></div>
-<div class="ticket-item"><b>现在处理</b><span>10/3 鸣沙山月牙泉：2026年实行线上售票，建议提前预约；当天计划安排在莫高窟结束后</span></div>
-<div class="ticket-item"><b>出发前确认</b><span>10/4 大柴旦翡翠湖：6/27已恢复开放；旺季参考营业 07:30–19:30，国庆前再次确认官方运营公告并购票</span></div>
-<div class="ticket-item"><b>住宿确定后</b><span>10/5 青海湖黑马河：住宿点已确定在黑马河；黑马河镇及湖边公共观景以现场管理为准，如临时进入收费景区再按景区最新公告购票</span></div>
-<div class="ticket-item"><b>9月22日</b><span>抢 10/6 西宁 → 西安动车/高铁</span></div>
-</div><div class="ticket-tip">景区门票没有统一固定放票日；“现在处理 / 出发前确认”是行程管理建议，不代表官方开售日期。莫高窟13:15场次已购；官方要求至少提前30分钟抵达数字展示中心。火车票起售时刻以12306对应车站查询为准。</div></div></section>
-<div class="section-label" id="detailStart">当天行程</div>
-<section class="panel detail" data-detail="0"><div class="detail-head"><div class="date-line">09.30 · 周三</div><h2>西安 → 张掖西</h2><div class="route">夜间火车 · 为第二天自驾留足体力</div></div><div class="chips"><span class="chip">🚆 T269</span><span class="chip">自驾 0km</span></div><div class="timeline"><div class="event"><span class="time">22:00</span>西安站乘 T269 出发。</div><div class="event"><span class="time">次日 11:31</span>抵达张掖西站。</div></div><div class="stay"><b>🌙 住宿</b> · T269 火车</div></section>
-<section class="panel detail" data-detail="1"><div class="cover"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Zhangye_Danxia_National_Geopark.jpg/1280px-Zhangye_Danxia_National_Geopark.jpg" alt="张掖七彩丹霞实景"><span class="label">张掖七彩丹霞</span></div><div class="detail-head"><div class="date-line">10.01 · 周四</div><h2>张掖西 → 七彩丹霞 → 嘉峪关</h2><div class="route">下火车取车，下午看丹霞，傍晚继续向西</div></div><div class="chips"><span class="chip">🚙 约250–280km</span><span class="chip">🎨 七彩丹霞</span><span class="chip">🏨 嘉峪关</span></div><div class="timeline"><div class="event"><span class="time">11:31</span>抵达张掖西，取行李。</div><div class="event"><span class="time">11:45–13:00</span>午饭、办理SUV租车、验车。</div><div class="event"><span class="time">13:00</span>前往七彩丹霞。</div><div class="event"><span class="time">13:45–17:00</span>七彩丹霞游览。建议以景区观光车串联主要观景台，重点留意彩色丘陵的层理和傍晚侧光；17:00左右及时离园，给去嘉峪关的车程留余量。</div><div class="event"><span class="time">17:00左右</span>出发前往嘉峪关，两名司机途中可轮换。</div><div class="event"><span class="time">19:30–20:30</span>抵达嘉峪关，先入住再晚饭。当天不再安排景点，补水、充电、整理第二天随车物品。</div></div><div class="quicktips"><div class="quicktip"><b>今日重点</b><span>丹霞游览后直接向西去嘉峪关，不返回张掖市区。</span></div><div class="quicktip"><b>顺路看</b><span>从彩色丘陵逐渐进入河西走廊戈壁，傍晚西行光线更有层次。</span></div><div class="quicktip"><b>补给</b><span>取车后先补齐水和零食；离开丹霞前确认油量。</span></div><div class="quicktip"><b>节奏</b><span>17点左右离开丹霞较合适，夜间不再增加景点。</span></div></div><div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">张掖西 → 七彩丹霞 → 临泽方向 → G30 连霍高速 → 酒泉 → 嘉峪关</div><ul class="roadnotes"><li>张掖西到丹霞先走市区/景区连接道路；丹霞游览结束后不必返回张掖市区，直接向西接入 G30，更顺路。</li><li>进入连霍高速后一路沿河西走廊向西，主要经过临泽、酒泉一带，路况以高速为主。</li><li>傍晚这一段视野开阔，典型河西走廊景观会从农田、绿洲逐渐过渡到戈壁荒漠；天气通透时远处可见祁连山方向山体轮廓。</li></ul><div class="scenery"><span class="scene">彩色丘陵</span><span class="scene">河西绿洲</span><span class="scene">戈壁</span><span class="scene">祁连山远景</span></div></div><div class="stay"><b>🏨 住宿</b> · 嘉峪关市区</div></section>
-<section class="panel detail" data-detail="2"><div class="cover"><img src="https://www.chinevoyage.com/image/a-large-size/gansu/jiayuguan/passe-jiayuguan-1-760x480.jpg" alt="嘉峪关关城实景"><span class="label">嘉峪关关城</span></div><div class="detail-head"><div class="date-line">10.02 · 周五</div><h2>嘉峪关关城 → 敦煌</h2><div class="route">上午关城，午后一路前往敦煌</div></div><div class="chips"><span class="chip">🚙 约370–376km</span><span class="chip">⏱ 约4h驾驶</span></div><div class="timeline"><div class="event"><span class="time">08:00–08:45</span>早餐、整理随车物品。</div><div class="event"><span class="time">09:00–11:45</span>嘉峪关关城游览。以关城主体、城墙和边塞视野为主，不额外叠加远距离景点，给下午敦煌段留足时间。</div><div class="event"><span class="time">11:45–12:45</span>午饭、补水、加油。</div><div class="event"><span class="time">12:45–13:00</span>出发前往敦煌。</div><div class="event"><span class="time">15:00左右</span>途中休息15–20分钟。</div><div class="event"><span class="time">17:00–18:00</span>抵达敦煌，入住后晚饭、休息。若体力不错，可在市区轻松散步、补充次日饮水零食，但不再安排正式景点。</div></div><div class="quicktips"><div class="quicktip"><b>今日重点</b><span>上午关城，午后专心赶往敦煌，晚上以休息为主。</span></div><div class="quicktip"><b>顺路看</b><span>酒泉—玉门—瓜州一带的河西走廊、风电场与戈壁公路。</span></div><div class="quicktip"><b>补给</b><span>嘉峪关出发前加油；瓜州方向适合作为途中休息节点。</span></div><div class="quicktip"><b>节奏</b><span>约2小时换司机或停车活动一次，不追求提前到敦煌。</span></div></div><div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">嘉峪关 → G30 连霍高速 → 玉门 → 瓜州 → G3011 柳格高速 → 敦煌</div><ul class="roadnotes"><li>离开嘉峪关后先走 G30 连霍高速，沿嘉安段一路向西，经过玉门、瓜州方向。</li><li>到瓜州附近转 G3011 柳格高速往敦煌，这是当天最主要的两条高速。</li><li>这一段是很典型的西北长距离公路景观：嘉峪关附近的城市与绿洲逐渐变成大片戈壁，经过玉门、瓜州后荒漠感明显增强；进入敦煌方向后能感受到沙漠绿洲交界。</li><li>中途建议在玉门/瓜州服务区一带完成休息、补水和驾驶员轮换，不把4小时连续开完。</li></ul><div class="scenery"><span class="scene">戈壁公路</span><span class="scene">风电景观</span><span class="scene">瓜州荒漠</span><span class="scene">敦煌绿洲</span></div></div><div class="stay"><b>🏨 住宿</b> · 敦煌方所酒店</div></section>
-<section class="panel detail" data-detail="3"><div class="cover duo"><img src="https://www.koya-culture.com/data/photos/20240939/art_17275669772829_85448e.jpg" alt="敦煌莫高窟实景"><img src="https://images.tripadeal.com.au/cdn-cgi/image/format%3Dauto%2Cwidth%3D800/https%3A/cstad.s3.ap-southeast-2.amazonaws.com/5633_China_Silk_Road_WEB_HERO_2_Crescent_Moon_Spring.jpg" alt="鸣沙山月牙泉实景"></div><div class="detail-head"><div class="date-line">10.03 · 周六</div><h2>莫高窟 → 鸣沙山月牙泉</h2><div class="route">敦煌完整一天 · 不安排长途驾驶</div></div><div class="chips"><span class="chip">🏛 莫高窟 13:15</span><span class="chip">🏜 鸣沙山月牙泉</span><span class="chip">轻松日</span></div><div class="timeline"><div class="event"><span class="time">上午</span>睡够、早餐、敦煌市区轻松活动。建议以休息为主，可慢慢吃早餐、整理相机和随身物品，不安排需要排队或远距离移动的项目。</div><div class="event"><span class="time">11:00–11:45</span>提前吃午饭。</div><div class="event"><span class="time">12:00左右</span>从酒店出发。</div><div class="event"><span class="time">12:30–12:45</span>抵达莫高窟数字展示中心。官方要求预约时间前至少30分钟抵达；13:15场次最晚应在12:45前到，国庆建议再多留一点缓冲。</div><div class="event"><span class="time">13:15</span>莫高窟参观。跟随景区组织完成数字展示、接驳和洞窟参观，现场节奏以工作人员安排为准。</div><div class="event"><span class="time">参观结束后</span>前往鸣沙山月牙泉。傍晚以沙丘、月牙泉和日落氛围为主。2026年当前公布的旺季售检票时段可覆盖傍晚，但国庆前仍要再看景区最新公告；若莫高窟结束较晚，就减少其他项目，不赶时间。</div></div><div class="quicktips"><div class="quicktip"><b>今日重点</b><span>莫高窟13:15是当天核心，午前不安排耗时项目。</span></div><div class="quicktip"><b>拍照时段</b><span>鸣沙山留到傍晚，光线更柔和，也避开白天较强日照。</span></div><div class="quicktip"><b>随身准备</b><span>轻装、防晒、防风，洞窟参观遵守现场拍摄规定。</span></div><div class="quicktip"><b>节奏</b><span>莫高窟结束时间浮动，鸣沙山按实际时间衔接。</span></div></div><div class="roadbox"><div class="roadtitle">🛣 当天移动</div><div class="roadline">敦煌市区 → 莫高窟数字展示中心 → 莫高窟 → 鸣沙山月牙泉 → 敦煌市区</div><ul class="roadnotes"><li>当天全部是敦煌周边短途，不需要长距离赶路，把时间留给莫高窟和鸣沙山。</li><li>前往莫高窟时会从敦煌绿洲逐渐进入更开阔的荒漠环境；傍晚鸣沙山则是沙丘、月牙泉和绿洲同框的核心景观。</li><li>莫高窟结束时间受当天参观组织影响，鸣沙山不写死入园时间，现场按实际结束时间衔接最稳妥。</li></ul><div class="scenery"><span class="scene">敦煌绿洲</span><span class="scene">石窟崖壁</span><span class="scene">鸣沙山沙丘</span><span class="scene">月牙泉</span></div></div><div class="stay"><b>🏨 住宿</b> · 敦煌方所酒店</div></section>
-<section class="panel detail" data-detail="4"><div class="cover"><img src="https://x0.ifengimg.com/res/2024/03E4AC5255975C592B744DA9A858F7F5CB82EC3A_size2097_w5272_h2962.jpg" alt="大柴旦翡翠湖实景"><span class="label">大柴旦翡翠湖</span></div><div class="detail-head"><div class="date-line">10.04 · 周日</div><h2>敦煌 → 翡翠湖 → 大柴旦</h2><div class="route">长途自驾日 · 中途正常休息补给</div></div><div class="chips"><span class="chip">🚙 约350km级</span><span class="chip">💚 翡翠湖</span></div><div class="timeline"><div class="event"><span class="time">07:30</span>早餐、退房。</div><div class="event"><span class="time">08:00</span>敦煌出发。</div><div class="event"><span class="time">约10:00</span>停车休息15–20分钟。</div><div class="event"><span class="time">中午</span>沿途用餐、补给。进入柴达木方向前把油量、饮水和简单食物补足，途中看到合适服务区就休息，不等到疲劳再停。</div><div class="event"><span class="time">14:00前后</span>抵达大柴旦区域，以实际导航为准。</div><div class="event"><span class="time">14:30–17:30</span>翡翠湖游览（按当前旺季07:30–19:30营业信息安排）。重点看不同颜色盐池、远山倒影和傍晚光线；景区较开阔，按体力选择观景点，不追求全部走完。</div><div class="event"><span class="time">18:00左右</span>入住大柴旦，晚饭、休息。</div></div><div class="quicktips"><div class="quicktip"><b>今日重点</b><span>当天核心是公路景观变化＋翡翠湖，不再叠加远途景点。</span></div><div class="quicktip"><b>顺路看</b><span>阿克塞荒漠、当金山、柴达木盆地，地貌变化非常明显。</span></div><div class="quicktip"><b>补给</b><span>敦煌出发前加油；途中遇合适服务区就补水、活动身体。</span></div><div class="quicktip"><b>节奏</b><span>进入高海拔区域后放慢节奏，下午到翡翠湖即可。</span></div></div><div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">敦煌 → G3011 柳格高速 → 阿克塞 → 当金山方向 → 青海境内 → 大柴旦 → 翡翠湖</div><ul class="roadnotes"><li>从敦煌向南走 G3011 柳格高速敦当段，经阿克塞、当金山方向进入青海，这是全程景观变化最明显的一天之一。</li><li>前半段是荒漠、戈壁和山地公路；接近当金山后海拔逐渐上升，翻越山地后进入柴达木盆地，视野重新变得极其开阔。</li><li>进入大柴旦方向后以高原荒漠、盐碱地和远山为主，最后抵达翡翠湖，可看到不同矿物和盐度形成的蓝绿湖面。</li><li>这一天不要为了赶14:00硬压时间，途中山口、天气和国庆车流都会影响速度，以安全抵达为优先。翡翠湖已于2026年6月27日恢复开放，但国庆前仍需再次确认景区与道路公告。</li></ul><div class="scenery"><span class="scene">阿克塞荒漠</span><span class="scene">当金山</span><span class="scene">柴达木盆地</span><span class="scene">盐湖</span></div></div><div class="stay"><b>🏨 住宿</b> · 大柴旦美豪丽致酒店</div></section>
-<section class="panel detail" data-detail="5"><div class="cover"><img src="https://n.sinaimg.cn/sinacn11/285/w640h445/20180327/bb70-fysqfnh2785452.jpg" alt="青海湖实景"><span class="label">青海湖</span></div><div class="detail-head"><div class="date-line">10.05 · 周一</div><h2>大柴旦 → 黑马河</h2><div class="route">以抵达黑马河为主，不额外叠加远途景点</div></div><div class="chips"><span class="chip">🚙 约430–470km级</span><span class="chip">👥 两人轮换</span><span class="chip">🌊 青海湖</span></div><div class="timeline"><div class="event"><span class="time">06:30–07:00</span>起床、早餐、退房。</div><div class="event"><span class="time">07:30前后</span>出发，沿德令哈方向向青海湖黑马河推进。</div><div class="event"><span class="time">途中</span>每约2小时休息一次，两名司机轮换，中午正常用餐。经过德令哈方向时可作为主要补给节点，完成加油、午饭和短休息后再继续。</div><div class="event"><span class="time">傍晚</span>抵达黑马河，先办理入住。若天色、天气和体力都合适，再就近看湖景或日落；不为追日落继续赶夜路。</div></div><div class="quicktips"><div class="quicktip"><b>今日重点</b><span>以安全抵达黑马河为目标，不临时增加绕路景点。</span></div><div class="quicktip"><b>顺路看</b><span>柴达木荒漠逐渐过渡到高原草原、远山和湖区。</span></div><div class="quicktip"><b>补给</b><span>德令哈方向作为主要补给节点，完成加油、午饭和短休。</span></div><div class="quicktip"><b>节奏</b><span>两名司机轮换；若到湖边已晚，日落直接放弃，不赶夜路。</span></div></div><div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">大柴旦 → 德令哈 → 茶卡方向 → 黑马河</div><ul class="roadnotes"><li>当天从柴达木盆地继续向东推进，先经过德令哈方向，再经茶卡方向前往黑马河。</li><li>沿途会经历柴达木荒漠、盐碱地、草原和高原湖区的连续变化，是全程路上风景占比很高的一天。</li><li>接近青海湖后，荒漠感逐渐减弱，草原和远山增多，最终进入黑马河一带开阔的青海湖湖景区域。</li><li>黑马河已经确定为当晚落脚点。当天里程较长，具体国道/高速组合仍以导航和实时路况为准；建议尽量在天黑前抵达，不再增加绕路景点。</li></ul><div class="scenery"><span class="scene">柴达木荒漠</span><span class="scene">高原草原</span><span class="scene">远山</span><span class="scene">青海湖</span></div></div><div class="stay"><b>🏨 住宿</b> · 黑马河</div></section>
-<section class="panel detail" data-detail="6"><div class="cover"><img src="https://n.sinaimg.cn/sinacn11/285/w640h445/20180327/bb70-fysqfnh2785452.jpg" alt="青海湖清晨实景"><span class="label">黑马河 → 西宁</span></div><div class="detail-head"><div class="date-line">10.06 · 周二</div><h2>黑马河 → 西宁 → 西安</h2><div class="route">自驾收尾 · 西宁还车后动车回西安</div></div><div class="chips"><span class="chip">🚙 约220km级</span><span class="chip">🚆 西宁 → 西安</span></div><div class="timeline"><div class="event"><span class="time">06:30–08:00</span>视天气看青海湖清晨。黑马河附近就近观景即可，不专门绕远；天气不好就直接多休息。</div><div class="event"><span class="time">08:00–09:00</span>早餐、退房，前往西宁。</div><div class="event"><span class="time">中午前后</span>抵达西宁区域，先补油、整理车辆和行李，检查随身物品后再办理还车。</div><div class="event"><span class="time">下午</span>完成还车后前往西宁站。建议把还车、交通和进站安检作为一个完整缓冲段，不在这期间临时增加景点。</div><div class="event"><span class="time">随后</span>西宁站乘动车前往西安，晚上抵达。具体车次和发车时间待12306出票后回填，当前不写死。</div></div><div class="quicktips"><div class="quicktip"><b>今日重点</b><span>上午返西宁、还车、进站，下午不再增加城市景点。</span></div><div class="quicktip"><b>顺路看</b><span>青海湖晨景、高原草原，随后逐渐进入湟源河谷和城市。</span></div><div class="quicktip"><b>还车前</b><span>补油、检查行李与车内物品，预留足够还车和进站时间。</span></div><div class="quicktip"><b>节奏</b><span>当天重点是顺利衔接西宁→西安动车，时间留有余量。</span></div></div><div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">黑马河 → G109 京拉线 → 倒淌河 / 湟源方向 → G6 京藏高速方向 → 西宁</div><ul class="roadnotes"><li>早晨可在黑马河附近看青海湖晨景，随后沿G109向东返回西宁；高速切换以当天导航为准。</li><li>沿青海湖东行时主要是湖面、草原和高原山地景观；离开湖区后经过倒淌河、日月山/湟源方向，逐步进入河谷和城市环境。</li><li>青海省国省干线部分路段会按养护和天气动态调整，10月6日当天以导航与交通部门实时路况为准。</li><li>抵达西宁后先补油、整理行李和车辆，再还车；不要把还车时间与动车发车时间卡得过紧。</li></ul><div class="scenery"><span class="scene">青海湖晨景</span><span class="scene">高原草原</span><span class="scene">日月山方向</span><span class="scene">湟源河谷</span></div></div><div class="stay"><b>🏨 住宿</b> · 西安</div></section>
-<section class="panel detail" data-detail="7"><div class="detail-head"><div class="date-line">10.07 · 周三</div><h2>西安 → 深圳</h2><div class="route">返程日 · 不安排额外景点</div></div><div class="chips"><span class="chip">✈️ 飞机返程</span><span class="chip">自驾 0km</span></div><div class="timeline"><div class="event"><span class="time">当天</span>根据航班时间前往机场，返回深圳。</div></div></section>
-<div class="footer">青甘自驾 · 2026 国庆</div></main><script>
-(()=>{
-  const buttons=[...document.querySelectorAll('.daybtn[data-day]')];
-  const details=[...document.querySelectorAll('.detail[data-detail]')];
-  let current=0;
-  function show(i,scroll=false){
-    current=Math.max(0,Math.min(7,Number(i)));
-    document.body.classList.toggle('show-overview',current===0);
-    buttons.forEach(b=>b.classList.toggle('active',Number(b.dataset.day)===current));
-    details.forEach(d=>d.classList.toggle('show',Number(d.dataset.detail)===current));
-    if(scroll){
-      const target=current===0?document.querySelector('#overview'):document.querySelector('#detailStart');
-      target?.scrollIntoView({behavior:'smooth',block:'start'});
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5faf6">
+  <title>2026 国庆 · 青甘环线 · 8天行程</title>
+  <style>
+    :root {
+      --bg: #f5faf6;
+      --card: rgba(255, 255, 255, .96);
+      --ink: #243a34;
+      --muted: #788a84;
+      --line: #dfeae4;
+      --green: #699b87;
+      --green-dark: #527d6c;
+      --green-soft: #e9f3ee;
+      --sand: #f5eee2;
+      --gutter: clamp(14px, 4.5vw, 22px);
+      --shadow: 0 5px 20px rgba(63, 96, 83, .065);
     }
-  }
-  buttons.forEach(b=>b.addEventListener('click',()=>show(b.dataset.day,true)));
-  details.forEach((d,i)=>{
-    const nav=document.createElement('div');
-    nav.className='navdays';
-    nav.innerHTML=`<button type="button" ${i===0?'disabled':''}>← 前一天</button><button type="button" ${i===7?'disabled':''}>后一天 →</button>`;
-    const bs=nav.querySelectorAll('button');
-    bs[0].addEventListener('click',()=>show(i-1,true));
-    bs[1].addEventListener('click',()=>show(i+1,true));
-    d.appendChild(nav);
-  });
-  show(0,false);
-})();
-</script></body></html>
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: linear-gradient(#f5faf6, #fbfcfa);
+      color: var(--ink);
+      font: 14px/1.6 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 760px;
+      margin: auto;
+      padding: 18px var(--gutter) 64px;
+    }
+
+    .hero { padding: 8px 2px 16px; }
+    .eyebrow {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+    }
+    .hero h1 {
+      margin: 5px 0 6px;
+      font-size: clamp(25px, 7vw, 31px);
+      line-height: 1.2;
+      letter-spacing: -.035em;
+    }
+    .hero p { margin: 0; color: var(--muted); line-height: 1.55; }
+
+    .panel {
+      margin-bottom: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .calendar-panel {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      margin-left: calc(var(--gutter) * -1);
+      margin-right: calc(var(--gutter) * -1);
+      border-right: 0;
+      border-left: 0;
+      border-radius: 0 0 18px 18px;
+      background: rgba(248, 252, 249, .92);
+      backdrop-filter: saturate(180%) blur(18px);
+      -webkit-backdrop-filter: saturate(180%) blur(18px);
+      box-shadow: 0 8px 22px rgba(63, 96, 83, .10);
+    }
+    .calendar {
+      padding: 7px max(8px, var(--gutter)) 9px;
+    }
+    .dates {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 4px;
+    }
+    .daybtn {
+      min-width: 0;
+      min-height: 43px;
+      padding: 4px 1px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      cursor: pointer;
+    }
+    .daybtn .n {
+      display: block;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .daybtn .city {
+      display: block;
+      overflow: hidden;
+      margin-top: 1px;
+      color: var(--muted);
+      font-size: 7.5px;
+      font-weight: 600;
+      line-height: 1.2;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .daybtn.active {
+      border-color: #cfe2d8;
+      background: var(--green-soft);
+    }
+    .daybtn.overview {
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .daybtn.overview .n { font-size: 13px; }
+    .daybtn.overview .city { color: var(--green); }
+    .daybtn:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 2px;
+    }
+
+    #overview { display: block; }
+    body.show-detail #overview { display: none; }
+    .detail { display: none; }
+    .detail.show { display: block; overflow: hidden; }
+
+    .panel-title {
+      padding: 16px 16px 4px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .brief { padding: 0 16px 14px; }
+    .brief-row {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 1px solid #edf2ef;
+    }
+    .brief-date { color: var(--green); font-weight: 800; }
+    .brief-main b { display: block; font-size: 13px; }
+    .brief-main span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+    .daynote {
+      margin: 0 16px 16px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--sand);
+      color: #6f6555;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    .ticketbox {
+      margin: 0 16px 16px;
+      padding: 14px;
+      border: 1px solid #dfece5;
+      border-radius: 18px;
+      background: #f5faf7;
+    }
+    .ticket-title { color: var(--green-dark); font-weight: 800; }
+    .ticket-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .ticket-item {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 4px;
+      padding: 11px 12px;
+      border-radius: 14px;
+      background: #fff;
+    }
+    .ticket-item b { color: #486b5c; font-size: 15px; }
+    .ticket-item span { color: #6f7f78; font-size: 12px; line-height: 1.55; }
+    .ticket-tip { margin-top: 10px; color: #87958f; font-size: 11px; line-height: 1.55; }
+
+    .section-label {
+      margin: 18px 2px 8px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .cover {
+      position: relative;
+      height: clamp(190px, 52vw, 255px);
+      background: #e8eee9;
+    }
+    .cover.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .cover .label {
+      position: absolute;
+      bottom: 9px;
+      left: 10px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(32, 53, 46, .72);
+      color: #fff;
+      font-size: 11px;
+      backdrop-filter: blur(6px);
+    }
+    .detail-head { padding: 16px 16px 10px; }
+    .date-line {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+    .detail h2 {
+      margin: 4px 0 5px;
+      font-size: clamp(21px, 6vw, 25px);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+    }
+    .route { color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .chips {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 0 16px 14px;
+      scrollbar-width: none;
+    }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip {
+      flex: 0 0 auto;
+      padding: 6px 9px;
+      border: 1px solid #e1ece6;
+      border-radius: 999px;
+      background: #f3f8f5;
+      color: #56776b;
+      font-size: 11px;
+    }
+
+    .timeline {
+      position: relative;
+      margin: 2px 16px 16px;
+      padding-left: 0;
+    }
+    .timeline::before {
+      position: absolute;
+      top: 9px;
+      bottom: 9px;
+      left: 66px;
+      width: 1px;
+      background: #dbe8e1;
+      content: "";
+    }
+    .event {
+      position: relative;
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr);
+      gap: 25px;
+      padding-bottom: 14px;
+      border: 0;
+      font-size: 13px;
+      line-height: 1.62;
+    }
+    .event:last-child { padding-bottom: 1px; }
+    .event::after {
+      position: absolute;
+      top: 7px;
+      left: 62px;
+      width: 9px;
+      height: 9px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 1px #bfd5ca;
+      content: "";
+    }
+    .event .time {
+      display: block;
+      padding-top: 1px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.35;
+      white-space: normal;
+    }
+    .quicktips {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 0 16px 16px;
+    }
+    .quicktip {
+      min-width: 0;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #f8fbf9;
+    }
+    .quicktip b {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--green);
+      font-size: 10px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .quicktip span { color: #536a62; font-size: 12px; line-height: 1.45; }
+    .roadbox, .stay {
+      margin: 0 16px 16px;
+      border-radius: 16px;
+    }
+    .roadbox {
+      padding: 13px;
+      border: 1px solid #eee7d9;
+      background: #fbfaf6;
+    }
+    .roadtitle { color: var(--green-dark); font-size: 13px; font-weight: 800; }
+    .roadline {
+      margin: 7px 0 8px;
+      color: #526b62;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+    .roadnotes {
+      margin: 0;
+      padding-left: 17px;
+      color: #687b74;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    .roadnotes li + li { margin-top: 5px; }
+    .scenery { display: flex; gap: 6px; overflow-x: auto; margin-top: 10px; scrollbar-width: none; }
+    .scenery::-webkit-scrollbar { display: none; }
+    .scene {
+      flex: 0 0 auto;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: #f1f6f2;
+      color: #668078;
+      font-size: 10px;
+    }
+    .stay { padding: 13px 14px; background: #f6faf7; color: #5d746b; }
+    .stay b { color: var(--green-dark); }
+    .navdays {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 0 16px 18px;
+    }
+    .navdays .home-button { color: var(--green-dark); background: var(--green-soft); }
+    .navdays button {
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+      color: #5d746b;
+      font: inherit;
+      cursor: pointer;
+    }
+    .navdays button:disabled { cursor: default; opacity: .38; }
+    .footer { margin-top: 28px; padding: 12px; color: #98a59f; font-size: 10px; text-align: center; }
+
+    @media (max-width: 430px) {
+      .wrap { padding-top: 12px; }
+      .panel { border-radius: 18px; }
+      .calendar-panel { border-radius: 0 0 16px 16px; }
+    }
+    @media (max-width: 390px) {
+      .calendar { padding-right: 6px; padding-left: 6px; }
+      .dates { gap: 3px; }
+      .daybtn { min-height: 45px; }
+      .timeline::before { left: 60px; }
+      .event { grid-template-columns: 49px minmax(0, 1fr); gap: 22px; }
+      .event::after { left: 56px; }
+      .detail h2 { font-size: 21px; }
+    }
+    @media (max-width: 350px) {
+      .daybtn .city { display: none; }
+      .daybtn { min-height: 39px; }
+      .quicktips, .ticket-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <div class="eyebrow">2026 · NATIONAL DAY ROAD TRIP</div>
+      <h1>青甘环线 · 8天行程</h1>
+      <p>西安 → 张掖 → 嘉峪关 → 敦煌 → 大柴旦 → 青海湖 → 西宁 → 西安</p>
+    </header>
+
+    <section class="panel calendar-panel" aria-label="每日行程导航">
+      <div class="calendar">
+        <div class="dates">
+          <button class="daybtn overview" type="button" data-day="0"><span class="n">⌂</span><span class="city">总览</span></button>
+          <button class="daybtn" type="button" data-day="1"><span class="n">1</span><span class="city">张掖</span></button>
+          <button class="daybtn" type="button" data-day="2"><span class="n">2</span><span class="city">嘉峪关</span></button>
+          <button class="daybtn" type="button" data-day="3"><span class="n">3</span><span class="city">敦煌</span></button>
+          <button class="daybtn" type="button" data-day="4"><span class="n">4</span><span class="city">大柴旦</span></button>
+          <button class="daybtn" type="button" data-day="5"><span class="n">5</span><span class="city">黑马河</span></button>
+          <button class="daybtn" type="button" data-day="6"><span class="n">6</span><span class="city">西宁</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="overview">
+      <div class="panel-title">🧭 完整行程</div>
+      <div class="brief">
+        <div class="brief-row"><div class="brief-date">9/30</div><div class="brief-main"><b>西安 → 张掖西</b><span>T269 · 22:00出发 · 夜间火车</span></div></div>
+        <div class="brief-row"><div class="brief-date">10/1</div><div class="brief-main"><b>张掖西 → 七彩丹霞 → 嘉峪关</b><span>与司机会合 · 约250–280km</span></div></div>
+        <div class="brief-row"><div class="brief-date">10/2</div><div class="brief-main"><b>嘉峪关关城 → 敦煌</b><span>约370–376km · 公路转场</span></div></div>
+        <div class="brief-row"><div class="brief-date">10/3</div><div class="brief-main"><b>莫高窟 → 鸣沙山月牙泉</b><span>敦煌轻松日 · 莫高窟 13:15</span></div></div>
+        <div class="brief-row"><div class="brief-date">10/4</div><div class="brief-main"><b>敦煌 → 翡翠湖 → 大柴旦</b><span>约350km级 · 公路观景＋盐湖</span></div></div>
+        <div class="brief-row"><div class="brief-date">10/5</div><div class="brief-main"><b>大柴旦 → 德令哈 → 黑马河</b><span>约430–470km级 · 公路观景日 · 住黑马河</span></div></div>
+        <div class="brief-row"><div class="brief-date">10/6</div><div class="brief-main"><b>黑马河晨景 → 西宁 → 西安</b><span>结束用车／车辆交接 · 西宁站乘动车返西安</span></div></div>
+        <div class="brief-row"><div class="brief-date">10/7</div><div class="brief-main"><b>西安 → 深圳</b><span>飞机返程</span></div></div>
+      </div>
+      <div class="daynote"><b>旅行节奏：</b>前半程以河西走廊与敦煌为主，10/3作为轻松日；10/4起进入柴达木与高原湖区。全程由专职司机负责驾驶，长距离转场以途中观景、正常午餐和适时休息为主。国庆期间车流、天气和道路情况可能变化，实际时间以当天导航为准。</div>
+      <div class="ticketbox">
+        <div class="ticket-title">🎫 票务时间</div>
+        <div class="ticket-grid">
+          <div class="ticket-item"><b>9月16日</b><span>抢 9/30 西安 → 张掖西 · T269</span></div>
+          <div class="ticket-item"><b>现在处理</b><span>10/1 七彩丹霞、10/2 嘉峪关关城：国庆客流集中，建议提前通过景区官方渠道购票或预约；具体分时库存以购票页为准</span></div>
+          <div class="ticket-item"><b>已购买</b><span>10/3 莫高窟 · 13:15场次；官方要求至少提前30分钟抵达数字展示中心，建议12:30–12:45到达</span></div>
+          <div class="ticket-item"><b>现在处理</b><span>10/3 鸣沙山月牙泉：2026年实行线上售票，建议提前预约；当天安排在莫高窟结束后</span></div>
+          <div class="ticket-item"><b>出发前确认</b><span>10/4 大柴旦翡翠湖：6/27已恢复开放；旺季参考营业07:30–19:30，国庆前再次确认官方运营公告并购票</span></div>
+          <div class="ticket-item"><b>出发前确认</b><span>10/5 青海湖·黑马河：当天住宿黑马河；湖边公共观景及临时交通管理以现场为准，如进入收费景区再按最新公告购票</span></div>
+          <div class="ticket-item"><b>9月22日</b><span>抢 10/6 西宁 → 西安动车或高铁</span></div>
+        </div>
+        <div class="ticket-tip">景区门票没有统一固定放票日；“现在处理／出发前确认”是行程管理建议，不代表官方开售日期。莫高窟13:15场次已购；火车票起售时刻以12306对应车站查询为准。</div>
+      </div>
+    </section>
+
+    <div class="section-label" id="detailStart">当天行程</div>
+
+    <section class="panel detail" data-detail="1">
+      <div class="cover"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Zhangye_Danxia_National_Geopark.jpg/1280px-Zhangye_Danxia_National_Geopark.jpg" alt="张掖七彩丹霞实景"><span class="label">张掖七彩丹霞</span></div>
+      <div class="detail-head"><div class="date-line">10.01 · 周四</div><h2>张掖西 → 七彩丹霞 → 嘉峪关</h2><div class="route">下火车与司机会合，下午看丹霞，傍晚继续向西</div></div>
+      <div class="chips"><span class="chip">🚙 约250–280km</span><span class="chip">🎨 七彩丹霞</span><span class="chip">🏨 嘉峪关</span></div>
+      <div class="timeline">
+        <div class="event"><span class="time">11:31</span>抵达张掖西，取行李。</div>
+        <div class="event"><span class="time">11:45–13:00</span>午饭、与专职司机会合，完成车辆和随身物品确认。</div>
+        <div class="event"><span class="time">13:00</span>前往七彩丹霞。</div>
+        <div class="event"><span class="time">13:45–17:00</span>七彩丹霞游览。建议以景区观光车串联主要观景台，重点留意彩色丘陵的层理和傍晚侧光；17:00左右及时离园，给去嘉峪关的车程留余量。</div>
+        <div class="event"><span class="time">17:00左右</span>出发前往嘉峪关。上车后以休息和沿途观景为主，傍晚留意河西走廊、戈壁以及远山方向的开阔景色。</div>
+        <div class="event"><span class="time">19:30–20:30</span>抵达嘉峪关，先入住再晚饭。当天不再安排景点，补水、充电、整理第二天随身物品。</div>
+      </div>
+      <div class="quicktips"><div class="quicktip"><b>今日重点</b><span>丹霞游览后直接向西去嘉峪关，不返回张掖市区。</span></div><div class="quicktip"><b>顺路看</b><span>从彩色丘陵逐渐进入河西走廊戈壁，傍晚西行光线更有层次。</span></div><div class="quicktip"><b>补给</b><span>会合后先补齐水和零食；离开丹霞前确认随车物品。</span></div><div class="quicktip"><b>节奏</b><span>17点左右离开丹霞较合适，夜间不再增加景点。</span></div></div>
+      <div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">张掖西 → 七彩丹霞 → 临泽方向 → G30连霍高速 → 酒泉 → 嘉峪关</div><ul class="roadnotes"><li>张掖西到丹霞先走市区或景区连接道路；游览结束后不必返回张掖市区，直接向西接入G30，更顺路。</li><li>进入连霍高速后一路沿河西走廊向西，主要经过临泽、酒泉一带，路况以高速为主。</li><li>傍晚视野开阔，景观会从农田、绿洲逐渐过渡到戈壁荒漠；天气通透时可欣赏远山轮廓。</li></ul><div class="scenery"><span class="scene">彩色丘陵</span><span class="scene">河西绿洲</span><span class="scene">戈壁</span><span class="scene">远山</span></div></div>
+      <div class="stay"><b>🏨 住宿</b> · 嘉峪关市区</div>
+    </section>
+
+    <section class="panel detail" data-detail="2">
+      <div class="cover"><img src="https://www.chinevoyage.com/image/a-large-size/gansu/jiayuguan/passe-jiayuguan-1-760x480.jpg" alt="嘉峪关关城实景"><span class="label">嘉峪关关城</span></div>
+      <div class="detail-head"><div class="date-line">10.02 · 周五</div><h2>嘉峪关关城 → 敦煌</h2><div class="route">上午关城，午后一路前往敦煌</div></div>
+      <div class="chips"><span class="chip">🚙 约370–376km</span><span class="chip">🛣 公路转场</span></div>
+      <div class="timeline">
+        <div class="event"><span class="time">08:00–08:45</span>早餐、整理随车物品。</div>
+        <div class="event"><span class="time">09:00–11:45</span>嘉峪关关城游览。以关城主体、城墙和边塞视野为主，不额外叠加远距离景点，给下午敦煌段留足时间。</div>
+        <div class="event"><span class="time">11:45–12:45</span>午饭、补水。</div>
+        <div class="event"><span class="time">12:45–13:00</span>出发前往敦煌。</div>
+        <div class="event"><span class="time">15:00左右</span>途中休息15–20分钟。</div>
+        <div class="event"><span class="time">17:00–18:00</span>抵达敦煌，入住后晚饭、休息。若体力不错，可在市区轻松散步、补充次日饮水零食，但不再安排正式景点。</div>
+      </div>
+      <div class="quicktips"><div class="quicktip"><b>今日重点</b><span>上午关城，午后专心前往敦煌，晚上以休息为主。</span></div><div class="quicktip"><b>顺路看</b><span>酒泉、玉门、瓜州一带的河西走廊与戈壁公路。</span></div><div class="quicktip"><b>补给</b><span>出发前补水；玉门或瓜州服务区适合作为途中休息节点。</span></div><div class="quicktip"><b>节奏</b><span>长距离转场不赶时间，中途安排一次完整休息，乘客可以沿途观景。</span></div></div>
+      <div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">嘉峪关 → G30连霍高速 → 玉门 → 瓜州 → G3011柳格高速 → 敦煌</div><ul class="roadnotes"><li>离开嘉峪关后走G30连霍高速，沿嘉安段向西，经过玉门、瓜州方向。</li><li>到瓜州附近转G3011柳格高速往敦煌，这是当天的主要公路段。</li><li>这一段是典型的西北长距离公路景观，绿洲逐渐过渡到戈壁荒漠，进入敦煌方向后可感受到沙漠与绿洲交界。</li><li>中途建议在玉门或瓜州服务区一带休息15–20分钟，顺便补水和活动身体；由专职司机驾驶后，这一段更适合作为河西走廊公路观景段。</li></ul><div class="scenery"><span class="scene">戈壁公路</span><span class="scene">河西绿洲</span><span class="scene">瓜州荒漠</span><span class="scene">敦煌绿洲</span></div></div>
+      <div class="stay"><b>🏨 住宿</b> · 敦煌方所酒店</div>
+    </section>
+
+    <section class="panel detail" data-detail="3">
+      <div class="cover duo"><img src="https://www.koya-culture.com/data/photos/20240939/art_17275669772829_85448e.jpg" alt="敦煌莫高窟实景"><img src="https://images.tripadeal.com.au/cdn-cgi/image/format%3Dauto%2Cwidth%3D800/https%3A/cstad.s3.ap-southeast-2.amazonaws.com/5633_China_Silk_Road_WEB_HERO_2_Crescent_Moon_Spring.jpg" alt="鸣沙山月牙泉实景"></div>
+      <div class="detail-head"><div class="date-line">10.03 · 周六</div><h2>莫高窟 → 鸣沙山月牙泉</h2><div class="route">敦煌完整一天 · 乘客轻松游览</div></div>
+      <div class="chips"><span class="chip">🏛 莫高窟13:15</span><span class="chip">🏜 鸣沙山月牙泉</span><span class="chip">轻松日</span></div>
+      <div class="timeline">
+        <div class="event"><span class="time">上午</span>睡够、早餐、敦煌市区轻松活动。以休息为主，不安排需要排队或远距离移动的项目。</div>
+        <div class="event"><span class="time">11:00–11:45</span>提前吃午饭。</div>
+        <div class="event"><span class="time">12:00左右</span>从酒店出发。</div>
+        <div class="event"><span class="time">12:30–12:45</span>抵达莫高窟数字展示中心。官方要求预约时间前至少30分钟抵达；13:15场次最晚应在12:45前到，国庆建议再多留一点缓冲。</div>
+        <div class="event"><span class="time">13:15</span>莫高窟参观。跟随景区组织完成数字展示、接驳和洞窟参观，现场节奏以工作人员安排为准。</div>
+        <div class="event"><span class="time">参观结束后</span>前往鸣沙山月牙泉。傍晚以沙丘、月牙泉和日落氛围为主；若莫高窟结束较晚，就减少其他项目，不赶时间。</div>
+      </div>
+      <div class="quicktips"><div class="quicktip"><b>今日重点</b><span>莫高窟13:15是当天核心，午前不安排耗时项目。</span></div><div class="quicktip"><b>拍照时段</b><span>鸣沙山留到傍晚，光线更柔和，也避开白天较强日照。</span></div><div class="quicktip"><b>随身准备</b><span>轻装、防晒、防风，洞窟参观遵守现场拍摄规定。</span></div><div class="quicktip"><b>节奏</b><span>莫高窟结束时间浮动，鸣沙山按实际时间衔接。</span></div></div>
+      <div class="roadbox"><div class="roadtitle">🛣 当天移动</div><div class="roadline">敦煌市区 → 莫高窟数字展示中心 → 莫高窟 → 鸣沙山月牙泉 → 敦煌市区</div><ul class="roadnotes"><li>当天全部是敦煌周边短途，把时间留给莫高窟和鸣沙山。</li><li>前往莫高窟时会从敦煌绿洲进入更开阔的荒漠环境；傍晚鸣沙山则是沙丘、月牙泉和绿洲同框的核心景观。</li><li>莫高窟结束时间受当天参观组织影响，鸣沙山按实际结束时间衔接最稳妥。</li></ul><div class="scenery"><span class="scene">敦煌绿洲</span><span class="scene">石窟崖壁</span><span class="scene">鸣沙山沙丘</span><span class="scene">月牙泉</span></div></div>
+      <div class="stay"><b>🏨 住宿</b> · 敦煌方所酒店</div>
+    </section>
+
+    <section class="panel detail" data-detail="4">
+      <div class="cover"><img src="https://x0.ifengimg.com/res/2024/03E4AC5255975C592B744DA9A858F7F5CB82EC3A_size2097_w5272_h2962.jpg" alt="大柴旦翡翠湖实景"><span class="label">大柴旦翡翠湖</span></div>
+      <div class="detail-head"><div class="date-line">10.04 · 周日</div><h2>敦煌 → 翡翠湖 → 大柴旦</h2><div class="route">公路观景日 · 中途正常休息补给</div></div>
+      <div class="chips"><span class="chip">🚙 约350km级</span><span class="chip">💚 翡翠湖</span><span class="chip">专职司机</span></div>
+      <div class="timeline">
+        <div class="event"><span class="time">07:30</span>早餐、退房。</div>
+        <div class="event"><span class="time">08:00</span>从敦煌出发前往大柴旦。</div>
+        <div class="event"><span class="time">约10:00</span>途中停车休息15–20分钟，下车活动身体，欣赏荒漠与山地景观。</div>
+        <div class="event"><span class="time">11:30–12:30</span>根据实际位置安排午餐和补给。补充饮水、零食，为进入柴达木区域做好准备。</div>
+        <div class="event"><span class="time">14:00–14:30</span>抵达大柴旦区域，具体时间根据国庆车流和当天道路情况浮动。</div>
+        <div class="event"><span class="time">14:30–17:30</span>翡翠湖游览。重点看不同颜色盐池、远山倒影和下午光线，根据体力选择主要观景区域，不追求全部走完。</div>
+        <div class="event"><span class="time">18:00左右</span>返回酒店办理入住，晚餐后休息。第二天属于距离较长的转场日，晚上不再增加活动。</div>
+      </div>
+      <div class="quicktips"><div class="quicktip"><b>今日重点</b><span>公路景观变化＋翡翠湖，不额外增加远距离景点。</span></div><div class="quicktip"><b>顺路看</b><span>阿克塞荒漠、当金山、柴达木盆地，地貌变化明显。</span></div><div class="quicktip"><b>途中安排</b><span>正常午餐＋一次完整休息，乘客可以把这一段当成公路观景体验。</span></div><div class="quicktip"><b>节奏</b><span>不为了赶14:00压缩途中时间，下午顺利抵达翡翠湖即可。</span></div></div>
+      <div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">敦煌 → G3011柳格高速 → 阿克塞 → 当金山方向 → 青海境内 → 大柴旦 → 翡翠湖</div><ul class="roadnotes"><li>从敦煌向南走G3011柳格高速敦当段，经阿克塞、当金山方向进入青海，这是全程景观变化明显的一天。</li><li>前半段是荒漠、戈壁和山地公路；接近当金山后海拔逐渐上升，进入柴达木盆地后视野重新开阔。</li><li>进入大柴旦方向后以高原荒漠、盐碱地和远山为主，最后抵达翡翠湖。</li><li>不要为了赶14:00硬压时间，途中山口、天气和国庆车流都会影响速度，以顺利抵达为优先。</li></ul><div class="scenery"><span class="scene">阿克塞荒漠</span><span class="scene">当金山</span><span class="scene">柴达木盆地</span><span class="scene">盐湖</span></div></div>
+      <div class="stay"><b>🏨 住宿</b> · 大柴旦美豪丽致酒店</div>
+    </section>
+
+    <section class="panel detail" data-detail="5">
+      <div class="cover"><img src="https://n.sinaimg.cn/sinacn11/285/w640h445/20180327/bb70-fysqfnh2785452.jpg" alt="青海湖实景"><span class="label">青海湖 · 黑马河</span></div>
+      <div class="detail-head"><div class="date-line">10.05 · 周一</div><h2>大柴旦 → 德令哈 → 黑马河</h2><div class="route">公路观景日 · 从柴达木盆地一路前往青海湖</div></div>
+      <div class="chips"><span class="chip">🚙 约430–470km级</span><span class="chip">🛣 公路观景日</span><span class="chip">🌊 黑马河</span></div>
+      <div class="timeline">
+        <div class="event"><span class="time">07:00</span>起床、早餐、退房。</div>
+        <div class="event"><span class="time">07:30–08:00</span>从大柴旦出发。今天不以打卡景点为目标，而是一路从柴达木盆地向青海湖推进。</div>
+        <div class="event"><span class="time">上午</span>穿行柴达木盆地。乘客可以在车上休息，沿途重点欣赏荒漠、盐碱地、远山以及视野开阔的高原公路。</div>
+        <div class="event"><span class="time">11:00–12:30</span>到达德令哈方向后安排一次完整休息。午餐、补水并活动身体，之后再继续前往黑马河。</div>
+        <div class="event"><span class="time">13:00左右</span>继续向茶卡、黑马河方向行驶。下午沿途景观会逐渐从柴达木荒漠转变为高原草原和山地。</div>
+        <div class="event"><span class="time">下午途中</span>根据实际道路和停车条件安排一次短休息。不专门绕进茶卡盐湖，把时间和体力留给黑马河。</div>
+        <div class="event"><span class="time">17:00–18:30</span>抵达黑马河并办理入住。实际抵达时间根据国庆车流、天气和当天道路情况浮动。</div>
+        <div class="event"><span class="time">傍晚</span>如果抵达时间、天气和光线合适，就近前往青海湖边看湖景和日落；如果抵达较晚，则直接晚餐、休息，不为了追日落继续赶路。</div>
+      </div>
+      <div class="quicktips"><div class="quicktip"><b>今日重点</b><span>今天不是赶景点，而是一整天从柴达木盆地走向青海湖的公路旅行。</span></div><div class="quicktip"><b>顺路看</b><span>荒漠 → 盐碱地 → 高原草原 → 山地 → 青海湖，沿途地貌变化丰富。</span></div><div class="quicktip"><b>补给</b><span>德令哈作为当天主要午餐、补水和休息节点，之后继续前往黑马河。</span></div><div class="quicktip"><b>节奏</b><span>专职司机负责驾驶，乘客以休息和观景为主，但保留正常午餐和途中活动时间。</span></div></div>
+      <div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">大柴旦 → 德令哈 → 茶卡方向 → 黑马河</div><ul class="roadnotes"><li>从大柴旦离开后继续穿行柴达木盆地，上午整体以开阔的高原荒漠景观为主。</li><li>德令哈作为当天重要的中途节点，建议在这里完成午餐、补水和休息。</li><li>德令哈之后继续向茶卡、黑马河方向前进，景观逐渐从柴达木荒漠过渡到高原草原和山地。</li><li>当天经过茶卡方向，但不安排茶卡盐湖游览，避免客流进一步拉长当天行程。</li><li>接近黑马河后进入青海湖区域。具体公路组合以当天导航和实时路况为准。</li></ul><div class="scenery"><span class="scene">柴达木盆地</span><span class="scene">高原草原</span><span class="scene">远山</span><span class="scene">青海湖</span></div></div>
+      <div class="stay"><b>🏨 住宿</b> · 黑马河</div>
+    </section>
+
+    <section class="panel detail" data-detail="6">
+      <div class="cover"><img src="https://n.sinaimg.cn/sinacn11/285/w640h445/20180327/bb70-fysqfnh2785452.jpg" alt="青海湖清晨实景"><span class="label">黑马河 → 西宁</span></div>
+      <div class="detail-head"><div class="date-line">10.06 · 周二</div><h2>黑马河晨景 → 西宁 → 西安</h2><div class="route">青海湖晨景 · 返回西宁 · 结束用车后动车前往西安</div></div>
+      <div class="chips"><span class="chip">🌊 青海湖晨景</span><span class="chip">🚙 约220km级</span><span class="chip">🚆 西宁 → 西安</span></div>
+      <div class="timeline">
+        <div class="event"><span class="time">06:30–08:00</span>根据天气决定是否看青海湖清晨。就在黑马河附近活动，不为了晨景专门长距离绕行；天气不好则直接多休息。</div>
+        <div class="event"><span class="time">08:00–09:00</span>返回住宿早餐、整理行李、退房。</div>
+        <div class="event"><span class="time">09:00左右</span>从黑马河出发返回西宁，沿途继续欣赏青海湖、草原和高原山地景观。</div>
+        <div class="event"><span class="time">途中</span>经高原河谷方向逐渐离开青海湖区域，中途正常安排一次短休息。</div>
+        <div class="event"><span class="time">13:00前后</span>预计进入西宁区域，实际时间以当天导航为准。</div>
+        <div class="event"><span class="time">抵达后</span>整理全部行李和随身物品，结束本段用车并完成车辆交接，预留办理时间。</div>
+        <div class="event"><span class="time">下午</span>前往西宁站。动车发车前保留充足的交通、进站和安检时间，不再临时安排西宁市区景点。</div>
+        <div class="event"><span class="time">随后</span>西宁站乘动车前往西安。具体车次和发车时间待12306出票后回填，晚上抵达西安。</div>
+      </div>
+      <div class="quicktips"><div class="quicktip"><b>今日重点</b><span>黑马河晨景后返西宁，完成车辆交接并稳妥衔接动车。</span></div><div class="quicktip"><b>顺路看</b><span>青海湖晨景、高原草原，随后逐渐进入河谷和城市。</span></div><div class="quicktip"><b>交接前</b><span>检查行李与车内物品，预留足够车辆交接和进站时间。</span></div><div class="quicktip"><b>节奏</b><span>当天重点是顺利衔接西宁→西安动车，不再增加城市景点。</span></div></div>
+      <div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">黑马河 → 西宁方向 → 西宁站</div><ul class="roadnotes"><li>早晨可在黑马河附近看青海湖晨景，随后返回西宁；具体公路组合以当天导航为准。</li><li>沿途主要是湖面、草原和高原山地景观；离开湖区后逐步进入河谷和城市环境。</li><li>部分路段会按养护和天气动态调整，10月6日当天以导航与实时路况为准。</li><li>抵达西宁后先整理行李和车辆，再完成车辆交接；不要把交接时间与动车发车时间卡得过紧。</li></ul><div class="scenery"><span class="scene">青海湖晨景</span><span class="scene">高原草原</span><span class="scene">河谷景观</span><span class="scene">西宁</span></div></div>
+      <div class="stay"><b>🏨 住宿</b> · 西安</div>
+    </section>
+
+    <section class="panel detail" data-detail="7">
+      <div class="detail-head"><div class="date-line">10.07 · 周三</div><h2>西安 → 深圳</h2><div class="route">返程日 · 不安排额外景点</div></div>
+      <div class="chips"><span class="chip">✈️ 飞机返程</span><span class="chip">行程结束</span></div>
+      <div class="timeline"><div class="event"><span class="time">当天</span>根据航班时间前往机场，返回深圳。</div></div>
+    </section>
+
+    <div class="footer">青甘环线 · 2026国庆</div>
+  </main>
+
+  <script>
+    (() => {
+      const buttons = [...document.querySelectorAll('.daybtn[data-day]')];
+      const details = [...document.querySelectorAll('.detail[data-detail]')];
+      let current = 0;
+
+      function show(day, scroll = false) {
+        current = Math.max(0, Math.min(7, Number(day)));
+        document.body.classList.toggle('show-detail', current !== 0);
+        buttons.forEach(button => {
+          button.classList.toggle('active', Number(button.dataset.day) === current);
+        });
+        details.forEach(detail => {
+          detail.classList.toggle('show', Number(detail.dataset.detail) === current);
+        });
+        if (scroll) {
+          const target = current === 0 ? document.querySelector('#overview') : document.querySelector('#detailStart');
+          target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      buttons.forEach(button => button.addEventListener('click', () => show(button.dataset.day, true)));
+      details.forEach(detail => {
+        const day = Number(detail.dataset.detail);
+        const nav = document.createElement('div');
+        nav.className = 'navdays';
+        nav.innerHTML = `<button type="button" ${day === 1 ? '' : ''}>← 前一天</button><button class="home-button" type="button">⌂ 回到总览</button><button type="button" ${day === 7 ? 'disabled' : ''}>后一天 →</button>`;
+        const navButtons = nav.querySelectorAll('button');
+        navButtons[0].addEventListener('click', () => show(day - 1, true));
+        navButtons[1].addEventListener('click', () => show(0, true));
+        navButtons[2].addEventListener('click', () => show(day + 1, true));
+        if (day === 7) navButtons[0].textContent = '← 10/6';
+        detail.appendChild(nav);
+      });
+
+      show(0);
+    })();
+  </script>
+</body>
+</html>
