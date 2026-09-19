@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f5faf6">
   <title>2026 国庆 · 青甘环线 · 8天行程</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <style>
     :root {
       --bg: #f8f7f3;
@@ -76,6 +77,68 @@
       backdrop-filter: saturate(180%) blur(18px);
       -webkit-backdrop-filter: saturate(180%) blur(18px);
       box-shadow: 0 6px 18px rgba(63, 96, 83, .06);
+    }
+    .route-map {
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .map-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+    }
+    .map-kicker { color: var(--green-dark); font-size: 14px; font-weight: 800; }
+    .map-status { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
+    .map-toggle {
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid #cfe2d8;
+      border-radius: 8px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    #tripMap {
+      display: none;
+      height: 300px;
+      border-top: 1px solid var(--line);
+      background: #e9efed;
+    }
+    .route-map.is-open #tripMap { display: block; }
+    .map-note {
+      padding: 9px 16px 12px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    .leaflet-container { font: inherit; }
+    .leaflet-control-zoom a {
+      width: 32px !important;
+      height: 32px !important;
+      line-height: 32px !important;
+      border-radius: 8px !important;
+      color: var(--ink) !important;
+    }
+    .map-marker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(36, 58, 52, .22);
+      color: #fff;
+      font-size: 13px;
+    }
+    @media (min-width: 701px) {
+      .route-map #tripMap { display: block; }
+      .route-map .map-toggle { display: none; }
     }
     .calendar {
       padding: 10px 24px 12px;
@@ -489,6 +552,7 @@
       .panel { border-radius: 12px; }
       .calendar-panel { margin-left: -16px; margin-right: -16px; border-radius: 0 0 12px 12px; }
       .calendar { padding-right: 16px; padding-left: 16px; }
+      #tripMap { height: 260px; }
       .panel-title { padding: 20px 16px 10px; }
       .brief { padding-right: 16px; padding-left: 16px; }
       .daynote, .ticketbox, .hotelbox, .wearbox, .viewbox, .quicktips, .roadbox, .stay { margin-right: 16px; margin-left: 16px; }
@@ -543,6 +607,15 @@
           <button class="daybtn" type="button" data-day="6"><span class="n">6</span><span class="city">西宁</span></button>
         </div>
       </div>
+    </section>
+
+    <section class="panel route-map" id="routeMapPanel" aria-label="青甘环线路线地图">
+      <div class="map-panel-head">
+        <div><div class="map-kicker">🗺 路线地图</div><span class="map-status" id="mapStatus">总览 · 点击查看主要地点与路线</span></div>
+        <button class="map-toggle" id="mapToggle" type="button" aria-expanded="false">打开地图</button>
+      </div>
+      <div id="tripMap" role="img" aria-label="青甘环线示意地图"></div>
+      <div class="map-note">地图用于判断顺序和区域关系，线路为示意线；国庆车流、天气和当天导航优先。</div>
     </section>
 
     <section class="panel" id="overview">
@@ -726,11 +799,85 @@
     <div class="footer">青甘环线 · 2026国庆</div>
   </main>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script>
     (() => {
       const buttons = [...document.querySelectorAll('.daybtn[data-day]')];
       const details = [...document.querySelectorAll('.detail[data-detail]')];
+      const routeMapPanel = document.querySelector('#routeMapPanel');
+      const mapToggle = document.querySelector('#mapToggle');
+      const mapStatus = document.querySelector('#mapStatus');
       let current = 0;
+      let tripMap = null;
+      let mapLayers = [];
+      const mapPlaces = {
+        xian: { name: '西安', lat: 34.3416, lng: 108.9398, icon: '🚉' },
+        zhangye: { name: '张掖西', lat: 39.1526, lng: 100.0444, icon: '🚉' },
+        danxia: { name: '七彩丹霞', lat: 38.9248, lng: 100.1167, icon: '🎨' },
+        jiayuguan: { name: '嘉峪关关城', lat: 39.8025, lng: 98.2038, icon: '🏯' },
+        dunhuang: { name: '敦煌', lat: 40.1421, lng: 94.6618, icon: '🏨' },
+        mogao: { name: '莫高窟', lat: 40.0422, lng: 94.8092, icon: '🪷' },
+        crescent: { name: '鸣沙山月牙泉', lat: 40.0871, lng: 94.6664, icon: '🌙' },
+        emerald: { name: '大柴旦翡翠湖', lat: 37.0266, lng: 95.3576, icon: '💎' },
+        dachaidan: { name: '大柴旦', lat: 37.8500, lng: 95.3000, icon: '🏨' },
+        delingha: { name: '德令哈', lat: 37.3695, lng: 97.3708, icon: '☕' },
+        heimah: { name: '黑马河', lat: 36.7167, lng: 99.1000, icon: '🌊' },
+        xining: { name: '西宁', lat: 36.6171, lng: 101.7782, icon: '🚉' },
+        shenzhen: { name: '深圳', lat: 22.5431, lng: 114.0579, icon: '✈️' }
+      };
+      const dayRoutes = {
+        0: ['xian', 'zhangye', 'danxia', 'jiayuguan', 'dunhuang', 'crescent', 'emerald', 'heimah', 'xining', 'shenzhen'],
+        1: ['zhangye', 'danxia', 'jiayuguan'],
+        2: ['jiayuguan', 'dunhuang'],
+        3: ['dunhuang', 'mogao', 'crescent'],
+        4: ['dunhuang', 'emerald', 'dachaidan'],
+        5: ['dachaidan', 'delingha', 'heimah'],
+        6: ['heimah', 'xining', 'xian'],
+        7: ['xian', 'shenzhen']
+      };
+      const routeColors = ['#699b87', '#6d9bb2', '#8a73a4', '#c18b55', '#5f8f83', '#7586aa', '#a07b64', '#6d9b73'];
+
+      function mapIcon(place, color) {
+        return L.divIcon({ className: '', html: `<span class="map-marker" style="background:${color}">${place.icon}</span>`, iconSize: [28, 28], iconAnchor: [14, 14] });
+      }
+
+      function updateMap(day) {
+        const label = day === 0 ? '总览' : `第${day}天`;
+        if (mapStatus) mapStatus.textContent = `${label} · 点击地图标记查看地点`;
+        if (!tripMap) return;
+        mapLayers.forEach(layer => tripMap.removeLayer(layer));
+        mapLayers = [];
+        const keys = dayRoutes[day] || dayRoutes[0];
+        const places = keys.map(key => mapPlaces[key]).filter(Boolean);
+        const coords = places.map(place => [place.lat, place.lng]);
+        places.forEach(place => {
+          const marker = L.marker([place.lat, place.lng], { icon: mapIcon(place, routeColors[day] || routeColors[0]) })
+            .addTo(tripMap)
+            .bindPopup(`<b>${place.name}</b><br><span style="color:#788a84">${label} · 路线参考点</span>`);
+          mapLayers.push(marker);
+        });
+        if (coords.length > 1) {
+          mapLayers.push(L.polyline(coords, { color: routeColors[day] || routeColors[0], weight: 3, opacity: .68, dashArray: '7 6' }).addTo(tripMap));
+          tripMap.fitBounds(coords, { padding: [28, 28], maxZoom: day === 0 ? 6 : 10 });
+        } else if (coords.length) {
+          tripMap.setView(coords[0], 10);
+        }
+      }
+
+      function initTripMap() {
+        if (!window.L || tripMap) return;
+        tripMap = L.map('tripMap', { zoomControl: false, scrollWheelZoom: false, attributionControl: true });
+        L.control.zoom({ position: 'topright' }).addTo(tripMap);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap &copy; CARTO' }).addTo(tripMap);
+        updateMap(current);
+      }
+
+      function openMap() {
+        routeMapPanel?.classList.add('is-open');
+        mapToggle?.setAttribute('aria-expanded', 'true');
+        if (!tripMap) initTripMap();
+        requestAnimationFrame(() => tripMap?.invalidateSize());
+      }
 
       function prepareEvent(event) {
         const time = event.querySelector('.time');
@@ -771,6 +918,7 @@
         document.body.classList.toggle('show-detail', current !== 0);
         buttons.forEach(button => button.classList.toggle('active', Number(button.dataset.day) === current));
         details.forEach(detail => detail.classList.toggle('show', Number(detail.dataset.detail) === current));
+        updateMap(current);
         if (scroll) {
           const target = current === 0 ? document.querySelector('#overview') : details.find(detail => Number(detail.dataset.detail) === current);
           target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -791,6 +939,17 @@
       });
 
       foldExtras();
+      if (window.innerWidth > 700) initTripMap();
+      mapToggle?.addEventListener('click', () => {
+        if (routeMapPanel?.classList.contains('is-open')) {
+          routeMapPanel.classList.remove('is-open');
+          mapToggle.setAttribute('aria-expanded', 'false');
+          mapToggle.textContent = '打开地图';
+        } else {
+          openMap();
+          mapToggle.textContent = '收起地图';
+        }
+      });
       buttons.forEach(button => button.addEventListener('click', () => show(button.dataset.day, true)));
       show(0);
     })();
