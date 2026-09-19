@@ -740,6 +740,9 @@
     .timeline { min-width: 0; }
     .event .event-body { overflow-wrap: anywhere; }
     .quicktips { grid-template-columns: 1fr; }
+    @media (min-width: 360px) {
+      .quicktips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
     .navdays { flex-wrap: wrap; }
     .navdays button { flex: 1 1 30%; }
     @media (min-width: 701px) {
@@ -1134,6 +1137,8 @@
         details.forEach(detail => {
           const timeline = detail.querySelector('.timeline');
           if (!timeline || detail.querySelector('.day-extra')) return;
+          const quicktips = detail.querySelector('.quicktips');
+          if (quicktips) timeline.before(quicktips);
           const extras = [...detail.children].filter(node => /^(wearbox|viewbox|roadbox|stay)$/.test(node.className));
           if (!extras.length) return;
           const fold = document.createElement('details');
