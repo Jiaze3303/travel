@@ -313,26 +313,6 @@
       font-size: 22px;
       font-weight: 800;
     }
-    .cover {
-      position: relative;
-      height: clamp(180px, 32vw, 224px);
-      border-radius: 16px;
-      overflow: hidden;
-      background: #e8eee9;
-    }
-    .cover.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-    .cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .cover .label {
-      position: absolute;
-      bottom: 9px;
-      left: 10px;
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: rgba(32, 53, 46, .72);
-      color: #fff;
-      font-size: 11px;
-      backdrop-filter: blur(6px);
-    }
     .detail-head {
       position: sticky;
       top: 58px;
@@ -431,17 +411,17 @@
     .event.sight .event-body::before { content: '◉'; color: #6d9b73; }
     .event.food .event-body::before { content: '⌁'; color: #c18b55; }
     .event.stay .event-body::before { content: '⌂'; color: #8a73a4; }
-    .event.transport .event-body::before { content: '↗'; color: #6d9bb2; }
+    .event.transport .event-body::before { content: '↗'; color: #6f9c8e; }
     .event.transport .event-body {
       min-height: 28px;
       padding: 8px 12px;
       border: 0;
       border-radius: 10px;
-      background: #f1f7fa;
+      background: #f0f5f1;
       box-shadow: none;
-      color: #5e7480;
+      color: #537267;
     }
-    .event.transport::after { background: #6d9bb2; box-shadow: 0 0 0 1px #b9d1dc; }
+    .event.transport::after { background: #6f9c8e; box-shadow: 0 0 0 1px #bdd5c9; }
     .event .time {
       display: block;
       position: absolute;
@@ -573,7 +553,6 @@
       .ticketbox, .hotelbox { padding: 16px; }
       .section-label { margin-top: 32px; margin-bottom: 16px; }
       .detail-head { top: 55px; padding-top: 16px; }
-      .cover { border-radius: 12px; }
       .timeline { margin-top: 16px; }
       .day-extra { margin-top: 16px; }
       .day-extra > summary { padding: 13px 14px; }
@@ -600,15 +579,15 @@
 
     /* Apple-style refinement: fewer surfaces, stronger hierarchy, calmer chrome. */
     :root {
-      --bg: #f2f2f7;
+      --bg: #f7f7f5;
       --card: #fff;
       --ink: #1d1d1f;
       --muted: #86868b;
       --line: rgba(60, 60, 67, .12);
-      --green: #0071e3;
-      --green-dark: #005ecb;
-      --green-soft: #e8f1fc;
-      --sand: #fff7e6;
+      --green: #4f806b;
+      --green-dark: #35614f;
+      --green-soft: #edf4ef;
+      --sand: #f7efe3;
       --shadow: 0 1px 2px rgba(0, 0, 0, .06);
     }
     body {
@@ -626,13 +605,13 @@
       margin-right: -20px;
       border-bottom: .5px solid var(--line);
       border-radius: 0;
-      background: rgba(242, 242, 247, .82);
+      background: rgba(247, 247, 245, .88);
       box-shadow: none;
     }
     .calendar { padding: 10px 20px 12px; }
     .daybtn { border-radius: 10px; }
     .daybtn.active { border-color: transparent; background: var(--green-soft); color: var(--green-dark); }
-    .daybtn.today { box-shadow: inset 0 0 0 2px rgba(0, 113, 227, .24); }
+    .daybtn.today { box-shadow: inset 0 0 0 2px rgba(79, 128, 107, .28); }
     .route-map { border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); }
     #overview { margin-top: 16px; }
     .panel-title { padding: 0 0 16px; font-size: 22px; letter-spacing: -.025em; }
@@ -662,13 +641,12 @@
     .ticket-item { padding: 0 0 16px; margin-top: 16px; }
     .ticket-item b { color: var(--ink); font-size: 14px; }
     .ticket-item span, .hotel-item span { color: #6e6e73; }
-    .cover { display: none; }
     .detail-head {
       top: 58px;
       padding: 14px 0 12px;
       border-bottom: 0;
-      background: rgba(242, 242, 247, .86);
-      box-shadow: 0 8px 16px rgba(242, 242, 247, .72);
+      background: rgba(247, 247, 245, .9);
+      box-shadow: 0 8px 16px rgba(247, 247, 245, .78);
     }
     .date-line { color: var(--green); }
     .detail h2 { font-size: clamp(24px, 6vw, 30px); }
@@ -677,7 +655,7 @@
     .timeline { margin-top: 18px; }
     .timeline::before { background: rgba(60, 60, 67, .16); }
     .event .event-body { box-shadow: var(--shadow); }
-    .event.transport .event-body { background: #eaf4fb; color: #4d6d80; }
+    .event.transport .event-body { background: #f0f5f1; color: #537267; }
     .wearbox, .viewbox, .roadbox, .quicktips { border: 0; background: #f5f5f7; box-shadow: none; }
     .wear-item, .view-item, .quicktip { border: 0; background: #fff; box-shadow: var(--shadow); }
     .day-extra { border: 0; box-shadow: var(--shadow); }
@@ -741,6 +719,33 @@
         line-height: 1.52;
       }
       .event.transport .event-body { padding: 9px 12px; }
+    }
+
+    /* Mobile-first guardrails: the phone layout is the base experience. */
+    *, *::before, *::after { min-width: 0; }
+    html, body { overflow-x: clip; }
+    img, svg, video { max-width: 100%; height: auto; }
+    body { overflow-wrap: break-word; }
+    .wrap {
+      width: 100%;
+      max-width: 720px;
+      padding: 24px 16px calc(40px + env(safe-area-inset-bottom));
+    }
+    .map-toggle, .daybtn, .navdays button, .day-extra > summary, .overview-extra > summary {
+      min-height: 44px;
+    }
+    .map-toggle { padding: 10px 14px; }
+    .daybtn { padding: 6px 4px; }
+    .detail-head { overflow-wrap: anywhere; }
+    .timeline { min-width: 0; }
+    .event .event-body { overflow-wrap: anywhere; }
+    .quicktips { grid-template-columns: 1fr; }
+    .navdays { flex-wrap: wrap; }
+    .navdays button { flex: 1 1 30%; }
+    @media (min-width: 701px) {
+      .wrap { padding: 56px 20px 64px; }
+      .quicktips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .navdays { flex-wrap: nowrap; }
     }
   </style>
 </head>
@@ -828,7 +833,6 @@
     <div class="section-label" id="detailStart">当天行程</div>
 
     <section class="panel detail" data-detail="1">
-      <div class="cover"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Zhangye_Danxia_National_Geopark.jpg/1280px-Zhangye_Danxia_National_Geopark.jpg" alt="张掖七彩丹霞实景"><span class="label">张掖七彩丹霞</span></div>
       <div class="detail-head"><div class="date-line">10.01 · 周四</div><h2>张掖西 → 七彩丹霞 → 嘉峪关</h2><div class="route">下火车与司机会合，下午看丹霞，傍晚继续向西</div></div>
       <div class="chips"><span class="chip">🚙 约250–280km</span><span class="chip">🎨 七彩丹霞</span><span class="chip">🏨 嘉峪关</span></div>
       <div class="wearbox"><div class="wear-title">🧥 穿衣节奏</div><div class="wear-grid"><div class="wear-item"><b>11:31–13:00 · 到站、午饭、会合</b><span>长袖＋长裤；抓绒内胆和冲锋衣放在手边。</span></div><div class="wear-item"><b>13:45–17:00 · 七彩丹霞</b><span>长袖为主，风大时加冲锋衣外壳；有太阳时不必一开始就把抓绒穿死，方便随时脱。</span></div><div class="wear-item"><b>17:00–20:30 · 西行、入住</b><span>车内冷气或傍晚降温时加抓绒；到嘉峪关后若风大，外壳继续穿，秋裤看个人体感。</span></div></div></div>
@@ -847,7 +851,6 @@
     </section>
 
     <section class="panel detail" data-detail="2">
-      <div class="cover"><img src="https://www.chinevoyage.com/image/a-large-size/gansu/jiayuguan/passe-jiayuguan-1-760x480.jpg" alt="嘉峪关关城实景"><span class="label">嘉峪关关城</span></div>
       <div class="detail-head"><div class="date-line">10.02 · 周五</div><h2>嘉峪关关城 → 敦煌</h2><div class="route">上午关城，午后一路前往敦煌</div></div>
       <div class="chips"><span class="chip">🚙 约370–376km</span><span class="chip">🛣 公路转场</span></div>
       <div class="wearbox"><div class="wear-title">🧥 穿衣节奏</div><div class="wear-grid"><div class="wear-item"><b>08:00–11:45 · 嘉峪关关城</b><span>长袖＋抓绒内胆；城墙风大时加冲锋衣，帽子可放口袋备用。</span></div><div class="wear-item"><b>12:45–17:00 · 长途车程</b><span>长袖＋抓绒按车内温度调整，冲锋衣放在座位旁；秋裤不一定整天穿，可在早晚或停车时加上。</span></div><div class="wear-item"><b>17:00–18:00 · 抵达敦煌</b><span>敦煌白天相对暖，进城后可脱外壳；晚饭散步时保留抓绒，遇风再加外壳。</span></div></div></div>
@@ -866,7 +869,6 @@
     </section>
 
     <section class="panel detail" data-detail="3">
-      <div class="cover duo"><img src="https://www.koya-culture.com/data/photos/20240939/art_17275669772829_85448e.jpg" alt="敦煌莫高窟实景"><img src="https://images.tripadeal.com.au/cdn-cgi/image/format%3Dauto%2Cwidth%3D800/https%3A/cstad.s3.ap-southeast-2.amazonaws.com/5633_China_Silk_Road_WEB_HERO_2_Crescent_Moon_Spring.jpg" alt="鸣沙山月牙泉实景"></div>
       <div class="detail-head"><div class="date-line">10.03 · 周六</div><h2>莫高窟 → 鸣沙山月牙泉</h2><div class="route">敦煌完整一天 · 乘客轻松游览</div></div>
       <div class="chips"><span class="chip">🏛 莫高窟13:15</span><span class="chip">🏜 月牙泉16:00–19:30 · 已购票</span><span class="chip">轻松日</span></div>
       <div class="wearbox"><div class="wear-title">🧥 穿衣节奏</div><div class="wear-grid"><div class="wear-item"><b>上午 · 敦煌市区</b><span>长袖＋长裤即可，抓绒内胆放包里；室外活动注意防晒和补水。</span></div><div class="wear-item"><b>12:30–15:30 · 莫高窟</b><span>长袖为主，抓绒备用；数字展示中心和洞窟内外温差可能明显，别把外套留在车上。</span></div><div class="wear-item"><b>16:00–19:30 · 鸣沙山月牙泉</b><span>入园时长袖＋抓绒，日落后加冲锋衣；沙漠风起时戴抓绒帽子，手套按风力取用，秋裤建议带在身上。</span></div></div></div>
@@ -885,7 +887,6 @@
     </section>
 
     <section class="panel detail" data-detail="4">
-      <div class="cover"><img src="https://x0.ifengimg.com/res/2024/03E4AC5255975C592B744DA9A858F7F5CB82EC3A_size2097_w5272_h2962.jpg" alt="大柴旦翡翠湖实景"><span class="label">大柴旦翡翠湖</span></div>
       <div class="detail-head"><div class="date-line">10.04 · 周日</div><h2>敦煌 → 翡翠湖 → 大柴旦</h2><div class="route">公路观景日 · 中途正常休息补给</div></div>
       <div class="chips"><span class="chip">🚙 约350km级</span><span class="chip">💚 翡翠湖 · 已购票</span><span class="chip">专职司机</span></div>
       <div class="wearbox"><div class="wear-title">🧥 穿衣节奏</div><div class="wear-grid"><div class="wear-item"><b>07:30–12:30 · 敦煌出发、长途车程</b><span>长袖＋抓绒内胆，冲锋衣外壳放在随手可取的位置；清晨或山口风大时加外壳和秋裤。</span></div><div class="wear-item"><b>14:30–17:30 · 翡翠湖</b><span>盐湖边按抓绒＋冲锋衣穿，秋裤建议穿上；拍照或下车时抓绒帽子、手套都带着，风停有太阳再脱。</span></div><div class="wear-item"><b>18:00以后 · 大柴旦入住</b><span>回酒店后可脱冲锋衣，但保留抓绒；第二天早出发的衣物提前叠好放在行李上层。</span></div></div></div>
@@ -905,7 +906,6 @@
     </section>
 
     <section class="panel detail" data-detail="5">
-      <div class="cover"><img src="https://n.sinaimg.cn/sinacn11/285/w640h445/20180327/bb70-fysqfnh2785452.jpg" alt="青海湖实景"><span class="label">青海湖 · 黑马河</span></div>
       <div class="detail-head"><div class="date-line">10.05 · 周一</div><h2>大柴旦 → 德令哈 → 黑马河</h2><div class="route">公路观景日 · 从柴达木盆地一路前往青海湖</div></div>
       <div class="chips"><span class="chip">🚙 约430–470km级</span><span class="chip">🛣 公路观景日</span><span class="chip">🌊 黑马河</span></div>
       <div class="wearbox"><div class="wear-title">🧥 穿衣节奏</div><div class="wear-grid"><div class="wear-item"><b>07:00–12:30 · 大柴旦至德令哈</b><span>长袖＋抓绒＋冲锋衣＋秋裤；车内暖和时可开外壳，帽子和手套放在座位旁。</span></div><div class="wear-item"><b>13:00–17:00 · 德令哈至黑马河</b><span>白天有太阳时可脱外壳，但下车休息和接近湖区时马上加回；不要只穿单层长袖。</span></div><div class="wear-item"><b>17:00以后 · 黑马河湖边</b><span>按完整保暖组合穿：长袖＋抓绒＋冲锋衣＋秋裤＋抓绒帽子＋手套；湖边风大，停留时间短也要全套。</span></div></div></div>
@@ -926,7 +926,6 @@
     </section>
 
     <section class="panel detail" data-detail="6">
-      <div class="cover"><img src="https://n.sinaimg.cn/sinacn11/285/w640h445/20180327/bb70-fysqfnh2785452.jpg" alt="青海湖清晨实景"><span class="label">黑马河 → 西宁</span></div>
       <div class="detail-head"><div class="date-line">10.06 · 周二</div><h2>黑马河晨景 → 西宁 → 西安</h2><div class="route">青海湖晨景 · 返回西宁 · 结束用车后动车前往西安</div></div>
       <div class="chips"><span class="chip">🌊 青海湖晨景</span><span class="chip">🚙 约220km级</span><span class="chip">🚆 西宁 → 西安</span></div>
       <div class="wearbox"><div class="wear-title">🧥 穿衣节奏</div><div class="wear-grid"><div class="wear-item"><b>06:30–08:00 · 黑马河晨景</b><span>全套保暖：长袖＋抓绒＋冲锋衣＋秋裤＋抓绒帽子＋手套；如果再加一件轻薄羽绒会更稳妥。</span></div><div class="wear-item"><b>08:00–13:00 · 早餐、返西宁</b><span>回酒店后逐层减少，车内以长袖＋抓绒为主；停车下车时重新穿上外壳。</span></div><div class="wear-item"><b>下午 · 西宁站、动车</b><span>长袖＋抓绒即可，冲锋衣作为防风备用；进站和车内不建议穿太厚，方便调节。</span></div></div></div>
@@ -1012,7 +1011,7 @@
         6: ['heimah', 'xining', 'xian'],
         7: ['xian', 'shenzhen']
       };
-      const routeColors = ['#699b87', '#6d9bb2', '#8a73a4', '#c18b55', '#5f8f83', '#7586aa', '#a07b64', '#6d9b73'];
+      const routeColors = ['#699b87', '#6f9c8e', '#8a73a4', '#c18b55', '#5f8f83', '#9a8a66', '#a07b64', '#6d9b73'];
 
       // 高德底图使用 GCJ-02；行程坐标按 WGS-84 记录，显示前做一次本地转换。
       const GCJ_PI = Math.PI;
