@@ -139,10 +139,11 @@
     .overview-extra { margin-top: 12px; }
     .overview-extra > .daynote, .overview-extra > .ticketbox, .overview-extra > .hotelbox, .overview-extra > .wearbox { margin: 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; box-shadow: none; }
     .overview-extra > .ticketbox, .overview-extra > .hotelbox, .overview-extra > .wearbox { background: var(--surface-soft); }
-    .roadline { margin: 8px 0; color: var(--green-dark); font-size: 13px; font-weight: 800; line-height: 1.55; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
-    .roadnotes { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
-    .roadnotes li + li { margin-top: 5px; }
-    .scenery { display: flex; gap: 6px; overflow-x: auto; margin-top: 10px; scrollbar-width: none; }
+    .roadline { margin: 12px 0 10px; padding: 12px 14px; border: 1px solid rgba(79, 128, 107, .14); border-radius: 12px; background: var(--green-soft); color: var(--green-dark); font-size: 13px; font-weight: 800; line-height: 1.55; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .roadnotes { display: grid; gap: 8px; margin: 0; padding: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.62; list-style: none; counter-reset: roadstep; }
+    .roadnotes li { position: relative; min-width: 0; padding: 12px 12px 12px 38px; border: 1px solid var(--line); border-radius: 12px; background: var(--grouped-bg); overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; counter-increment: roadstep; }
+    .roadnotes li::before { position: absolute; top: 12px; left: 12px; display: grid; width: 20px; height: 20px; place-items: center; border-radius: 50%; background: var(--green-soft); color: var(--green-dark); content: counter(roadstep); font-size: 11px; font-weight: 800; }
+    .scenery { display: flex; gap: 6px; overflow-x: auto; margin-top: 12px; padding-top: 2px; scrollbar-width: none; }
     .scenery::-webkit-scrollbar { display: none; }
     .scene { flex: 0 0 auto; padding: 5px 8px; border-radius: 999px; background: var(--green-soft); color: var(--green-dark); font-size: 12px; }
     .stay:not(.event) { padding: 14px 16px; color: var(--ink-soft); font-size: 13px; line-height: 1.55; }
