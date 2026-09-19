@@ -602,6 +602,102 @@
       html { scroll-behavior: auto; }
       .event .event-body { transition: none; }
     }
+
+    /* Apple-style refinement: fewer surfaces, stronger hierarchy, calmer chrome. */
+    :root {
+      --bg: #f2f2f7;
+      --card: #fff;
+      --ink: #1d1d1f;
+      --muted: #86868b;
+      --line: rgba(60, 60, 67, .12);
+      --green: #0071e3;
+      --green-dark: #005ecb;
+      --green-soft: #e8f1fc;
+      --sand: #fff7e6;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .06);
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+      letter-spacing: -.01em;
+    }
+    .wrap { max-width: 720px; padding: 56px 20px 64px; }
+    .eyebrow, .section-label { display: none; }
+    .hero { padding: 24px 0 28px; }
+    .hero h1 { font-size: clamp(32px, 7vw, 40px); letter-spacing: -.045em; }
+    .hero p { max-width: 540px; font-size: 15px; }
+    .panel { border: 0; border-radius: 16px; background: transparent; }
+    .calendar-panel {
+      margin-left: -20px;
+      margin-right: -20px;
+      border-bottom: .5px solid var(--line);
+      border-radius: 0;
+      background: rgba(242, 242, 247, .82);
+      box-shadow: none;
+    }
+    .calendar { padding: 10px 20px 12px; }
+    .daybtn { border-radius: 10px; }
+    .daybtn.active { border-color: transparent; background: var(--green-soft); color: var(--green-dark); }
+    .route-map { border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); }
+    #overview { margin-top: 16px; }
+    .panel-title { padding: 0 0 16px; font-size: 22px; letter-spacing: -.025em; }
+    .brief { padding: 0; }
+    .brief-row {
+      margin-bottom: 8px;
+      padding: 14px 16px;
+      border: 0;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .brief-date { color: var(--green); }
+    .brief-main b { font-size: 15px; letter-spacing: -.015em; }
+    .brief-main span { font-size: 12px; }
+    .daynote, .ticketbox, .hotelbox {
+      margin: 12px 0 0;
+      padding: 16px;
+      border: 0;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .daynote { color: #6e6e73; }
+    .ticketbox, .hotelbox { background: #fff; }
+    .ticket-title, .wear-title, .view-title, .roadtitle { color: var(--ink); }
+    .ticket-item { padding: 0 0 16px; margin-top: 16px; }
+    .ticket-item b { color: var(--ink); font-size: 14px; }
+    .ticket-item span, .hotel-item span { color: #6e6e73; }
+    .cover { display: none; }
+    .detail-head {
+      top: 58px;
+      padding: 14px 0 12px;
+      border-bottom: 0;
+      background: rgba(242, 242, 247, .86);
+      box-shadow: 0 8px 16px rgba(242, 242, 247, .72);
+    }
+    .date-line { color: var(--green); }
+    .detail h2 { font-size: clamp(24px, 6vw, 30px); }
+    .route { font-size: 13px; }
+    .chip { border: 0; border-radius: 8px; background: #fff; color: var(--green-dark); box-shadow: var(--shadow); }
+    .timeline { margin-top: 18px; }
+    .timeline::before { background: rgba(60, 60, 67, .16); }
+    .event .event-body { box-shadow: var(--shadow); }
+    .event.transport .event-body { background: #eaf4fb; color: #4d6d80; }
+    .wearbox, .viewbox, .roadbox, .quicktips { border: 0; background: #f5f5f7; box-shadow: none; }
+    .wear-item, .view-item, .quicktip { border: 0; background: #fff; box-shadow: var(--shadow); }
+    .day-extra { border: 0; box-shadow: var(--shadow); }
+    .day-extra > summary { color: var(--ink); }
+    .navdays { border-top: .5px solid var(--line); padding-top: 16px; }
+    .navdays button { border: 0; background: #fff; box-shadow: var(--shadow); }
+    .navdays .home-button { background: var(--green-soft); color: var(--green-dark); }
+    .footer { display: none; }
+    @media (max-width: 700px) {
+      .wrap { padding: 24px 16px 40px; }
+      .hero { padding: 16px 0 22px; }
+      .calendar-panel { margin-left: -16px; margin-right: -16px; }
+      .calendar { padding-right: 16px; padding-left: 16px; }
+      .detail-head { top: 55px; }
+      .route-map { border-radius: 14px; }
+    }
   </style>
 </head>
 <body>
