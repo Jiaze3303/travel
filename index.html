@@ -697,6 +697,22 @@
       .calendar { padding-right: 16px; padding-left: 16px; }
       .detail-head { top: 55px; }
       .route-map { border-radius: 14px; }
+      .event .event-body {
+        position: relative;
+        padding: 10px 28px 10px 12px;
+        font-size: 14px;
+        line-height: 1.45;
+      }
+      .event:not(.is-expanded) .event-body::after {
+        position: absolute;
+        right: 12px;
+        bottom: 9px;
+        color: #8e8e93;
+        content: '›';
+        font-size: 18px;
+        line-height: 1;
+      }
+      .event.transport .event-body { padding: 8px 28px 8px 12px; }
     }
   </style>
 </head>
@@ -1036,10 +1052,13 @@
           [...event.childNodes].forEach(node => { if (node !== time) body.appendChild(node); });
           event.appendChild(body);
         }
-        if (/出发|前往|返回|动车|车程|途中|抵达|进站|机场/.test(event.textContent)) event.classList.add('transport');
-        if (/景区|游览|拍照|湖|丹霞|莫高窟|月牙泉/.test(event.textContent)) event.classList.add('sight');
-        if (/早餐|午饭|午餐|晚饭|晚餐/.test(event.textContent)) event.classList.add('food');
-        if (/入住|酒店|退房/.test(event.textContent)) event.classList.add('stay');
+        const text = event.textContent;
+        let kind = 'default';
+        if (/景区|游览|拍照|青海湖|丹霞|莫高窟|月牙泉/.test(text)) kind = 'sight';
+        else if (/入住|酒店|退房/.test(text)) kind = 'stay';
+        else if (/早餐|午饭|午餐|晚饭|晚餐/.test(text)) kind = 'food';
+        else if (/出发|前往|返回|动车|车程|途中|抵达|进站|机场/.test(text)) kind = 'transport';
+        event.classList.add(kind);
         event.querySelector('.event-body').addEventListener('click', () => {
           if (window.matchMedia('(max-width: 700px)').matches) event.classList.toggle('is-expanded');
         });
