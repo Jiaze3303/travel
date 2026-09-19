@@ -9,895 +9,153 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <style>
     :root {
-      --bg: #f8f7f3;
-      --card: #fff;
-      --ink: #243a34;
-      --muted: #788a84;
-      --line: rgba(36, 58, 52, .10);
-      --green: #699b87;
-      --green-dark: #527d6c;
-      --green-soft: #e9f3ee;
-      --sand: #f5eee2;
-      --gutter: 16px;
-      --shadow: 0 8px 24px rgba(63, 96, 83, .06);
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      overflow-x: hidden;
-      background: var(--bg);
-      color: var(--ink);
-      font: 14px/1.6 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    .wrap {
-      width: 100%;
-      max-width: 840px;
-      margin: auto;
-      padding: 80px 24px 96px;
-    }
-
-    .hero { padding: 0 0 48px; }
-    .eyebrow {
-      color: var(--green);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .14em;
-    }
-    .hero h1 {
-      margin: 5px 0 6px;
-      font-size: clamp(32px, 5vw, 40px);
-      line-height: 1.2;
-      letter-spacing: -.035em;
-    }
-    .hero p { margin: 0; color: var(--muted); line-height: 1.55; }
-    .panel {
-      margin-bottom: 20px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--card);
-      box-shadow: none;
-    }
-
-    .calendar-panel {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      margin-left: -24px;
-      margin-right: -24px;
-      border-right: 0;
-      border-left: 0;
-      border-radius: 0 0 12px 12px;
-      border-top: 1px solid rgba(36, 58, 52, .04);
-      background: rgba(248, 249, 246, .92);
-      backdrop-filter: saturate(180%) blur(18px);
-      -webkit-backdrop-filter: saturate(180%) blur(18px);
-      box-shadow: 0 6px 18px rgba(63, 96, 83, .06);
-    }
-    .route-map {
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-    .map-panel-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px 16px;
-    }
-    .map-panel-head > div { min-width: 0; flex: 1 1 auto; }
-    .map-kicker { color: var(--green-dark); font-size: 14px; font-weight: 800; }
-    .map-status { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
-    .map-toggle {
-      min-height: 40px;
-      padding: 8px 12px;
-      border: 1px solid #cfe2d8;
-      border-radius: 8px;
-      background: var(--green-soft);
-      color: var(--green-dark);
-      font: inherit;
-      font-size: 12px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-    #tripMap {
-      display: none;
-      height: 300px;
-      border-top: 1px solid var(--line);
-      background: #e9efed;
-    }
-    .route-map.is-open #tripMap { display: block; }
-    .route-map.map-failed #tripMap { display: none; }
-    .map-note {
-      padding: 9px 16px 12px;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.5;
-    }
-    .map-note a { color: var(--green-dark); text-decoration: underline; }
-    .leaflet-container { font: inherit; }
-    .leaflet-control-zoom a {
-      width: 44px !important;
-      height: 44px !important;
-      line-height: 44px !important;
-      border-radius: 8px !important;
-      color: var(--ink) !important;
-    }
-    .map-marker {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border: 2px solid #fff;
-      border-radius: 50%;
-      box-shadow: 0 2px 8px rgba(36, 58, 52, .22);
-      color: #fff;
-      font-size: 13px;
-    }
-    @media (min-width: 701px) {
-      .route-map #tripMap { display: block; }
-      .route-map .map-toggle { display: none; }
-    }
-    .calendar {
-      padding: 10px 24px 12px;
-    }
-    .dates {
-      display: flex;
-      gap: 4px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .dates::-webkit-scrollbar { display: none; }
-    .dates .daybtn { flex: 1 0 58px; }
-    .dates .daybtn.overview { flex-basis: 60px; }
-    .daybtn {
-      min-width: 0;
-      min-height: 43px;
-      padding: 4px 1px;
-      border: 1px solid transparent;
-      border-radius: 12px;
-      background: transparent;
-      color: var(--ink);
-      font: inherit;
-      cursor: pointer;
-    }
-    .daybtn .n {
-      display: block;
-      font-size: 14px;
-      font-weight: 800;
-      line-height: 1.25;
-    }
-    .daybtn .city {
-      display: block;
-      overflow: hidden;
-      margin-top: 1px;
-      color: var(--muted);
-      font-size: 7.5px;
-      font-weight: 600;
-      line-height: 1.2;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-    .daybtn.active {
-      border-color: #cfe2d8;
-      background: var(--green-soft);
-    }
-    .daybtn.overview {
-      color: var(--green-dark);
-      font-size: 12px;
-      font-weight: 800;
-    }
-    .daybtn.overview .n { font-size: 13px; }
-    .daybtn.overview .city { color: var(--green); }
-    .daybtn:focus-visible {
-      outline: 2px solid var(--green);
-      outline-offset: 2px;
-    }
-
-    #overview { display: block; }
-    body.show-detail #overview { display: none; }
-    .detail { display: none; border: 0; border-radius: 0; background: transparent; overflow: visible; }
-    .detail.show { display: block; overflow: visible; margin-bottom: 64px; }
-
-    .panel-title {
-      padding: 24px 24px 12px;
-      font-size: 22px;
-      font-weight: 800;
-    }
-    .brief { padding: 0 24px 20px; }
-    .brief-row {
-      display: grid;
-      grid-template-columns: 44px minmax(0, 1fr);
-      gap: 10px;
-      padding: 12px 0;
-      border-top: 1px solid rgba(36, 58, 52, .07);
-    }
-    .brief-date { color: var(--green); font-weight: 800; }
-    .brief-main b { display: block; font-size: 13px; }
-    .brief-main span {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.45;
-    }
-    .daynote {
-      margin: 0 24px 20px;
-      padding: 14px 16px;
-      border-radius: 12px;
-      background: var(--sand);
-      color: #6f6555;
-      font-size: 12px;
-      line-height: 1.55;
-    }
-    .ticketbox {
-      margin: 0 24px 20px;
-      padding: 20px;
-      border: 1px solid rgba(36, 58, 52, .08);
-      border-radius: 12px;
-      background: #f5faf7;
-    }
-    .ticket-title { color: var(--green-dark); font-weight: 800; }
-    .ticket-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .ticket-item {
-      display: flex;
-      min-width: 0;
-      flex-direction: column;
-      gap: 4px;
-      padding: 12px;
-      border-radius: 8px;
-      background: #fff;
-    }
-    .ticket-item b { color: #486b5c; font-size: 15px; }
-    .ticket-item span { color: #6f7f78; font-size: 12px; line-height: 1.55; }
-    .ticket-tip { margin-top: 10px; color: #87958f; font-size: 11px; line-height: 1.55; }
-    .hotelbox {
-      margin: 0 24px 20px;
-      padding: 20px;
-      border: 1px solid rgba(36, 58, 52, .08);
-      border-radius: 12px;
-      background: #fbfaf6;
-    }
-    .hotel-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .hotel-item {
-      min-width: 0;
-      padding: 12px;
-      border-radius: 8px;
-      background: #fff;
-    }
-    .hotel-item b { display: block; color: #486b5c; font-size: 13px; line-height: 1.4; }
-    .hotel-item span { display: block; margin-top: 4px; color: #6f7f78; font-size: 11px; line-height: 1.55; }
-    .hotel-item em { display: block; margin-top: 5px; color: var(--green); font-size: 10px; font-style: normal; font-weight: 800; }
-    .stay-address { display: block; margin-top: 3px; color: #73847d; font-size: 11px; font-weight: 400; line-height: 1.5; }
-    .wearbox {
-      margin: 0 24px 20px;
-      padding: 16px;
-      border: 1px solid rgba(75, 113, 128, .16);
-      border-radius: 12px;
-      background: #f6fafc;
-    }
-    .wear-title { color: #4d7180; font-size: 13px; font-weight: 800; }
-    .wear-grid { display: grid; gap: 7px; margin-top: 9px; }
-    .wear-item { padding: 10px 12px; border-radius: 8px; background: #fff; }
-    .wear-item b { display: block; color: #537887; font-size: 11px; }
-    .wear-item span { display: block; margin-top: 2px; color: #63777f; font-size: 11px; line-height: 1.5; }
-    .wear-note { margin-top: 9px; color: #7b8b91; font-size: 10px; line-height: 1.55; }
-    .viewbox {
-      margin: 0 24px 20px;
-      padding: 16px;
-      border: 1px solid rgba(128, 107, 77, .16);
-      border-radius: 12px;
-      background: #fcfaf5;
-    }
-    .view-title { color: #806b4d; font-size: 13px; font-weight: 800; }
-    .view-grid { display: grid; gap: 7px; margin-top: 9px; }
-    .view-item { padding: 10px 12px; border-radius: 8px; background: #fff; }
-    .view-item b { display: block; color: #7a684f; font-size: 11px; }
-    .view-item span { display: block; margin-top: 2px; color: #756f66; font-size: 11px; line-height: 1.55; }
-    .view-note { margin-top: 9px; color: #9a8e7d; font-size: 10px; line-height: 1.55; }
-
-    .section-label {
-      margin: 48px 0 20px;
-      font-size: 22px;
-      font-weight: 800;
-    }
-    .detail-head {
-      position: sticky;
-      top: 58px;
-      z-index: 8;
-      padding: 20px 0 16px;
-      background: rgba(248, 247, 243, .92);
-      border-bottom: 1px solid rgba(36, 58, 52, .08);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-    .date-line {
-      color: var(--green);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .08em;
-    }
-    .detail h2 {
-      margin: 4px 0 5px;
-      font-size: clamp(24px, 4vw, 30px);
-      line-height: 1.25;
-      letter-spacing: -.025em;
-    }
-    .route { color: var(--muted); font-size: 12px; line-height: 1.5; }
-    .chips {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 0 0 20px;
-      scrollbar-width: none;
-    }
-    .chips::-webkit-scrollbar { display: none; }
-    .chip {
-      flex: 0 0 auto;
-      padding: 6px 10px;
-      border-radius: 8px;
-      border: 1px solid #e1ece6;
-      background: #f3f8f5;
-      color: #56776b;
-      font-size: 11px;
-    }
-
-    .timeline {
-      position: relative;
-      margin: 20px 0 24px;
-      padding-left: 88px;
-    }
-    .timeline::before {
-      position: absolute;
-      top: 9px;
-      bottom: 9px;
-      left: 68px;
-      width: 2px;
-      background: #dbe8e1;
-      content: "";
-    }
-    .event {
-      position: relative;
-      display: block;
-      padding-bottom: 12px;
-      border: 0;
-      font-size: 13px;
-      line-height: 1.62;
-    }
-    .event:last-child { padding-bottom: 1px; }
-    .event::after {
-      position: absolute;
-      top: 17px;
-      left: -24px;
-      width: 9px;
-      height: 9px;
-      border: 2px solid #fff;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 0 1px #bfd5ca;
-      content: "";
-    }
-    .event .event-body {
-      min-height: 44px;
-      padding: 12px 14px;
-      border: 0;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, .94);
-      box-shadow: 0 1px 2px rgba(36, 58, 52, .06);
-      line-height: 1.6;
-      transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
-    }
-    .event .event-body { cursor: default; }
-    .event .event-body:active { transform: scale(.99); background: #fff; box-shadow: 0 3px 8px rgba(36, 58, 52, .09); }
-    .event .event-body::before {
-      content: '•';
-      display: inline-block;
-      margin-right: 7px;
-      color: var(--green);
-      font-weight: 800;
-    }
-    .event.sight .event-body::before { content: '◉'; color: #6d9b73; }
-    .event.food .event-body::before { content: '⌁'; color: #c18b55; }
-    .event.stay .event-body::before { content: '⌂'; color: #8a73a4; }
-    .event.transport .event-body::before { content: '↗'; color: #6f9c8e; }
-    .event.transport .event-body {
-      min-height: 28px;
-      padding: 8px 12px;
-      border: 0;
-      border-radius: 10px;
-      background: #f0f5f1;
-      box-shadow: none;
-      color: #537267;
-    }
-    .event.transport::after { background: #6f9c8e; box-shadow: 0 0 0 1px #bdd5c9; }
-    .event .time {
-      display: block;
-      position: absolute;
-      top: 12px;
-      left: -88px;
-      width: 52px;
-      padding-top: 0;
-      text-align: right;
-      color: var(--green);
-      font-size: 11px;
-      font-weight: 800;
-      line-height: 1.35;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: .01em;
-      white-space: normal;
-    }
-    .day-extra {
-      margin: 20px 0 0;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: #fff;
-    }
-    .day-extra > summary {
-      padding: 14px 16px;
-      color: var(--green-dark);
-      font-weight: 800;
-      cursor: pointer;
-      list-style: none;
-    }
-    .day-extra > summary::-webkit-details-marker { display: none; }
-    .day-extra > summary::after { content: '＋'; float: right; color: var(--muted); font-size: 18px; line-height: 1; }
-    .day-extra[open] > summary::after { content: '−'; }
-    .day-extra > .wearbox, .day-extra > .viewbox, .day-extra > .quicktips, .day-extra > .roadbox, .day-extra > .stay {
-      margin-left: 16px;
-      margin-right: 16px;
-    }
-    .day-extra > .wearbox:first-of-type { margin-top: 0; }
-    .quicktips {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin: 0 24px 20px;
-    }
-    .quicktip {
-      min-width: 0;
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #f8fbf9;
-    }
-    .quicktip b {
-      display: block;
-      margin-bottom: 2px;
-      color: var(--green);
-      font-size: 10px;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-    }
-    .quicktip span { color: #536a62; font-size: 12px; line-height: 1.45; }
-    .roadbox, .stay:not(.event) {
-      margin: 0 24px 20px;
-      border-radius: 12px;
-    }
-    .roadbox {
-      padding: 16px;
-      border: 1px solid #eee7d9;
-      background: #fbfaf6;
-    }
-    .roadtitle { color: var(--green-dark); font-size: 13px; font-weight: 800; }
-    .roadline {
-      margin: 7px 0 8px;
-      color: #526b62;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.55;
-    }
-    .roadnotes {
-      margin: 0;
-      padding-left: 17px;
-      color: #687b74;
-      font-size: 12px;
-      line-height: 1.7;
-    }
-    .roadnotes li + li { margin-top: 5px; }
-    .scenery { display: flex; gap: 6px; overflow-x: auto; margin-top: 10px; scrollbar-width: none; }
-    .scenery::-webkit-scrollbar { display: none; }
-    .scene {
-      flex: 0 0 auto;
-      padding: 5px 8px;
-      border-radius: 999px;
-      background: #f1f6f2;
-      color: #668078;
-      font-size: 10px;
-    }
-    .stay:not(.event) { padding: 14px 16px; background: #f6faf7; color: #5d746b; }
-    .stay:not(.event) b { color: var(--green-dark); }
-    .navdays {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 24px;
-      padding: 0 0 24px;
-    }
-    .navdays .home-button { color: var(--green-dark); background: var(--green-soft); }
-    .navdays button {
-      min-height: 44px;
-      padding: 10px 14px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      color: #5d746b;
-      font: inherit;
-      cursor: pointer;
-    }
-    .navdays button:disabled { cursor: default; opacity: .38; }
-    .footer { margin-top: 48px; padding: 12px; color: #98a59f; font-size: 10px; text-align: center; }
-
-    .skip-link {
-      position: fixed;
-      top: 8px;
-      left: 8px;
-      z-index: 100;
-      transform: translateY(-150%);
-      padding: 10px 14px;
-      border-radius: 10px;
-      background: var(--ink);
-      color: #fff;
-      font-weight: 700;
-      text-decoration: none;
-      transition: transform .18s ease;
-    }
-    .skip-link:focus-visible { transform: translateY(0); outline: 3px solid var(--green); outline-offset: 2px; }
-    #main-content:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
-    .departure-note {
-      display: flex;
-      gap: 8px;
-      align-items: baseline;
-      margin: 12px 0 8px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: var(--sand);
-      color: #6e5947;
-      font-size: 13px;
-    }
-    .departure-note b { color: #9a663b; white-space: nowrap; }
-    .map-fallback {
-      padding: 16px;
-      border-top: 1px solid var(--line);
-      background: #fbfaf6;
-      color: var(--muted);
-    }
-    .map-fallback[hidden] { display: none; }
-    .map-fallback b { display: block; margin-bottom: 6px; color: var(--ink); }
-    .map-fallback ol { margin: 8px 0 0; padding-left: 20px; line-height: 1.7; }
-    .map-fallback p { margin: 8px 0 0; font-size: 12px; }
-
-    @media (max-width: 700px) {
-      .wrap { padding: 24px 16px 96px; }
-      .hero { padding-bottom: 32px; }
-      .hero h1 { font-size: 32px; }
-      .panel { border-radius: 12px; }
-      .calendar-panel { margin-left: -16px; margin-right: -16px; border-radius: 0 0 12px 12px; }
-      .calendar { padding-right: 16px; padding-left: 16px; }
-      #tripMap { height: 260px; }
-      .panel-title { padding: 20px 16px 10px; }
-      .brief { padding-right: 16px; padding-left: 16px; }
-      .daynote, .ticketbox, .hotelbox, .wearbox, .viewbox, .quicktips, .roadbox, .stay:not(.event) { margin-right: 16px; margin-left: 16px; }
-      .ticketbox, .hotelbox { padding: 16px; }
-      .section-label { margin-top: 32px; margin-bottom: 16px; }
-      .detail-head { top: 55px; padding-top: 16px; }
-      .timeline { margin-top: 16px; }
-      .day-extra { margin-top: 16px; }
-      .day-extra > summary { padding: 13px 14px; }
-    }
-    @media (max-width: 390px) {
-      .calendar { padding-right: 6px; padding-left: 6px; }
-      .dates { gap: 3px; }
-      .dates .daybtn { flex-basis: 52px; min-height: 45px; }
-      .timeline { padding-left: 76px; }
-      .timeline::before { left: 58px; }
-      .event .time { left: -76px; width: 46px; }
-      .event::after { left: -22px; }
-      .detail h2 { font-size: 21px; }
-    }
-    @media (max-width: 350px) {
-      .daybtn .city { display: none; }
-      .daybtn { min-height: 39px; }
-      .quicktips, .ticket-grid, .hotel-grid { grid-template-columns: 1fr; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .event .event-body { transition: none; }
-    }
-
-    /* Apple-style refinement: fewer surfaces, stronger hierarchy, calmer chrome. */
-    :root {
       --bg: #f7f7f5;
-      --card: #fff;
+      --surface: #fff;
+      --surface-soft: #f3f6f3;
       --ink: #1d1d1f;
-      --muted: #86868b;
+      --ink-soft: #5f6862;
+      --muted: #6e6e73;
       --line: rgba(60, 60, 67, .12);
       --green: #4f806b;
       --green-dark: #35614f;
       --green-soft: #edf4ef;
       --sand: #f7efe3;
       --shadow: 0 1px 2px rgba(0, 0, 0, .06);
+      --shadow-lift: 0 8px 22px rgba(29, 29, 31, .055);
+      --calendar-h: 66px;
     }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
-      letter-spacing: -.01em;
-    }
-    .wrap { max-width: 720px; padding: 56px 20px 64px; }
-    .eyebrow, .section-label { display: none; }
-    .hero { padding: 24px 0 28px; }
-    .hero h1 { font-size: clamp(32px, 7vw, 40px); letter-spacing: -.045em; }
-    .hero p { max-width: 540px; font-size: 15px; }
-    .panel { border: 0; border-radius: 16px; background: transparent; }
-    .calendar-panel {
-      margin-left: -20px;
-      margin-right: -20px;
-      border-bottom: .5px solid var(--line);
-      border-radius: 0;
-      background: rgba(247, 247, 245, .88);
-      box-shadow: none;
-    }
-    .calendar { padding: 10px 20px 12px; }
-    .daybtn { border-radius: 10px; }
-    .daybtn.active { border-color: transparent; background: var(--green-soft); color: var(--green-dark); }
-    .daybtn.today { box-shadow: inset 0 0 0 2px rgba(79, 128, 107, .28); }
-    .route-map { border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); }
-    #overview { margin-top: 16px; }
-    .panel-title { padding: 0 0 16px; font-size: 22px; letter-spacing: -.025em; }
-    .brief { padding: 0; }
-    .brief-row {
-      margin-bottom: 8px;
-      padding: 14px 16px;
-      border: 0;
-      border-radius: 12px;
-      background: #fff;
-      box-shadow: var(--shadow);
-    }
-    .brief-date { color: var(--green); }
-    .brief-main b { font-size: 15px; letter-spacing: -.015em; }
-    .brief-main span { font-size: 12px; }
-    .daynote, .ticketbox, .hotelbox {
-      margin: 12px 0 0;
-      padding: 16px;
-      border: 0;
-      border-radius: 14px;
-      background: #fff;
-      box-shadow: var(--shadow);
-    }
-    .daynote { color: #6e6e73; }
-    .ticketbox, .hotelbox { background: #fff; }
-    .ticket-title, .wear-title, .view-title, .roadtitle { color: var(--ink); }
-    .ticket-item { padding: 0 0 16px; margin-top: 16px; }
-    .ticket-item b { color: var(--ink); font-size: 14px; }
-    .ticket-item span, .hotel-item span { color: #6e6e73; }
-    .detail-head {
-      top: 58px;
-      padding: 14px 0 12px;
-      border-bottom: 0;
-      background: rgba(247, 247, 245, .9);
-      box-shadow: 0 8px 16px rgba(247, 247, 245, .78);
-    }
-    .date-line { color: var(--green); }
-    .detail h2 { font-size: clamp(24px, 6vw, 30px); }
-    .route { font-size: 13px; }
-    .chip { border: 0; border-radius: 8px; background: #fff; color: var(--green-dark); box-shadow: var(--shadow); }
-    .timeline { margin-top: 18px; }
-    .timeline::before { background: rgba(60, 60, 67, .16); }
-    .event .event-body { box-shadow: var(--shadow); }
-    .event.transport .event-body { background: #f0f5f1; color: #537267; }
-    .wearbox, .viewbox, .roadbox, .quicktips { border: 0; background: #f5f5f7; box-shadow: none; }
-    .wear-item, .view-item, .quicktip { border: 0; background: #fff; box-shadow: var(--shadow); }
-    .day-extra { border: 0; box-shadow: var(--shadow); }
-    .day-extra > summary { color: var(--ink); }
-    .navdays { border-top: .5px solid var(--line); padding-top: 16px; }
-    .navdays button { border: 0; background: #fff; box-shadow: var(--shadow); }
-    .navdays .home-button { background: var(--green-soft); color: var(--green-dark); }
-    .footer { display: none; }
-    @media (max-width: 700px) {
-      .wrap { padding: 24px 16px 40px; }
-      .hero { padding: 16px 0 22px; }
-      .calendar-panel { margin-left: -16px; margin-right: -16px; }
-      .calendar { padding-right: 16px; padding-left: 16px; }
-      .detail-head { top: 55px; }
-      .route-map { border-radius: 14px; }
-      .event .event-body {
-        position: relative;
-        padding: 10px 28px 10px 12px;
-        font-size: 14px;
-        line-height: 1.45;
-      }
-      .event.transport .event-body { padding: 8px 28px 8px 12px; }
-    }
-    .overview-extra {
-      margin-top: 12px;
-      border-radius: 14px;
-      background: #fff;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .overview-extra > summary {
-      padding: 16px;
-      color: var(--ink);
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      list-style: none;
-    }
-    .overview-extra > summary::-webkit-details-marker { display: none; }
-    .overview-extra > summary::after { content: '＋'; float: right; color: #8e8e93; font-size: 19px; line-height: 1; }
-    .overview-extra[open] > summary::after { content: '−'; }
-    .overview-extra > .daynote,
-    .overview-extra > .ticketbox,
-    .overview-extra > .hotelbox,
-    .overview-extra > .wearbox {
-      margin: 0;
-      border-top: .5px solid var(--line);
-      border-radius: 0;
-      box-shadow: none;
-    }
-    .event .event-body {
-      display: block;
-      max-height: none;
-      overflow: visible;
-      cursor: default;
-    }
-    @media (max-width: 700px) {
-      .event .event-body {
-        padding: 11px 12px;
-        font-size: 14px;
-        line-height: 1.52;
-      }
-      .event.transport .event-body { padding: 9px 12px; }
-    }
-
-    /* Mobile-first guardrails: the phone layout is the base experience. */
-    *, *::before, *::after { min-width: 0; }
-    html, body { overflow-x: clip; }
+    *, *::before, *::after { box-sizing: border-box; min-width: 0; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body { margin: 0; overflow-x: clip; background: var(--bg); color: var(--ink); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     img, svg, video { max-width: 100%; height: auto; }
-    body { overflow-wrap: break-word; }
     button, summary, a { touch-action: manipulation; -webkit-tap-highlight-color: rgba(79, 128, 107, .16); }
-    .hero p, .map-note, .map-fallback, .hotel-item, .ticket-item { overflow-wrap: anywhere; word-break: break-all; text-wrap: pretty; }
-    .wrap {
-      width: 100%;
-      max-width: 720px;
-      padding: 24px 16px calc(40px + env(safe-area-inset-bottom));
-    }
-    .map-toggle, .daybtn, .navdays button, .day-extra > summary, .overview-extra > summary {
-      min-height: 44px;
-    }
-    .map-toggle { padding: 10px 14px; }
-    .daybtn { padding: 6px 4px; }
-    .detail-head { overflow-wrap: anywhere; }
-    .detail { scroll-margin-top: calc(var(--calendar-sticky-height, 66px) + 16px); }
-    .detail-head { top: var(--calendar-sticky-height, 66px); }
-    .timeline { min-width: 0; }
-    .event .event-body { overflow-wrap: anywhere; }
-    .quicktips { grid-template-columns: 1fr; }
-    @media (min-width: 360px) {
-      .quicktips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    .navdays { flex-wrap: wrap; }
-    .navdays button { flex: 1 1 30%; }
-    .map-panel-head { align-items: flex-start; }
-    .map-toggle { flex: 0 0 auto; min-width: 44px; }
-    button:focus-visible, summary:focus-visible, a:focus-visible {
-      outline: 3px solid var(--green);
-      outline-offset: 2px;
-    }
+    button:focus-visible, summary:focus-visible, a:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+    h1, h2, h3, .brief-main b, .event-body, .day-extra > summary, .overview-extra > summary { text-wrap: balance; }
+    .skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; transform: translateY(-150%); padding: 10px 14px; border-radius: 10px; background: var(--ink); color: #fff; font-weight: 700; text-decoration: none; transition: transform .18s ease; }
+    .skip-link:focus-visible { transform: translateY(0); }
+    #main-content:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
+    .wrap { width: 100%; max-width: 720px; margin: auto; padding: 56px 20px calc(64px + env(safe-area-inset-bottom)); }
+    .hero { padding: 28px 0; }
+    .eyebrow { display: block; margin-bottom: 8px; color: var(--green); font-size: 12px; font-weight: 800; line-height: 1.3; letter-spacing: .14em; }
+    .hero h1 { max-width: none; margin: 0 0 6px; font-size: clamp(30px, 7vw, 40px); font-weight: 700; line-height: 1.2; letter-spacing: -.02em; }
+    .hero p { display: block; max-width: 34rem; margin: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.55; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .panel { margin-bottom: 20px; overflow: hidden; border: 0; border-radius: 16px; background: transparent; }
+    .calendar-panel { position: sticky; top: env(safe-area-inset-top, 0); z-index: 50; margin-right: -20px; margin-left: -20px; border-bottom: 1px solid var(--line); border-radius: 0; background: rgba(247, 247, 245, .94); backdrop-filter: saturate(180%) blur(18px); -webkit-backdrop-filter: saturate(180%) blur(18px); }
+    .calendar { padding: 8px 20px 10px; }
+    .dates { display: flex; gap: 6px; overflow-x: auto; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .dates::-webkit-scrollbar { display: none; }
+    .daybtn { position: relative; flex: 0 0 56px; min-width: 56px; min-height: 44px; padding: 6px 4px; border: 1px solid transparent; border-radius: 10px; background: transparent; color: var(--ink); font: inherit; cursor: pointer; scroll-snap-align: center; transition: background-color .18s ease, color .18s ease; }
+    .daybtn.overview { flex-basis: 60px; min-width: 60px; color: var(--green-dark); }
+    .daybtn .n { display: block; font-size: 16px; font-weight: 800; line-height: 1.25; }
+    .daybtn .city { display: block; margin-top: 1px; overflow: hidden; color: var(--muted); font-size: 10px; font-weight: 600; line-height: 1.2; white-space: nowrap; text-overflow: ellipsis; }
+    .daybtn.overview .n { font-size: 14px; }
+    .daybtn.overview .city { color: var(--green); }
+    .daybtn.active { background: var(--green-soft); color: var(--green-dark); }
+    .daybtn.active::after { position: absolute; right: 50%; bottom: 3px; width: 16px; height: 2px; border-radius: 99px; background: var(--green); content: ""; transform: translateX(50%); }
+    .route-map { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-lift); }
+    .map-panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 15px 16px; }
+    .map-panel-head > div { min-width: 0; flex: 1 1 auto; }
+    .map-kicker { margin: 0; color: var(--green-dark); font-size: 15px; font-weight: 800; }
+    .map-status { display: block; margin-top: 2px; color: var(--ink-soft); font-size: 12px; line-height: 1.45; }
+    .map-toggle { min-width: 44px; min-height: 44px; padding: 10px 14px; border: 1px solid rgba(79, 128, 107, .22); border-radius: 8px; background: var(--green-soft); color: var(--green-dark); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+    #tripMap { display: none; height: 300px; border-top: 1px solid var(--line); background: #e9efed; }
+    .route-map.is-open #tripMap { display: block; }
+    .route-map.map-failed #tripMap { display: none; }
+    .map-note { display: block; max-width: 100%; padding: 10px 16px 12px; color: var(--muted); font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .map-note a { color: var(--green-dark); text-decoration: underline; }
+    .map-fallback { padding: 16px; border-top: 1px solid var(--line); background: #fbfaf6; color: var(--ink-soft); font-size: 13px; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .map-fallback[hidden] { display: none; }
+    .map-fallback b { display: block; margin-bottom: 6px; color: var(--ink); }
+    .map-fallback ol { margin: 8px 0 0; padding-left: 20px; line-height: 1.7; }
+    .map-fallback p { margin: 8px 0 0; font-size: 12px; }
+    .leaflet-container { font: inherit; }
+    .leaflet-control-zoom a { width: 44px !important; height: 44px !important; line-height: 44px !important; border-radius: 8px !important; color: var(--ink) !important; }
+    .map-marker { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 2px 8px rgba(36, 58, 52, .22); color: #fff; font-size: 13px; }
+    #overview { display: block; margin-top: 20px; }
+    body.show-detail #overview { display: none; }
+    .panel-title { margin: 0; padding: 0 0 14px; font-size: 22px; font-weight: 700; letter-spacing: -.025em; }
+    .brief { padding: 0; }
+    .brief-row { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; align-items: start; margin-bottom: 8px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
+    .brief-date { display: grid; min-height: 28px; place-items: center; border-radius: 8px; background: var(--green-soft); color: var(--green); font-weight: 800; }
+    .brief-main b { display: block; font-size: 15px; line-height: 1.4; }
+    .brief-main span { display: block; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .daynote { margin: 12px 0 0; padding: 14px 16px; border-left: 3px solid #c7945f; border-radius: 12px; background: var(--sand); color: var(--ink-soft); font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .ticketbox, .hotelbox, .wearbox, .viewbox, .roadbox { margin: 12px 0 0; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-lift); }
+    .ticket-title, .wear-title, .view-title, .roadtitle { color: var(--green-dark); font-size: 14px; font-weight: 800; }
+    .ticket-grid, .hotel-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+    .ticket-item, .hotel-item, .wear-item, .view-item, .quicktip { min-width: 0; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-soft); box-shadow: none; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .ticket-item { display: flex; flex-direction: column; gap: 4px; }
+    .ticket-item b, .hotel-item b { color: var(--ink); font-size: 14px; line-height: 1.4; }
+    .ticket-item span, .hotel-item span, .wear-item span, .view-item span, .quicktip span { color: var(--ink-soft); font-size: 13px; line-height: 1.55; }
+    .ticket-tip, .wear-note, .view-note { display: block; margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .hotel-item em { display: block; margin-top: 6px; color: var(--green); font-size: 12px; font-style: normal; font-weight: 800; line-height: 1.45; }
+    .stay-address { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .wear-grid, .view-grid { display: grid; gap: 8px; margin-top: 10px; }
+    .quicktips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 12px 0 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+    .quicktip { border-left: 3px solid var(--green); }
+    .quicktip b { display: block; margin-bottom: 3px; color: var(--green); font-size: 12px; letter-spacing: .04em; }
+    .detail { display: none; margin-bottom: 64px; overflow: visible; border: 0; border-radius: 0; background: transparent; }
+    .detail.show { display: block; }
+    .detail-head { position: sticky; top: calc(var(--calendar-h) + env(safe-area-inset-top, 0)); z-index: 8; padding: 17px 14px 14px 16px; border-bottom: 1px solid var(--line); border-left: 3px solid var(--green); background: rgba(247, 247, 245, .95); box-shadow: 0 8px 18px rgba(247, 247, 245, .86); overflow-wrap: anywhere; }
+    .detail { scroll-margin-top: calc(var(--calendar-h) + 16px); }
+    .date-line { color: var(--green); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+    .detail h2 { margin: 4px 0 5px; font-size: clamp(24px, 6vw, 30px); font-weight: 700; line-height: 1.25; letter-spacing: -.02em; overflow-wrap: anywhere; word-break: normal; text-wrap: balance; }
+    .route { color: var(--ink-soft); font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .chips { display: flex; gap: 8px; overflow-x: auto; padding: 12px 0 0; scrollbar-width: none; }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip { flex: 0 0 auto; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--green-dark); font-size: 12px; line-height: 1.35; }
+    .timeline { --time-col: 56px; --dot-col: 24px; --gap: 10px; position: relative; margin: 20px 0 24px; }
+    .timeline::before { position: absolute; top: 12px; bottom: 12px; left: calc(var(--time-col) + var(--gap) + var(--dot-col) / 2); width: 2px; background: rgba(79, 128, 107, .22); content: ""; transform: translateX(-50%); }
+    .event { display: grid; grid-template-columns: var(--time-col) var(--dot-col) minmax(0, 1fr); column-gap: var(--gap); padding-bottom: 14px; font-size: 15px; line-height: 1.55; }
+    .event:last-child { padding-bottom: 1px; }
+    .event .time { position: static; grid-column: 1; width: auto; padding-top: 12px; text-align: right; color: var(--green); font-size: 12px; font-weight: 800; line-height: 1.3; font-variant-numeric: tabular-nums; letter-spacing: .01em; overflow-wrap: anywhere; word-break: normal; }
+    .event::after { grid-column: 2; align-self: start; justify-self: center; width: 10px; height: 10px; margin-top: 14px; border: 2px solid var(--bg); border-radius: 50%; background: var(--green); box-shadow: 0 0 0 1px rgba(79, 128, 107, .22); content: ""; }
+    .event .event-body { grid-column: 3; min-height: 44px; padding: 12px 14px; border: 1px solid rgba(60, 60, 67, .06); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow-lift); font-size: 15px; line-height: 1.55; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .event .event-body:active { transform: scale(.99); }
+    .event.transport .event-body { min-height: 0; padding: 9px 12px; border: 0; border-radius: 10px; background: var(--surface-soft); color: var(--green-dark); box-shadow: none; }
+    .event.transport::after { background: #6f9c8e; }
+    .day-extra, .overview-extra { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-lift); }
+    .day-extra { margin-top: 16px; }
+    .day-extra > summary, .overview-extra > summary { display: flex; align-items: center; min-height: 48px; padding: 14px 16px; color: var(--ink); font-size: 15px; font-weight: 700; cursor: pointer; list-style: none; }
+    .day-extra > summary::-webkit-details-marker, .overview-extra > summary::-webkit-details-marker { display: none; }
+    .day-extra > summary::after, .overview-extra > summary::after { margin-left: auto; color: var(--muted); content: '＋'; font-size: 19px; line-height: 1; }
+    .day-extra[open] > summary::after, .overview-extra[open] > summary::after { content: '−'; }
+    .day-extra > .wearbox, .day-extra > .viewbox, .day-extra > .roadbox, .day-extra > .stay { margin: 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; box-shadow: none; }
+    .day-extra > .wearbox, .day-extra > .viewbox, .day-extra > .roadbox, .day-extra > .stay { background: var(--surface-soft); }
+    .overview-extra { margin-top: 12px; }
+    .overview-extra > .daynote, .overview-extra > .ticketbox, .overview-extra > .hotelbox, .overview-extra > .wearbox { margin: 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; box-shadow: none; }
+    .overview-extra > .ticketbox, .overview-extra > .hotelbox, .overview-extra > .wearbox { background: var(--surface-soft); }
+    .roadline { margin: 8px 0; color: var(--green-dark); font-size: 13px; font-weight: 800; line-height: 1.55; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .roadnotes { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .roadnotes li + li { margin-top: 5px; }
+    .scenery { display: flex; gap: 6px; overflow-x: auto; margin-top: 10px; scrollbar-width: none; }
+    .scenery::-webkit-scrollbar { display: none; }
+    .scene { flex: 0 0 auto; padding: 5px 8px; border-radius: 999px; background: var(--green-soft); color: var(--green-dark); font-size: 12px; }
+    .stay { padding: 14px 16px; color: var(--ink-soft); font-size: 13px; line-height: 1.55; }
+    .stay b { color: var(--green-dark); }
+    .navdays { display: flex; flex-wrap: nowrap; justify-content: space-between; gap: 10px; margin-top: 28px; padding: 16px 0 24px; border-top: 1px solid var(--line); }
+    .navdays button { flex: 1 1 30%; min-height: 44px; padding: 10px 14px; border: 0; border-radius: 8px; background: var(--surface); color: var(--ink-soft); font: inherit; cursor: pointer; box-shadow: var(--shadow); }
+    .navdays .home-button { background: var(--green-soft); color: var(--green-dark); }
+    .navdays button:disabled { cursor: default; opacity: .38; }
+    .footer { margin-top: 48px; padding: 12px; color: var(--muted); font-size: 12px; text-align: center; }
+    .departure-note { display: flex; gap: 8px; align-items: baseline; margin: 12px 0 8px; padding: 12px 14px; border-radius: 12px; background: var(--sand); color: #6e5947; font-size: 13px; overflow-wrap: anywhere; }
+    .departure-note b { color: #9a663b; white-space: nowrap; }
     @media (max-width: 700px) {
-      :root { --calendar-sticky-height: 66px; }
+      .wrap { padding: 24px 16px calc(40px + env(safe-area-inset-bottom)); }
+      .hero { padding: 16px 0 22px; }
+      .calendar-panel { margin-right: -16px; margin-left: -16px; }
+      .calendar { padding-right: 16px; padding-left: 16px; }
       .map-panel-head { flex-wrap: wrap; }
       .map-panel-head > div { flex: 1 1 100%; }
       .map-toggle { width: 100%; }
-    }
-    @media (min-width: 701px) {
-      :root { --calendar-sticky-height: 66px; }
-      .wrap { padding: 56px 20px 64px; }
-      .quicktips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .navdays { flex-wrap: nowrap; }
-    }
-
-    /* Superdesign visual pass: clarify the travel-board hierarchy without adding decoration. */
-    :root {
-      --surface: #fff;
-      --surface-soft: #f3f6f3;
-      --ink-soft: #5f6862;
-      --sage-line: rgba(79, 128, 107, .22);
-      --shadow-lift: 0 8px 22px rgba(29, 29, 31, .055);
-    }
-    h1, h2, h3, .brief-main b, .event-body, .day-extra > summary, .overview-extra > summary { text-wrap: balance; }
-    .eyebrow {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--green);
-      font-size: 11px;
-      line-height: 1.3;
-      letter-spacing: .14em;
-    }
-    .hero {
-      padding-top: 28px;
-      padding-bottom: 28px;
-    }
-    .hero h1 { max-width: none; font-weight: 700; }
-    .hero p { display: block; max-width: 34rem; color: var(--ink-soft); white-space: normal; }
-    .calendar-panel { border-bottom-color: rgba(60, 60, 67, .16); }
-    .calendar { padding-top: 8px; padding-bottom: 10px; }
-    .daybtn { position: relative; transition: background-color .18s ease, color .18s ease; }
-    .daybtn.active::after {
-      position: absolute;
-      right: 50%;
-      bottom: 3px;
-      width: 16px;
-      height: 2px;
-      border-radius: 99px;
-      background: var(--green);
-      content: "";
-      transform: translateX(50%);
-    }
-    .route-map { box-shadow: var(--shadow-lift); }
-    .map-panel-head { padding: 15px 16px; }
-    .map-kicker { font-size: 15px; letter-spacing: -.01em; }
-    .map-status { color: var(--ink-soft); }
-    .map-toggle { background: var(--green-soft); border-color: var(--sage-line); }
-    .panel-title { font-weight: 700; }
-    .brief-row { box-shadow: var(--shadow-lift); }
-    .brief-date { display: grid; place-items: center; min-height: 28px; border-radius: 8px; background: var(--green-soft); }
-    .daynote { border-left: 3px solid #c7945f; background: var(--sand); }
-    .ticket-title { font-size: 14px; }
-    .wearbox {
-      border-color: var(--sage-line);
-      background: var(--surface-soft);
-    }
-    .wear-title { color: var(--green-dark); }
-    .wear-item { border: 1px solid rgba(79, 128, 107, .10); }
-    .detail-head {
-      padding: 17px 14px 14px 16px;
-      border-left: 3px solid var(--green);
-      border-bottom: 1px solid var(--line);
-      background: rgba(247, 247, 245, .94);
-      box-shadow: 0 8px 18px rgba(247, 247, 245, .86);
-    }
-    .detail h2 { font-weight: 700; overflow-wrap: anywhere; word-break: break-word; }
-    .route { color: var(--ink-soft); }
-    .chips { padding-top: 12px; }
-    .chip { border: 1px solid rgba(79, 128, 107, .12); background: var(--surface); }
-    .timeline { margin-top: 20px; }
-    .timeline::before { background: rgba(79, 128, 107, .22); }
-    .event { padding-bottom: 14px; }
-    .event::after { width: 10px; height: 10px; border-color: var(--bg); box-shadow: 0 0 0 1px var(--sage-line); }
-    .event .event-body { border: 1px solid rgba(60, 60, 67, .06); box-shadow: 0 4px 14px rgba(29, 29, 31, .045); }
-    .event.transport .event-body { border: 0; background: var(--surface-soft); }
-    .quicktips { gap: 10px; }
-    .quicktip { border: 1px solid rgba(79, 128, 107, .10); border-left: 3px solid var(--green); background: var(--surface); box-shadow: var(--shadow); }
-    .day-extra, .overview-extra { box-shadow: var(--shadow-lift); }
-    .day-extra > summary, .overview-extra > summary { min-height: 48px; display: flex; align-items: center; }
-    .day-extra > summary::after, .overview-extra > summary::after { margin-left: auto; }
-    .navdays { margin-top: 28px; }
-    .navdays button { color: var(--ink-soft); }
-    @media (max-width: 700px) {
-      .hero { padding-top: 16px; }
+      #tripMap { height: 260px; }
       .detail-head { padding-left: 13px; }
     }
-    @media (max-width: 379px) {
-      .hero h1 { max-width: 100%; font-size: 29px; letter-spacing: -.065em; text-wrap: balance; }
-      .quicktips { grid-template-columns: 1fr; }
-    }
-    @media (min-width: 380px) {
-      .quicktips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
+    @media (max-width: 480px) { .ticket-grid, .hotel-grid, .quicktips { grid-template-columns: 1fr; } }
+    @media (max-width: 380px) { .hero h1 { font-size: 29px; letter-spacing: -.02em; } .calendar { padding-right: 8px; padding-left: 8px; } }
+    @media (min-width: 701px) { .route-map #tripMap { display: block; } .route-map .map-toggle { display: none; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .event .event-body, .daybtn { transition: none; } }
+    .section-label { display: none; }
   </style>
 </head>
 <body>
@@ -928,7 +186,7 @@
         <div><h2 class="map-kicker" id="map-title">路线地图</h2><span class="map-status" id="mapStatus" aria-live="polite">总览 · 点击查看主要地点与路线</span></div>
         <button class="map-toggle" id="mapToggle" type="button" aria-controls="tripMap" aria-expanded="false">打开地图</button>
       </div>
-      <div id="tripMap" role="img" aria-label="青甘环线示意地图"></div>
+      <div id="tripMap" role="region" aria-label="青甘环线示意地图"></div>
       <div class="map-fallback" id="mapFallback" hidden role="status" aria-live="polite">
         <b>地图暂时无法加载</b>
         <ol id="mapFallbackRoute"></ol>
@@ -1414,7 +672,8 @@
           button.setAttribute('aria-pressed', String(selected));
           const isToday = actualView > 0 && buttonDay === actualView;
           button.classList.toggle('today', isToday);
-          if (isToday) button.setAttribute('aria-current', 'date');
+          if (selected) button.setAttribute('aria-current', 'true');
+          else if (isToday) button.setAttribute('aria-current', 'date');
           else button.removeAttribute('aria-current');
           if (selected && (scroll || current === initialView)) requestAnimationFrame(() => revealDayButton(button, scroll));
         });
@@ -1444,6 +703,17 @@
       foldExtras();
       markDecorativeIcons();
       addDepartureNote();
+      const calendarPanel = document.querySelector('.calendar-panel');
+      function syncCalendarHeight() {
+        const h = calendarPanel?.offsetHeight || 66;
+        document.documentElement.style.setProperty('--calendar-h', `${h}px`);
+      }
+      syncCalendarHeight();
+      if (window.ResizeObserver && calendarPanel) {
+        new ResizeObserver(syncCalendarHeight).observe(calendarPanel);
+      } else {
+        window.addEventListener('resize', syncCalendarHeight);
+      }
       if (window.innerWidth > 700) initTripMap();
       mapToggle?.addEventListener('click', () => {
         if (routeMapPanel?.classList.contains('is-open')) {
@@ -1460,3 +730,5 @@
   </script>
 </body>
 </html>
+
+
