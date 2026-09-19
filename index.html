@@ -116,6 +116,7 @@
       font-size: 11px;
       line-height: 1.5;
     }
+    .map-note a { color: var(--green-dark); text-decoration: underline; }
     .leaflet-container { font: inherit; }
     .leaflet-control-zoom a {
       width: 32px !important;
@@ -619,7 +620,7 @@
         <button class="map-toggle" id="mapToggle" type="button" aria-expanded="false">打开地图</button>
       </div>
       <div id="tripMap" role="img" aria-label="青甘环线示意地图"></div>
-      <div class="map-note">地图用于判断顺序和区域关系，线路为示意线；国庆车流、天气和当天导航优先。</div>
+      <div class="map-note">地图用于判断顺序和区域关系，线路为示意线；国庆车流、天气和当天导航优先。地图数据：<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a></div>
     </section>
 
     <section class="panel" id="overview">
@@ -870,9 +871,9 @@
 
       function initTripMap() {
         if (!window.L || tripMap) return;
-        tripMap = L.map('tripMap', { zoomControl: false, scrollWheelZoom: false, attributionControl: true });
+        tripMap = L.map('tripMap', { zoomControl: false, scrollWheelZoom: false, attributionControl: false });
         L.control.zoom({ position: 'topright' }).addTo(tripMap);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap &copy; CARTO' }).addTo(tripMap);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap contributors' }).addTo(tripMap);
         updateMap(current);
       }
 
