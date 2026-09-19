@@ -727,7 +727,7 @@
         <button class="map-toggle" id="mapToggle" type="button" aria-expanded="false">打开地图</button>
       </div>
       <div id="tripMap" role="img" aria-label="青甘环线示意地图"></div>
-      <div class="map-note">地图用于判断顺序和区域关系，线路为示意线；国庆车流、天气和当天导航优先。地图数据：<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a></div>
+      <div class="map-note">地图用于判断顺序和区域关系，线路为示意线；国庆车流、天气和当天导航优先。底图：高德地图。</div>
     </section>
 
     <section class="panel" id="overview">
@@ -949,6 +949,40 @@
       };
       const routeColors = ['#699b87', '#6d9bb2', '#8a73a4', '#c18b55', '#5f8f83', '#7586aa', '#a07b64', '#6d9b73'];
 
+      // 高德底图使用 GCJ-02；行程坐标按 WGS-84 记录，显示前做一次本地转换。
+      const GCJ_PI = Math.PI;
+      const GCJ_A = 6378245.0;
+      const GCJ_EE = 0.00669342162296594323;
+      function outOfChina(lon, lat) {
+        return lon < 72.004 || lon > 137.8347 || lat < 0.8293 || lat > 55.8271;
+      }
+      function transformLat(x, y) {
+        let ret = -100 + 2 * x + 3 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
+        ret += (20 * Math.sin(6 * x * GCJ_PI) + 20 * Math.sin(2 * x * GCJ_PI)) * 2 / 3;
+        ret += (20 * Math.sin(y * GCJ_PI) + 40 * Math.sin(y / 3 * GCJ_PI)) * 2 / 3;
+        ret += (160 * Math.sin(y / 12 * GCJ_PI) + 320 * Math.sin(y * GCJ_PI / 30)) * 2 / 3;
+        return ret;
+      }
+      function transformLon(x, y) {
+        let ret = 300 + x + 2 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
+        ret += (20 * Math.sin(6 * x * GCJ_PI) + 20 * Math.sin(2 * x * GCJ_PI)) * 2 / 3;
+        ret += (20 * Math.sin(x * GCJ_PI) + 40 * Math.sin(x / 3 * GCJ_PI)) * 2 / 3;
+        ret += (150 * Math.sin(x / 12 * GCJ_PI) + 300 * Math.sin(x / 30 * GCJ_PI)) * 2 / 3;
+        return ret;
+      }
+      function wgs84ToGcj02(lon, lat) {
+        if (outOfChina(lon, lat)) return [lat, lon];
+        let dLat = transformLat(lon - 105, lat - 35);
+        let dLon = transformLon(lon - 105, lat - 35);
+        const radLat = lat / 180 * GCJ_PI;
+        let magic = Math.sin(radLat);
+        magic = 1 - GCJ_EE * magic * magic;
+        const sqrtMagic = Math.sqrt(magic);
+        dLat = (dLat * 180) / ((GCJ_A * (1 - GCJ_EE)) / (magic * sqrtMagic) * GCJ_PI);
+        dLon = (dLon * 180) / (GCJ_A / sqrtMagic * Math.cos(radLat) * GCJ_PI);
+        return [lat + dLat, lon + dLon];
+      }
+
       function mapIcon(place, color) {
         return L.divIcon({ className: '', html: `<span class="map-marker" style="background:${color}">${place.icon}</span>`, iconSize: [28, 28], iconAnchor: [14, 14] });
       }
@@ -960,7 +994,10 @@
         mapLayers.forEach(layer => tripMap.removeLayer(layer));
         mapLayers = [];
         const keys = dayRoutes[day] || dayRoutes[0];
-        const places = keys.map(key => mapPlaces[key]).filter(Boolean);
+        const places = keys.map(key => mapPlaces[key]).filter(Boolean).map(place => {
+          const [lat, lng] = wgs84ToGcj02(place.lng, place.lat);
+          return { ...place, lat, lng };
+        });
         const coords = places.map(place => [place.lat, place.lng]);
         places.forEach(place => {
           const marker = L.marker([place.lat, place.lng], { icon: mapIcon(place, routeColors[day] || routeColors[0]) })
@@ -980,7 +1017,7 @@
         if (!window.L || tripMap) return;
         tripMap = L.map('tripMap', { zoomControl: false, scrollWheelZoom: false, attributionControl: false });
         L.control.zoom({ position: 'topright' }).addTo(tripMap);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap contributors' }).addTo(tripMap);
+        L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', { subdomains: '1234', maxZoom: 18, attribution: '© 高德地图' }).addTo(tripMap);
         updateMap(current);
       }
 
