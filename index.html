@@ -53,45 +53,6 @@
       letter-spacing: -.035em;
     }
     .hero p { margin: 0; color: var(--muted); line-height: 1.55; }
-    .editbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin: 0 0 20px;
-      padding: 12px 14px;
-      border: 1px solid rgba(36, 58, 52, .08);
-      border-radius: 12px;
-      background: #fff;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .editbar-actions { display: flex; gap: 8px; }
-    .editbar button, .fab {
-      min-height: 44px;
-      padding: 9px 14px;
-      border: 1px solid rgba(36, 58, 52, .10);
-      border-radius: 8px;
-      background: #fff;
-      color: var(--green-dark);
-      font: inherit;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .editbar .primary, .fab { border-color: var(--green); background: var(--green); color: #fff; }
-    .fab {
-      position: fixed;
-      right: 24px;
-      bottom: max(18px, env(safe-area-inset-bottom));
-      z-index: 60;
-      box-shadow: 0 8px 20px rgba(63, 96, 83, .18);
-    }
-    .edit-mode .event { cursor: grab; }
-    .edit-mode .event:active { cursor: grabbing; }
-    .edit-mode .event-body { outline: 2px dashed rgba(105, 155, 135, .35); outline-offset: 2px; }
-    .event.dragging { transform: scale(1.02); opacity: .75; box-shadow: 0 10px 24px rgba(63, 96, 83, .14); }
-    .event.drop-target { border-top: 2px dashed var(--green); }
-
     .panel {
       margin-bottom: 20px;
       overflow: hidden;
@@ -390,6 +351,8 @@
       background: #fff;
       line-height: 1.6;
     }
+    .event .event-body { cursor: default; }
+    .event.is-expanded .event-body { max-height: none; }
     .event .event-body::before {
       content: '•';
       display: inline-block;
@@ -418,6 +381,27 @@
       line-height: 1.35;
       white-space: normal;
     }
+    .day-extra {
+      margin: 20px 0 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+    .day-extra > summary {
+      padding: 14px 16px;
+      color: var(--green-dark);
+      font-weight: 800;
+      cursor: pointer;
+      list-style: none;
+    }
+    .day-extra > summary::-webkit-details-marker { display: none; }
+    .day-extra > summary::after { content: '＋'; float: right; color: var(--muted); font-size: 18px; line-height: 1; }
+    .day-extra[open] > summary::after { content: '−'; }
+    .day-extra > .wearbox, .day-extra > .viewbox, .day-extra > .quicktips, .day-extra > .roadbox, .day-extra > .stay {
+      margin-left: 16px;
+      margin-right: 16px;
+    }
+    .day-extra > .wearbox:first-of-type { margin-top: 0; }
     .quicktips {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -502,8 +486,6 @@
       .wrap { padding: 24px 16px 96px; }
       .hero { padding-bottom: 32px; }
       .hero h1 { font-size: 32px; }
-      .editbar { align-items: stretch; flex-direction: column; }
-      .editbar-actions button { flex: 1; }
       .panel { border-radius: 12px; }
       .calendar-panel { margin-left: -16px; margin-right: -16px; border-radius: 0 0 12px 12px; }
       .calendar { padding-right: 16px; padding-left: 16px; }
@@ -515,7 +497,16 @@
       .detail-head { top: 55px; padding-top: 16px; }
       .cover { border-radius: 12px; }
       .timeline { margin-top: 16px; }
-      .fab { right: 16px; }
+      .event .event-body {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        cursor: pointer;
+      }
+      .event.is-expanded .event-body { display: block; }
+      .day-extra { margin-top: 16px; }
+      .day-extra > summary { padding: 13px 14px; }
     }
     @media (max-width: 390px) {
       .calendar { padding-right: 6px; padding-left: 6px; }
@@ -540,11 +531,6 @@
       <h1>青甘环线 · 8天行程</h1>
       <p>西安 → 张掖 → 嘉峪关 → 敦煌 → 大柴旦 → 青海湖 → 西宁 → 西安</p>
     </header>
-    <div class="editbar" aria-label="行程编辑工具">
-      <span>行程工具 · 可编辑文字，也可拖动时间轴顺序</span>
-      <div class="editbar-actions"><button id="editToggle" class="primary" type="button">编辑行程</button><button id="resetEdits" type="button">恢复原始</button></div>
-    </div>
-
     <section class="panel calendar-panel" aria-label="每日行程导航">
       <div class="calendar">
         <div class="dates">
@@ -737,7 +723,6 @@
       <div class="timeline"><div class="event"><span class="time">当天</span>根据航班时间前往机场，返回深圳。</div></div>
     </section>
 
-    <button class="fab" id="addEvent" type="button">＋ 添加行程</button>
     <div class="footer">青甘环线 · 2026国庆</div>
   </main>
 
@@ -745,172 +730,68 @@
     (() => {
       const buttons = [...document.querySelectorAll('.daybtn[data-day]')];
       const details = [...document.querySelectorAll('.detail[data-detail]')];
-      const editToggle = document.querySelector('#editToggle');
-      const resetEdits = document.querySelector('#resetEdits');
-      const addEventButton = document.querySelector('#addEvent');
-      const editStorageKey = 'qingan-trip-edits-v1';
       let current = 0;
-      let editMode = false;
-      let draggedEvent = null;
 
       function prepareEvent(event) {
         const time = event.querySelector('.time');
         if (!event.querySelector('.event-body')) {
           const body = document.createElement('div');
           body.className = 'event-body';
-          [...event.childNodes].forEach(node => {
-            if (node !== time) body.appendChild(node);
-          });
+          [...event.childNodes].forEach(node => { if (node !== time) body.appendChild(node); });
           event.appendChild(body);
         }
-        event.draggable = true;
         if (/出发|前往|返回|动车|车程|途中|抵达|进站|机场/.test(event.textContent)) event.classList.add('transport');
         if (/景区|游览|拍照|湖|丹霞|莫高窟|月牙泉/.test(event.textContent)) event.classList.add('sight');
         if (/早餐|午饭|午餐|晚饭|晚餐/.test(event.textContent)) event.classList.add('food');
         if (/入住|酒店|退房/.test(event.textContent)) event.classList.add('stay');
-        event.addEventListener('dragstart', () => {
-          if (!editMode) return;
-          draggedEvent = event;
-          event.classList.add('dragging');
-        });
-        event.addEventListener('dragend', () => {
-          event.classList.remove('dragging');
-          draggedEvent = null;
-          document.querySelectorAll('.drop-target').forEach(item => item.classList.remove('drop-target'));
-          saveEdits();
-        });
-        event.addEventListener('dragover', (e) => {
-          if (!editMode || !draggedEvent || draggedEvent === event) return;
-          e.preventDefault();
-          event.classList.add('drop-target');
-        });
-        event.addEventListener('dragleave', () => event.classList.remove('drop-target'));
-        event.addEventListener('drop', (e) => {
-          if (!editMode || !draggedEvent || draggedEvent === event) return;
-          e.preventDefault();
-          const rect = event.getBoundingClientRect();
-          const after = e.clientY > rect.top + rect.height / 2;
-          event.closest('.timeline').insertBefore(draggedEvent, after ? event.nextSibling : event);
-          event.classList.remove('drop-target');
-          saveEdits();
+        event.querySelector('.event-body').addEventListener('click', () => {
+          if (window.matchMedia('(max-width: 700px)').matches) event.classList.toggle('is-expanded');
         });
       }
 
-      details.forEach(detail => detail.querySelectorAll('.event').forEach((event, index) => {
-        event.dataset.editId = `d${detail.dataset.detail}-${index}`;
-        prepareEvent(event);
-      }));
-
-      function saveEdits() {
-        if (!window.localStorage) return;
-        const data = details.map(detail => [...detail.querySelectorAll('.event')].map(event => ({
-          id: event.dataset.editId || '',
-          time: event.querySelector('.time')?.innerHTML || '',
-          body: event.querySelector('.event-body')?.innerHTML || ''
-        })));
-        localStorage.setItem(editStorageKey, JSON.stringify(data));
-      }
-
-      function restoreEdits() {
-        if (!window.localStorage) return;
-        try {
-          const data = JSON.parse(localStorage.getItem(editStorageKey) || 'null');
-          if (!Array.isArray(data)) return;
-          data.forEach((events, detailIndex) => {
-            const timeline = details[detailIndex]?.querySelector('.timeline');
-            if (!timeline || !Array.isArray(events)) return;
-            events.forEach((item, eventIndex) => {
-              let event = timeline.querySelector(`[data-edit-id="${item.id}"]`) || timeline.querySelectorAll('.event')[eventIndex];
-              if (!event) {
-                event = document.createElement('div');
-                event.className = 'event';
-                event.dataset.editId = item.id || `d${detailIndex + 1}-saved-${eventIndex}`;
-                event.innerHTML = '<span class="time"></span><div class="event-body"></div>';
-                timeline.appendChild(event);
-                prepareEvent(event);
-              }
-              if (event.querySelector('.time')) event.querySelector('.time').innerHTML = item.time || '';
-              if (event.querySelector('.event-body')) event.querySelector('.event-body').innerHTML = item.body || '';
-              timeline.appendChild(event);
-            });
-          });
-        } catch (error) {
-          localStorage.removeItem(editStorageKey);
-        }
-      }
-
-      function setEditMode(next) {
-        editMode = next;
-        document.body.classList.toggle('edit-mode', editMode);
-        document.querySelectorAll('.event-body').forEach(body => {
-          body.contentEditable = editMode ? 'true' : 'false';
-          body.spellcheck = false;
+      function foldExtras() {
+        details.forEach(detail => {
+          const timeline = detail.querySelector('.timeline');
+          if (!timeline || detail.querySelector('.day-extra')) return;
+          const extras = [...detail.children].filter(node => /^(wearbox|viewbox|quicktips|roadbox|stay)$/.test(node.className));
+          if (!extras.length) return;
+          const fold = document.createElement('details');
+          fold.className = 'day-extra';
+          fold.open = window.innerWidth > 700;
+          const summary = document.createElement('summary');
+          summary.textContent = '穿衣、拍照与途中建议（点击展开）';
+          fold.appendChild(summary);
+          timeline.after(fold);
+          extras.forEach(node => fold.appendChild(node));
         });
-        editToggle.textContent = editMode ? '完成编辑' : '编辑行程';
-        editToggle.classList.toggle('primary', !editMode);
-        if (!editMode) saveEdits();
       }
 
       function show(day, scroll = false) {
         current = Math.max(0, Math.min(7, Number(day)));
         document.body.classList.toggle('show-detail', current !== 0);
-        buttons.forEach(button => {
-          button.classList.toggle('active', Number(button.dataset.day) === current);
-        });
-        details.forEach(detail => {
-          detail.classList.toggle('show', Number(detail.dataset.detail) === current);
-        });
+        buttons.forEach(button => button.classList.toggle('active', Number(button.dataset.day) === current));
+        details.forEach(detail => detail.classList.toggle('show', Number(detail.dataset.detail) === current));
         if (scroll) {
-          const target = current === 0 ? document.querySelector('#overview') : document.querySelector('#detailStart');
+          const target = current === 0 ? document.querySelector('#overview') : details.find(detail => Number(detail.dataset.detail) === current);
           target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
 
-      buttons.forEach(button => button.addEventListener('click', () => show(button.dataset.day, true)));
       details.forEach(detail => {
+        detail.querySelectorAll('.event').forEach(prepareEvent);
         const day = Number(detail.dataset.detail);
         const nav = document.createElement('div');
         nav.className = 'navdays';
-        nav.innerHTML = `<button type="button" ${day === 1 ? '' : ''}>← 前一天</button><button class="home-button" type="button">⌂ 回到总览</button><button type="button" ${day === 7 ? 'disabled' : ''}>后一天 →</button>`;
+        nav.innerHTML = `<button type="button" ${day === 1 ? 'disabled' : ''}>← 前一天</button><button class="home-button" type="button">⌂ 回到总览</button><button type="button" ${day === 7 ? 'disabled' : ''}>后一天 →</button>`;
         const navButtons = nav.querySelectorAll('button');
         navButtons[0].addEventListener('click', () => show(day - 1, true));
         navButtons[1].addEventListener('click', () => show(0, true));
         navButtons[2].addEventListener('click', () => show(day + 1, true));
-        if (day === 7) navButtons[0].textContent = '← 10/6';
         detail.appendChild(nav);
       });
 
-      editToggle.addEventListener('click', () => setEditMode(!editMode));
-      resetEdits.addEventListener('click', () => {
-        if (window.confirm('恢复原始行程？这会清除本机保存的编辑内容。')) {
-          localStorage.removeItem(editStorageKey);
-          window.location.reload();
-        }
-      });
-      addEventButton.addEventListener('click', () => {
-        if (!editMode) setEditMode(true);
-        if (current === 0) {
-          window.alert('请先选择要添加行程的日期。');
-          return;
-        }
-        const timeline = details.find(detail => Number(detail.dataset.detail) === current)?.querySelector('.timeline');
-        if (!timeline) return;
-        const time = window.prompt('时间，例如 15:30–17:00');
-        if (!time) return;
-        const text = window.prompt('行程内容，例如：在观景台拍照、补水、休息');
-        if (!text) return;
-        const event = document.createElement('div');
-        event.className = 'event';
-        event.dataset.editId = `d${current}-new-${Date.now()}`;
-        event.innerHTML = `<span class="time"></span><div class="event-body"></div>`;
-        event.querySelector('.time').textContent = time;
-        event.querySelector('.event-body').textContent = text;
-        timeline.appendChild(event);
-        prepareEvent(event);
-        saveEdits();
-      });
-
-      restoreEdits();
+      foldExtras();
+      buttons.forEach(button => button.addEventListener('click', () => show(button.dataset.day, true)));
       show(0);
     })();
   </script>
