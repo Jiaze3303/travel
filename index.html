@@ -111,7 +111,7 @@
     .daily-brief-item { min-width: 0; padding: 12px 14px; border: 1px solid rgba(57, 77, 106, .16); border-radius: 12px; background: var(--green-soft); }
     .daily-brief-item b { display: block; margin-bottom: 3px; color: var(--green-dark); font-size: 12px; letter-spacing: .04em; }
     .daily-brief-item span { display: block; color: var(--ink-soft); font-size: 13px; line-height: 1.55; overflow-wrap: anywhere; text-wrap: pretty; }
-    .detail { display: none; margin-bottom: 64px; overflow: visible; border: 0; border-radius: 0; background: transparent; }
+    .detail { display: none; margin-bottom: 24px; overflow: visible; border: 0; border-radius: 0; background: transparent; }
     .detail.show { display: block; }
     .detail-head { position: relative; padding: 17px 14px 14px 16px; border-bottom: 1px solid var(--line); border-left: 2px solid var(--green); background: rgba(233, 238, 245, .95); box-shadow: none; overflow-wrap: anywhere; }
     .detail { scroll-margin-top: calc(var(--calendar-h) + 16px); }
@@ -128,7 +128,7 @@
     .event .time { position: static; grid-row: 1; grid-column: 1; width: auto; padding-top: 12px; text-align: right; color: var(--green); font-size: 12px; font-weight: 800; line-height: 1.3; font-variant-numeric: tabular-nums; letter-spacing: .01em; overflow-wrap: anywhere; word-break: normal; }
     .event::after { grid-row: 1; grid-column: 2; align-self: start; justify-self: center; width: 10px; height: 10px; margin-top: 14px; border: 2px solid var(--bg); border-radius: 50%; background: var(--green); box-shadow: 0 0 0 1px rgba(57, 77, 106, .22); content: ""; }
     .event .event-body { grid-row: 1; grid-column: 3; min-height: 44px; padding: 12px 14px; border: 1px solid rgba(7, 22, 29, .09); border-radius: 14px; background: var(--surface); box-shadow: 0 1px 2px rgba(29, 29, 31, .05), 0 4px 14px rgba(29, 29, 31, .03); font-size: 15px; line-height: 1.55; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
-    .event .event-body:active { transform: scale(.99); }
+    
     .event.transport .event-body { min-height: 44px; padding: 12px 14px; border: 1px solid rgba(7, 22, 29, .09); border-radius: 14px; background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(29, 29, 31, .05), 0 4px 14px rgba(29, 29, 31, .03); }
     .event.transport::after { background: var(--green); }
     .day-extra, .overview-extra { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-lift); }
@@ -155,7 +155,7 @@
     .navdays button { font-size: 14px; flex: 1 1 30%; min-height: 44px; padding: 10px 14px; border: 1px solid rgba(7, 22, 29, .11); border-radius: 12px; background: var(--material-strong); color: var(--ink-soft); font-family: inherit; cursor: pointer; box-shadow: var(--shadow); }
     .navdays .home-button { border-color: transparent; background: var(--green-soft); color: var(--green-dark); }
     .navdays button:disabled { cursor: default; opacity: .38; }
-    .footer { margin-top: 48px; padding: 12px; color: var(--muted); font-size: 12px; text-align: center; }
+    .footer { margin-top: 20px; padding: 12px; color: var(--muted); font-size: 12px; text-align: center; }
     .departure-note { display: flex; gap: 8px; align-items: baseline; margin: 12px 0 8px; padding: 12px 14px; border-radius: 12px; background: var(--sand); color: var(--ink-soft); font-size: 13px; overflow-wrap: anywhere; }
     .departure-note b { color: var(--accent); white-space: nowrap; }
     body.show-detail .route-map { margin-bottom: 12px; }
@@ -176,7 +176,7 @@
       #tripMap { height: 260px; }
       .detail-head { padding-left: 13px; }
     }
-    @media (max-width: 480px) { .ticket-grid, .hotel-grid, .quicktips, .daily-brief { grid-template-columns: 1fr; } .brief-row { grid-template-columns: 42px minmax(0, 1fr); } .brief-action { grid-column: 2; grid-row: 2; margin-top: 2px; } .detail-head h2 { font-size: 22px; line-height: 1.3; } }
+    @media (max-width: 480px) { .ticket-grid, .hotel-grid, .quicktips, .daily-brief { grid-template-columns: 1fr; } .brief-row { grid-template-columns: 42px minmax(0, 1fr) 16px; gap: 10px; } .brief-action { grid-column: 3; grid-row: 1; margin-top: 0; } .detail-head h2 { font-size: 22px; line-height: 1.3; } }
     @media (max-width: 380px) { .hero h1 { font-size: 29px; letter-spacing: -.02em; } .calendar { padding-right: 8px; padding-left: 8px; } }
     @media (min-width: 701px) { html { overflow-y: scroll; } .route-map #tripMap { display: block; } .route-map .map-toggle { display: none; } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .event .event-body, .daybtn, .brief-row, .map-toggle, .navdays button, .day-extra > summary, .overview-extra > summary { transition: none; } .brief-row:active, .daybtn:active, .map-toggle:active, .navdays button:active, .day-extra > summary:active, .overview-extra > summary:active { transform: none; } }
@@ -217,6 +217,32 @@
       .navdays { gap: 6px; }
       .navdays button { padding: 10px 6px; font-size: 13px; }
     }
+
+    /* Calm grouped surfaces and immediate, restrained touch feedback. */
+    .daily-brief-item + .daily-brief-item { border-left: 1px solid var(--line); }
+    .timeline-note { margin: 16px 0 8px; color: var(--muted); font-size: 12px; }
+    .timeline { margin-top: 12px; }
+    .event .event-body, .event.transport .event-body { border-color: transparent; box-shadow: var(--shadow); }
+    .day-extra { margin-top: 10px; border-color: transparent; box-shadow: var(--shadow); }
+    .day-extra > summary { min-height: 52px; padding: 14px 16px; font-weight: 600; }
+    .day-extra > summary:hover, .overview-extra > summary:hover { box-shadow: none; }
+    .day-extra > summary:active, .overview-extra > summary:active { transform: none; background: var(--green-soft); }
+    .fold-icon { transition: transform .18s ease; }
+    .stay-card h3 { font-size: 15px; font-weight: 600; color: var(--ink-soft); }
+    .stay-card > p:first-of-type { font-size: 17px; font-weight: 600; color: var(--ink); }
+    .copy-status:empty { margin: 0; }
+    .action { border-color: transparent; border-radius: 10px; font-weight: 600; transition: background-color .15s ease; }
+    .actions a:first-of-type { background: var(--green); color: white; }
+    .actions a:first-of-type:hover { background: var(--ink); }
+    .action:active { transform: none; opacity: .8; }
+    .map-toggle { border-color: transparent; border-radius: 10px; font-weight: 600; }
+    .route-map { box-shadow: var(--shadow); border-color: transparent; }
+    .brief-row { border-color: transparent; box-shadow: var(--shadow); }
+    .brief-action .ui-icon { margin: 0; width: 16px; height: 16px; color: var(--muted); }
+    @media (max-width: 480px) {
+      .daily-brief-item + .daily-brief-item { border-left: 0; border-top: 1px solid var(--line); }
+    }
+    @media (prefers-reduced-motion: reduce) { .fold-icon, .action { transition: none; } }
   </style>
 </head>
 <body>
@@ -762,6 +788,7 @@
       function foldExtras() {
         details.forEach(detail => {
           const timeline = detail.querySelector('.timeline');
+          const note=document.createElement('p'); note.className='timeline-note'; note.textContent='除预约与车票时间外，其余时间可随路况调整。'; timeline.before(note);
           const tips = detail.querySelector('.quicktips');
           const road = detail.querySelector('.roadbox');
           if (tips) {
@@ -807,9 +834,9 @@
         const copy=document.createElement('button'); copy.type='button'; copy.className='action'; copy.textContent='复制地址'; copy.dataset.copyAddress='true';
         const live=document.createElement('p'); live.className='copy-status'; live.setAttribute('aria-live','polite');
         copy.addEventListener('click',async()=>{ try { await navigator.clipboard.writeText(name+' '+address); live.textContent='地址已复制'; } catch { live.textContent='复制未成功，请长按或选择上方完整地址复制。'; } });
-        const link=document.createElement('a'); link.className='action'; link.href='https://uri.amap.com/search?keyword='+encodeURIComponent(name+' '+address)+'&callnative=1'; link.textContent='高德导航（需联网）'; link.target='_blank'; link.rel='noopener';
+        const link=document.createElement('a'); link.className='action'; link.href='https://uri.amap.com/search?keyword='+encodeURIComponent(name+' '+address)+'&callnative=1'; link.textContent='导航到酒店'; link.target='_blank'; link.rel='noopener';
         actions.append(copy,link);
-        if(phone) { const tel=document.createElement('a'); tel.className='action'; tel.href='tel:'+phone; tel.textContent='拨打酒店电话'; actions.append(tel); }
+        if(phone) { const tel=document.createElement('a'); tel.className='action'; tel.href='tel:'+phone; tel.textContent='联系酒店'; actions.append(tel); }
         stay.append(actions,live);
       }
 
@@ -824,28 +851,12 @@
           else if(day===3 && /16:00/.test(time)) { label.textContent='入园时段 16:00–19:30 · 已购买'; label.classList.add('hard'); }
           else if(day===1 && /11:31/.test(time)) { label.textContent='列车到站时间 · 以票面为准'; label.classList.add('hard'); }
           else if(/若|如果|视体力|可选/.test(text)) label.textContent='可选';
-          else label.textContent='预计';
+          else label.textContent='';
           if(day===6 && /动车/.test(text)) {label.textContent='车次与发车时间待确认';label.classList.add('hard');}
           if(day===7) {label.textContent='航班与起飞时间待确认';label.classList.add('hard');}
-          body.prepend(label);
+          if(label.textContent) body.prepend(label);
         }));
-        const footer=document.querySelector('.footer');
-        const save=document.createElement('button'); save.type='button'; save.className='action'; save.textContent='保存离线攻略'; save.id='saveOffline';
-        const updated=document.createElement('p'); updated.textContent='行程资料整理：2026-09-19 · 车次、航班等待确认项目请以出行凭证为准。';
-        footer.append(updated,save); save.addEventListener('click',saveOffline);
-      }
-
-      function saveOffline() {
-        const clone=document.documentElement.cloneNode(true);
-        clone.querySelectorAll('script, link, .calendar-panel, .navdays, #routeMapPanel, #saveOffline, [data-copy-address], .skip-link').forEach(n=>n.remove());
-        clone.querySelector('body').classList.remove('show-detail');
-        clone.querySelectorAll('.detail').forEach(n=>{n.classList.add('show');n.style.display='block';});
-        clone.querySelectorAll('details').forEach(n=>n.open=true);
-        clone.querySelectorAll('.brief-row').forEach(button=>{const row=document.createElement('div'); row.className=button.className; row.innerHTML=button.innerHTML; row.querySelector('.brief-action')?.remove(); button.replaceWith(row);});
-        const note=document.createElement('p');note.textContent='离线攻略 · 全部行程已展开。高德导航需要联网，地图请回到在线页面查看。';
-        clone.querySelector('.hero').append(note);
-        const blob=new Blob(['<!doctype html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'});
-        const url=URL.createObjectURL(blob); const a=document.createElement('a');a.href=url;a.download='青甘环线-离线攻略.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);
+        document.querySelectorAll('.brief-action').forEach(node=>node.replaceChildren(createSvgIcon('chevron')));
       }
 
       function addDepartureNote() {
