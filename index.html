@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f7f7f5">
+  <meta name="theme-color" content="#f2f2f0">
   <title>2026 国庆 · 青甘环线 · 8天行程</title>
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
@@ -22,6 +22,10 @@
       --sand: #f7efe3;
       --shadow: 0 1px 2px rgba(0, 0, 0, .06);
       --shadow-lift: 0 8px 22px rgba(29, 29, 31, .055);
+      --grouped-bg: #f2f2f0;
+      --material: rgba(255, 255, 255, .72);
+      --material-strong: rgba(255, 255, 255, .88);
+      --swift-radius: 16px;
       --calendar-h: 66px;
     }
     *, *::before, *::after { box-sizing: border-box; min-width: 0; }
@@ -152,10 +156,58 @@
       .detail-head { padding-left: 13px; }
     }
     @media (max-width: 480px) { .ticket-grid, .hotel-grid, .quicktips { grid-template-columns: 1fr; } }
+    @media (max-width: 480px) { .detail h2 { font-size: 22px; line-height: 1.3; } }
     @media (max-width: 380px) { .hero h1 { font-size: 29px; letter-spacing: -.02em; } .calendar { padding-right: 8px; padding-left: 8px; } }
     @media (min-width: 701px) { .route-map #tripMap { display: block; } .route-map .map-toggle { display: none; } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .event .event-body, .daybtn { transition: none; } }
     .section-label { display: none; }
+
+    /* SwiftUI-inspired layer: grouped surfaces, material chrome and quiet motion. */
+    body { background: var(--grouped-bg); }
+    .wrap { padding-top: 32px; }
+    .hero { padding-top: 24px; }
+    .hero h1 { letter-spacing: -.015em; }
+    .calendar-panel {
+      background: var(--material);
+      border-bottom-color: rgba(60, 60, 67, .16);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, .7);
+    }
+    .daybtn { border-radius: 12px; }
+    .daybtn.active { box-shadow: inset 0 0 0 1px rgba(79, 128, 107, .08); }
+    .route-map, .brief-row, .ticketbox, .hotelbox, .wearbox, .viewbox, .roadbox, .day-extra, .overview-extra {
+      border-radius: var(--swift-radius);
+      box-shadow: 0 1px 2px rgba(29, 29, 31, .05), 0 5px 18px rgba(29, 29, 31, .035);
+    }
+    .route-map, .ticketbox, .hotelbox, .wearbox, .viewbox, .roadbox, .day-extra, .overview-extra { background: var(--material-strong); }
+    .brief-row { border-color: rgba(60, 60, 67, .08); }
+    .brief-row:active, .daybtn:active, .map-toggle:active, .navdays button:active, .day-extra > summary:active, .overview-extra > summary:active { transform: scale(.985); }
+    .brief-row, .daybtn, .map-toggle, .navdays button, .day-extra > summary, .overview-extra > summary { transition: transform .18s cubic-bezier(.2, .8, .2, 1), background-color .18s ease, box-shadow .18s ease; }
+    .map-panel-head { background: var(--material); }
+    .map-toggle { border-color: rgba(79, 128, 107, .16); box-shadow: 0 1px 2px rgba(29, 29, 31, .04); }
+    .panel-title { font-size: 23px; }
+    .brief-date { border-radius: 9px; }
+    .ticket-item, .hotel-item, .wear-item, .view-item, .quicktip {
+      border-color: rgba(60, 60, 67, .08);
+      border-radius: 12px;
+      background: var(--grouped-bg);
+    }
+    .event .event-body { border-color: rgba(60, 60, 67, .07); border-radius: 14px; box-shadow: 0 1px 2px rgba(29, 29, 31, .05), 0 4px 14px rgba(29, 29, 31, .03); }
+    .event.transport .event-body { border-radius: 12px; background: var(--green-soft); }
+    .detail-head { background: rgba(242, 242, 240, .88); border-left-width: 2px; }
+    .navdays { border-top-color: rgba(60, 60, 67, .10); }
+    .navdays button { border: 1px solid rgba(60, 60, 67, .07); border-radius: 12px; background: var(--material-strong); }
+    .navdays .home-button { border-color: transparent; }
+    @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+      .route-map, .ticketbox, .hotelbox, .wearbox, .viewbox, .roadbox, .day-extra, .overview-extra { backdrop-filter: saturate(140%) blur(14px); -webkit-backdrop-filter: saturate(140%) blur(14px); }
+    }
+    @media (max-width: 700px) {
+      .wrap { padding-top: 16px; }
+      .hero { padding-top: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .brief-row, .daybtn, .map-toggle, .navdays button, .day-extra > summary, .overview-extra > summary { transition: none; }
+      .brief-row:active, .daybtn:active, .map-toggle:active, .navdays button:active, .day-extra > summary:active, .overview-extra > summary:active { transform: none; }
+    }
   </style>
 </head>
 <body>
