@@ -714,6 +714,49 @@
       }
       .event.transport .event-body { padding: 8px 28px 8px 12px; }
     }
+    .overview-extra {
+      margin-top: 12px;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .overview-extra > summary {
+      padding: 16px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+    }
+    .overview-extra > summary::-webkit-details-marker { display: none; }
+    .overview-extra > summary::after { content: '＋'; float: right; color: #8e8e93; font-size: 19px; line-height: 1; }
+    .overview-extra[open] > summary::after { content: '−'; }
+    .overview-extra > .daynote,
+    .overview-extra > .ticketbox,
+    .overview-extra > .hotelbox,
+    .overview-extra > .wearbox {
+      margin: 0;
+      border-top: .5px solid var(--line);
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .event .event-body {
+      display: block;
+      max-height: none;
+      overflow: visible;
+      cursor: default;
+      -webkit-line-clamp: unset;
+    }
+    .event:not(.is-expanded) .event-body::after { display: none; }
+    @media (max-width: 700px) {
+      .event .event-body {
+        padding: 11px 12px;
+        font-size: 14px;
+        line-height: 1.52;
+      }
+      .event.transport .event-body { padding: 9px 12px; }
+    }
   </style>
 </head>
 <body>
@@ -1059,8 +1102,22 @@
         else if (/早餐|午饭|午餐|晚饭|晚餐/.test(text)) kind = 'food';
         else if (/出发|前往|返回|动车|车程|途中|抵达|进站|机场/.test(text)) kind = 'transport';
         event.classList.add(kind);
-        event.querySelector('.event-body').addEventListener('click', () => {
-          if (window.matchMedia('(max-width: 700px)').matches) event.classList.toggle('is-expanded');
+      }
+
+      function foldOverviewExtras() {
+        const overview = document.querySelector('#overview');
+        if (!overview || overview.querySelector('.overview-extra')) return;
+        const labels = ['旅行节奏', '票务状态', '住宿地址', '行前核对', '穿衣总原则'];
+        const blocks = [...overview.children].filter(node => /^(daynote|ticketbox|hotelbox|wearbox)$/.test(node.className));
+        blocks.forEach((node, index) => {
+          const fold = document.createElement('details');
+          fold.className = 'overview-extra';
+          fold.open = window.innerWidth > 700;
+          const summary = document.createElement('summary');
+          summary.textContent = labels[index] || '补充信息';
+          fold.appendChild(summary);
+          node.replaceWith(fold);
+          fold.appendChild(node);
         });
       }
 
@@ -1106,6 +1163,7 @@
         detail.appendChild(nav);
       });
 
+      foldOverviewExtras();
       foldExtras();
       if (window.innerWidth > 700) initTripMap();
       mapToggle?.addEventListener('click', () => {
