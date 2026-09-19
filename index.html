@@ -396,7 +396,7 @@
     .event::after {
       position: absolute;
       top: 17px;
-      left: 64px;
+      left: -24px;
       width: 9px;
       height: 9px;
       border: 2px solid #fff;
@@ -408,12 +408,15 @@
     .event .event-body {
       min-height: 44px;
       padding: 12px 14px;
-      border: 1px solid rgba(36, 58, 52, .08);
+      border: 0;
       border-radius: 12px;
-      background: #fff;
+      background: rgba(255, 255, 255, .94);
+      box-shadow: 0 1px 2px rgba(36, 58, 52, .06);
       line-height: 1.6;
+      transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
     }
     .event .event-body { cursor: default; }
+    .event .event-body:active { transform: scale(.99); background: #fff; box-shadow: 0 3px 8px rgba(36, 58, 52, .09); }
     .event.is-expanded .event-body { max-height: none; }
     .event .event-body::before {
       content: '•';
@@ -428,10 +431,12 @@
     .event.transport .event-body::before { content: '↗'; color: #6d9bb2; }
     .event.transport .event-body {
       min-height: 28px;
-      padding: 4px 12px;
-      border-style: dashed;
-      border-color: rgba(81, 125, 149, .24);
-      background: transparent;
+      padding: 8px 12px;
+      border: 0;
+      border-radius: 10px;
+      background: #f1f7fa;
+      box-shadow: none;
+      color: #5e7480;
     }
     .event.transport::after { background: #6d9bb2; box-shadow: 0 0 0 1px #b9d1dc; }
     .event .time {
@@ -446,6 +451,8 @@
       font-size: 11px;
       font-weight: 800;
       line-height: 1.35;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .01em;
       white-space: normal;
     }
     .day-extra {
@@ -583,13 +590,17 @@
       .timeline { padding-left: 76px; }
       .timeline::before { left: 58px; }
       .event .time { left: -76px; width: 46px; }
-      .event::after { left: 54px; }
+      .event::after { left: -22px; }
       .detail h2 { font-size: 21px; }
     }
     @media (max-width: 350px) {
       .daybtn .city { display: none; }
       .daybtn { min-height: 39px; }
       .quicktips, .ticket-grid, .hotel-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .event .event-body { transition: none; }
     }
   </style>
 </head>
