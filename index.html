@@ -101,6 +101,8 @@
     .ticket-item b, .hotel-item b { color: var(--ink); font-size: 14px; line-height: 1.4; }
     .ticket-item span, .hotel-item span, .wear-item span, .view-item span, .quicktip span { color: var(--ink-soft); font-size: 13px; line-height: 1.55; }
     .ticket-tip, .wear-note, .view-note { display: block; margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .hotel-item > b { display: block; margin-bottom: 6px; }
+    .hotel-item > span { display: block; }
     .hotel-item em { display: block; margin-top: 6px; color: var(--green); font-size: 12px; font-style: normal; font-weight: 800; line-height: 1.45; }
     .stay-address { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; line-height: 1.5; }
     .wear-grid, .view-grid { display: grid; gap: 8px; margin-top: 10px; }
@@ -299,11 +301,11 @@
         <h3 class="ticket-title">🎫 门票与交通</h3>
         <div class="ticket-grid">
           <div class="ticket-item"><b>9/30 · 火车</b><span>西安 → 张掖西 · T269；按车票信息提前进站，夜间车程准备好水和眼罩。</span></div>
-          <div class="ticket-item"><b>10/1 · 七彩丹霞 · 已购买</b><span>下午13:45–17:00游览；按门票对应时段入园，观光车按所购票种乘坐。</span></div>
-          <div class="ticket-item"><b>10/2 · 嘉峪关关城</b><span>国庆期间建议通过景区官方渠道提前购票或预约，按预约时段进入关城。</span></div>
+          <div class="ticket-item"><b>10/1 · 七彩丹霞</b><span>下午13:45–17:00游览；按门票对应时段入园，观光车按所购票种乘坐。</span></div>
+          <div class="ticket-item"><b>10/2 · 嘉峪关关城</b><span>按门票预约时段进入关城，提前准备身份证和入园凭证。</span></div>
           <div class="ticket-item"><b>10/3 · 莫高窟</b><span>13:15场次；至少提前30分钟抵达数字展示中心，建议12:30–12:45到达。</span></div>
-          <div class="ticket-item"><b>10/3 · 鸣沙山月牙泉 · 已购买</b><span>16:00–19:30入园时段；莫高窟结束后直接前往，按票面时段入园。</span></div>
-          <div class="ticket-item"><b>10/4 · 翡翠湖 · 已购买</b><span>下午游览盐湖；观光车或小火车按门票对应票种使用，景区内注意防风和防晒。</span></div>
+          <div class="ticket-item"><b>10/3 · 鸣沙山月牙泉</b><span>16:00–19:30入园时段；莫高窟结束后直接前往，按票面时段入园。</span></div>
+          <div class="ticket-item"><b>10/4 · 翡翠湖</b><span>下午游览盐湖；观光车或小火车按门票对应票种使用，景区内注意防风和防晒。</span></div>
           <div class="ticket-item"><b>10/5 · 青海湖</b><span>黑马河湖边公共观景按现场管理通行；如进入收费景区，按当天公告购票。</span></div>
           <div class="ticket-item"><b>10/6 · 动车</b><span>西宁 → 西安；车次与发车时间待确认。预留车辆交接和进站时间，提前查看车站与检票口信息。</span></div>
         </div>
@@ -312,10 +314,10 @@
       <div class="hotelbox">
         <h3 class="ticket-title">🏨 住宿地址与入住提醒</h3>
         <div class="hotel-grid">
-          <div class="hotel-item"><b>10/1 · 嘉峪关 · 已预订</b><span>全季酒店（嘉峪关步行街店）<br>甘肃省嘉峪关市新华南路2199-1-18号，近和诚路</span><em>电话：0937-6788866</em></div>
+          <div class="hotel-item"><b>10/1 · 嘉峪关</b><span>全季酒店（嘉峪关步行街店）<br>甘肃省嘉峪关市新华南路2199-1-18号，近和诚路</span><em>电话：0937-6788866</em></div>
           <div class="hotel-item"><b>10/2–10/3 · 敦煌</b><span>Fonso·方所酒店（敦煌夜市商业街店）<br>甘肃省酒泉市敦煌市甘泉路197号</span><em>连续入住两晚 · 夜市商业街附近</em></div>
           <div class="hotel-item"><b>10/4 · 大柴旦</b><span>美豪丽致酒店（大柴旦店）<br>青海省海西州大柴旦人民西路与绍兴南街交叉口西北角</span><em>电话：0977-5967888 · 备好高原常用药</em></div>
-          <div class="hotel-item"><b>10/5 · 黑马河 · 已预订</b><span>曦和国际大酒店<br>青海省共和县黑马河镇加隆村01034号</span><em>靠近黑马河观日点 · 早起看湖预留时间</em></div>
+          <div class="hotel-item"><b>10/5 · 黑马河</b><span>曦和国际大酒店<br>青海省共和县黑马河镇加隆村01034号</span><em>靠近黑马河观日点 · 早起看湖预留时间</em></div>
         </div>
         <div class="ticket-tip">导航时直接搜索完整酒店名；长途日抵达后先办理入住，再安排晚餐、补水和休息。</div>
       </div>
@@ -336,7 +338,7 @@
 
     <section class="panel detail" data-detail="1">
       <div class="detail-head"><div class="date-line">10.01 · 周四</div><h2>张掖西 → 七彩丹霞 → 嘉峪关</h2><div class="route">下火车与司机会合，下午看丹霞，傍晚继续向西</div></div>
-      <div class="chips"><span class="chip">🚙 约250–280km</span><span class="chip">🎨 七彩丹霞 · 已购买</span><span class="chip">🏨 嘉峪关</span></div>
+      <div class="chips"><span class="chip">🚙 约250–280km</span><span class="chip">🎨 七彩丹霞</span><span class="chip">🏨 嘉峪关</span></div>
       <div class="daily-brief" aria-label="今日先看"><div class="daily-brief-item"><b>关键时间</b><span>11:31到张掖西；13:45–17:00游览七彩丹霞；17:00后前往嘉峪关。</span></div><div class="daily-brief-item"><b>注意事项</b><span>丹霞结束后直接西行，先补水再上车；傍晚降温，抓绒和冲锋衣放在手边。</span></div></div>
       <div class="wearbox"><h3 class="wear-title">🧥 穿衣节奏</h3><div class="wear-grid"><div class="wear-item"><b>11:31–13:00 · 到站、午饭、会合</b><span>长袖＋长裤；抓绒内胆和冲锋衣放在手边。</span></div><div class="wear-item"><b>13:45–17:00 · 七彩丹霞</b><span>长袖为主，风大时加冲锋衣外壳；有太阳时不必一开始就把抓绒穿死，方便随时脱。</span></div><div class="wear-item"><b>17:00–20:30 · 西行、入住</b><span>车内冷气或傍晚降温时加抓绒；到嘉峪关后若风大，外壳继续穿，秋裤看个人体感。</span></div></div></div>
       <div class="viewbox"><h3 class="view-title">📸 拍照与观景</h3><div class="view-grid"><div class="view-item"><b>七彩丹霞 · 13:45–17:00</b><span>优先看七彩虹霞台、最佳摄影点、七彩敖河台；下午侧光能把彩色层理拍出起伏。人多时先拍远景和山体纹理，再拍合影。</span></div><div class="view-item"><b>张掖 → 嘉峪关 · 17:00以后</b><span>车窗左／右侧都可留意河西绿洲、戈壁、远山和夕阳；只在服务区或合法停车点下车，不在高速路肩停留。</span></div></div><div class="view-note">景区内沿观景台步道拍摄，别翻越围栏、踩踏彩丘；车上拍摄请先征得司机同意，避免影响驾驶。</div></div>
@@ -393,7 +395,7 @@
 
     <section class="panel detail" data-detail="4">
       <div class="detail-head"><div class="date-line">10.04 · 周日</div><h2>敦煌 → 翡翠湖 → 大柴旦</h2><div class="route">公路观景日 · 中途正常休息补给</div></div>
-      <div class="chips"><span class="chip">🚙 约350km级</span><span class="chip">💚 翡翠湖 · 已购买</span><span class="chip">专职司机</span></div>
+      <div class="chips"><span class="chip">🚙 约350km级</span><span class="chip">💚 翡翠湖</span><span class="chip">专职司机</span></div>
       <div class="daily-brief" aria-label="今日先看"><div class="daily-brief-item"><b>关键时间</b><span>08:00敦煌出发；14:30–17:30游览翡翠湖；18:00左右抵达大柴旦入住。</span></div><div class="daily-brief-item"><b>注意事项</b><span>长途车程不赶时间，盐湖边风大温度低；帽子、手套和冲锋衣放在随手可取的位置。</span></div></div>
       <div class="wearbox"><h3 class="wear-title">🧥 穿衣节奏</h3><div class="wear-grid"><div class="wear-item"><b>07:30–12:30 · 敦煌出发、长途车程</b><span>长袖＋抓绒内胆，冲锋衣外壳放在随手可取的位置；清晨或山口风大时加外壳和秋裤。</span></div><div class="wear-item"><b>14:30–17:30 · 翡翠湖</b><span>盐湖边按抓绒＋冲锋衣穿，秋裤建议穿上；拍照或下车时抓绒帽子、手套都带着，风停有太阳再脱。</span></div><div class="wear-item"><b>18:00以后 · 大柴旦入住</b><span>回酒店后可脱冲锋衣，但保留抓绒；第二天早出发的衣物提前叠好放在行李上层。</span></div></div></div>
       <div class="viewbox"><h3 class="view-title">📸 拍照与观景</h3><div class="view-grid"><div class="view-item"><b>敦煌 → 大柴旦 · G3011沿线</b><span>留意阿克塞荒漠、当金山山口、戈壁公路和柴达木盆地的地貌转换；最适合在服务区、观景停车点或司机主动安排的安全地点下车。</span></div><div class="view-item"><b>翡翠湖 · 14:30–17:30</b><span>优先拍不同颜色盐池、盐壳纹理、远山倒影和长直线栈道；下午光线更柔，人物不要站到盐池边缘或盐壳上。</span></div><div class="view-item"><b>大柴旦夜晚</b><span>如果天气晴朗，可在酒店附近拍低光下的街景和星空氛围；不为拍照额外远行，保留体力给第二天。</span></div></div><div class="view-note">盐湖颜色受天气、光线和水位影响，现场优先服从景区步道和围栏管理。</div></div>
@@ -824,11 +826,9 @@
         const phone = raw.match(/电话([\d-]+)/)?.[1];
         stay.className='stay stay-card'; stay.replaceChildren();
         const title=document.createElement('h3'); title.textContent='今晚住宿 · 10/'+day;
-        const hotel=document.createElement('p'); hotel.textContent=day===6?'西安酒店 · 待确认':name;
-        const status=document.createElement('p'); status.className='copy-status';
-        status.textContent=[1,5].includes(day)?'已预订':'预订状态待确认';
-        const addr=document.createElement('span'); addr.className='stay-address'; addr.textContent=address || '酒店名称、地址待确认';
-        stay.append(title,hotel,status,addr);
+        const hotel=document.createElement('p'); hotel.textContent=day===6?'西安酒店':name;
+        const addr=document.createElement('span'); addr.className='stay-address'; addr.textContent=address || '酒店名称与地址请查看预订订单';
+        stay.append(title,hotel,addr);
         if (!address) return;
         const actions=document.createElement('div'); actions.className='actions';
         const copy=document.createElement('button'); copy.type='button'; copy.className='action'; copy.textContent='复制地址'; copy.dataset.copyAddress='true';
@@ -848,8 +848,8 @@
           const body=event.querySelector('.event-body'); const text=body.textContent;
           const day=Number(detail.dataset.detail); const time=event.querySelector('.time')?.textContent || '';
           const label=document.createElement('span'); label.className='timing-label';
-          if(day===3 && /13:15/.test(time)) { label.textContent='预约场次 · 购票状态待确认'; label.classList.add('hard'); }
-          else if(day===3 && /16:00/.test(time)) { label.textContent='入园时段 16:00–19:30 · 已购买'; label.classList.add('hard'); }
+          if(day===3 && /13:15/.test(time)) { label.textContent='预约场次'; label.classList.add('hard'); }
+          else if(day===3 && /16:00/.test(time)) { label.textContent='入园时段 16:00–19:30'; label.classList.add('hard'); }
           else if(day===1 && /11:31/.test(time)) { label.textContent='列车到站时间 · 以票面为准'; label.classList.add('hard'); }
           else if(/若|如果|视体力|可选/.test(text)) label.textContent='可选';
           else label.textContent='';
