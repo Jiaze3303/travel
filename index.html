@@ -190,6 +190,29 @@
     .ticket-item b { color: #486b5c; font-size: 15px; }
     .ticket-item span { color: #6f7f78; font-size: 12px; line-height: 1.55; }
     .ticket-tip { margin-top: 10px; color: #87958f; font-size: 11px; line-height: 1.55; }
+    .hotelbox {
+      margin: 0 16px 16px;
+      padding: 14px;
+      border: 1px solid #e6e4da;
+      border-radius: 18px;
+      background: #fbfaf6;
+    }
+    .hotel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .hotel-item {
+      min-width: 0;
+      padding: 11px 12px;
+      border-radius: 14px;
+      background: #fff;
+    }
+    .hotel-item b { display: block; color: #486b5c; font-size: 13px; line-height: 1.4; }
+    .hotel-item span { display: block; margin-top: 4px; color: #6f7f78; font-size: 11px; line-height: 1.55; }
+    .hotel-item em { display: block; margin-top: 5px; color: var(--green); font-size: 10px; font-style: normal; font-weight: 800; }
+    .stay-address { display: block; margin-top: 3px; color: #73847d; font-size: 11px; font-weight: 400; line-height: 1.5; }
 
     .section-label {
       margin: 18px 2px 8px;
@@ -389,7 +412,7 @@
     @media (max-width: 350px) {
       .daybtn .city { display: none; }
       .daybtn { min-height: 39px; }
-      .quicktips, .ticket-grid { grid-template-columns: 1fr; }
+      .quicktips, .ticket-grid, .hotel-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -442,6 +465,17 @@
         </div>
         <div class="ticket-tip">景区门票没有统一固定放票日；“现在处理／出发前确认”是行程管理建议，不代表官方开售日期。七彩丹霞、莫高窟13:15场次、鸣沙山月牙泉16:00–19:30时段、大柴旦翡翠湖均已购；火车票起售时刻以12306对应车站查询为准。</div>
       </div>
+      <div class="hotelbox">
+        <div class="ticket-title">🏨 住宿地址与入住提醒</div>
+        <div class="hotel-grid">
+          <div class="hotel-item"><b>10/1 · 嘉峪关 · 已预订</b><span>全季酒店（嘉峪关步行街店）<br>甘肃省嘉峪关市新华南路2199-1-18号，近和诚路</span><em>电话：0937-6788866</em></div>
+          <div class="hotel-item"><b>10/2–10/3 · 敦煌</b><span>Fonso·方所酒店（敦煌夜市商业街店）<br>甘肃省敦煌市甘泉路197号</span><em>连续住两晚 · 地址以订单为准</em></div>
+          <div class="hotel-item"><b>10/4 · 大柴旦</b><span>美豪丽致酒店（大柴旦店）<br>青海省海西州大柴旦人民西路与绍兴南街交叉口西北角</span><em>电话：0977-5967888 · 备好高原常用药</em></div>
+          <div class="hotel-item"><b>10/5 · 黑马河 · 已预订</b><span>曦和国际大酒店<br>青海省共和县黑马河镇加隆村01034号</span><em>靠近黑马河观日点 · 早起看湖预留时间</em></div>
+        </div>
+        <div class="ticket-tip">酒店导航建议直接搜索完整酒店名；国庆期间到店时间可能受车流影响，长途日先电话确认前台仍可办理入住。</div>
+      </div>
+      <div class="daynote"><b>行前核对：</b>身份证、火车／飞机订单、景区订单、充电宝和防晒用品随身携带；浙江户籍办理翡翠湖免大门票时带本人有效身份证，观光车或小火车是否包含以订单为准。</div>
     </section>
 
     <div class="section-label" id="detailStart">当天行程</div>
@@ -460,7 +494,7 @@
       </div>
       <div class="quicktips"><div class="quicktip"><b>今日重点</b><span>丹霞游览后直接向西去嘉峪关，不返回张掖市区。</span></div><div class="quicktip"><b>顺路看</b><span>从彩色丘陵逐渐进入河西走廊戈壁，傍晚西行光线更有层次。</span></div><div class="quicktip"><b>补给</b><span>会合后先补齐水和零食；离开丹霞前确认随车物品。</span></div><div class="quicktip"><b>节奏</b><span>17点左右离开丹霞较合适，夜间不再增加景点。</span></div></div>
       <div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">张掖西 → 七彩丹霞 → 临泽方向 → G30连霍高速 → 酒泉 → 嘉峪关</div><ul class="roadnotes"><li>张掖西到丹霞先走市区或景区连接道路；游览结束后不必返回张掖市区，直接向西接入G30，更顺路。</li><li>进入连霍高速后一路沿河西走廊向西，主要经过临泽、酒泉一带，路况以高速为主。</li><li>傍晚视野开阔，景观会从农田、绿洲逐渐过渡到戈壁荒漠；天气通透时可欣赏远山轮廓。</li></ul><div class="scenery"><span class="scene">彩色丘陵</span><span class="scene">河西绿洲</span><span class="scene">戈壁</span><span class="scene">远山</span></div></div>
-      <div class="stay"><b>🏨 住宿 · 已预订</b> · 全季嘉峪关步行街酒店</div>
+      <div class="stay"><b>🏨 住宿 · 已预订</b> · 全季嘉峪关步行街酒店<span class="stay-address">新华南路2199-1-18号，近和诚路 · 电话0937-6788866</span></div>
     </section>
 
     <section class="panel detail" data-detail="2">
@@ -477,7 +511,7 @@
       </div>
       <div class="quicktips"><div class="quicktip"><b>今日重点</b><span>上午关城，午后专心前往敦煌，晚上以休息为主。</span></div><div class="quicktip"><b>顺路看</b><span>酒泉、玉门、瓜州一带的河西走廊与戈壁公路。</span></div><div class="quicktip"><b>补给</b><span>出发前补水；玉门或瓜州服务区适合作为途中休息节点。</span></div><div class="quicktip"><b>节奏</b><span>长距离转场不赶时间，中途安排一次完整休息，乘客可以沿途观景。</span></div></div>
       <div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">嘉峪关 → G30连霍高速 → 玉门 → 瓜州 → G3011柳格高速 → 敦煌</div><ul class="roadnotes"><li>离开嘉峪关后走G30连霍高速，沿嘉安段向西，经过玉门、瓜州方向。</li><li>到瓜州附近转G3011柳格高速往敦煌，这是当天的主要公路段。</li><li>这一段是典型的西北长距离公路景观，绿洲逐渐过渡到戈壁荒漠，进入敦煌方向后可感受到沙漠与绿洲交界。</li><li>中途建议在玉门或瓜州服务区一带休息15–20分钟，顺便补水和活动身体；由专职司机驾驶后，这一段更适合作为河西走廊公路观景段。</li></ul><div class="scenery"><span class="scene">戈壁公路</span><span class="scene">河西绿洲</span><span class="scene">瓜州荒漠</span><span class="scene">敦煌绿洲</span></div></div>
-      <div class="stay"><b>🏨 住宿</b> · 敦煌方所酒店</div>
+      <div class="stay"><b>🏨 住宿</b> · 敦煌方所酒店<span class="stay-address">甘泉路197号 · 连续住10/2–10/3两晚</span></div>
     </section>
 
     <section class="panel detail" data-detail="3">
@@ -494,7 +528,7 @@
       </div>
       <div class="quicktips"><div class="quicktip"><b>今日重点</b><span>莫高窟13:15是当天核心，午前不安排耗时项目。</span></div><div class="quicktip"><b>拍照时段</b><span>鸣沙山留到傍晚，光线更柔和，也避开白天较强日照。</span></div><div class="quicktip"><b>随身准备</b><span>轻装、防晒、防风，洞窟参观遵守现场拍摄规定。</span></div><div class="quicktip"><b>节奏</b><span>莫高窟结束时间浮动，预留转场时间，衔接月牙泉16:00–19:30已购票时段。</span></div></div>
       <div class="roadbox"><div class="roadtitle">🛣 当天移动</div><div class="roadline">敦煌市区 → 莫高窟数字展示中心 → 莫高窟 → 鸣沙山月牙泉 → 敦煌市区</div><ul class="roadnotes"><li>当天全部是敦煌周边短途，把时间留给莫高窟和鸣沙山。</li><li>前往莫高窟时会从敦煌绿洲进入更开阔的荒漠环境；傍晚鸣沙山则是沙丘、月牙泉和绿洲同框的核心景观。</li><li>莫高窟结束时间受当天参观组织影响，需预留前往鸣沙山的转场时间，并按已购门票16:00–19:30时段及票面要求入园。</li></ul><div class="scenery"><span class="scene">敦煌绿洲</span><span class="scene">石窟崖壁</span><span class="scene">鸣沙山沙丘</span><span class="scene">月牙泉</span></div></div>
-      <div class="stay"><b>🏨 住宿</b> · 敦煌方所酒店</div>
+      <div class="stay"><b>🏨 住宿</b> · 敦煌方所酒店<span class="stay-address">甘泉路197号 · 10/3晚继续入住</span></div>
     </section>
 
     <section class="panel detail" data-detail="4">
@@ -512,7 +546,7 @@
       </div>
       <div class="quicktips"><div class="quicktip"><b>今日重点</b><span>公路景观变化＋翡翠湖，不额外增加远距离景点。</span></div><div class="quicktip"><b>顺路看</b><span>阿克塞荒漠、当金山、柴达木盆地，地貌变化明显。</span></div><div class="quicktip"><b>途中安排</b><span>正常午餐＋一次完整休息，乘客可以把这一段当成公路观景体验。</span></div><div class="quicktip"><b>节奏</b><span>不为了赶14:00压缩途中时间，下午顺利抵达翡翠湖即可。</span></div></div>
       <div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">敦煌 → G3011柳格高速 → 阿克塞 → 当金山方向 → 青海境内 → 大柴旦 → 翡翠湖</div><ul class="roadnotes"><li>从敦煌向南走G3011柳格高速敦当段，经阿克塞、当金山方向进入青海，这是全程景观变化明显的一天。</li><li>前半段是荒漠、戈壁和山地公路；接近当金山后海拔逐渐上升，进入柴达木盆地后视野重新开阔。</li><li>进入大柴旦方向后以高原荒漠、盐碱地和远山为主，最后抵达翡翠湖。</li><li>不要为了赶14:00硬压时间，途中山口、天气和国庆车流都会影响速度，以顺利抵达为优先。</li></ul><div class="scenery"><span class="scene">阿克塞荒漠</span><span class="scene">当金山</span><span class="scene">柴达木盆地</span><span class="scene">盐湖</span></div></div>
-      <div class="stay"><b>🏨 住宿</b> · 大柴旦美豪丽致酒店</div>
+      <div class="stay"><b>🏨 住宿</b> · 大柴旦美豪丽致酒店<span class="stay-address">人民西路与绍兴南街交叉口西北角 · 电话0977-5967888</span></div>
     </section>
 
     <section class="panel detail" data-detail="5">
@@ -531,7 +565,7 @@
       </div>
       <div class="quicktips"><div class="quicktip"><b>今日重点</b><span>今天不是赶景点，而是一整天从柴达木盆地走向青海湖的公路旅行。</span></div><div class="quicktip"><b>顺路看</b><span>荒漠 → 盐碱地 → 高原草原 → 山地 → 青海湖，沿途地貌变化丰富。</span></div><div class="quicktip"><b>补给</b><span>德令哈作为当天主要午餐、补水和休息节点，之后继续前往黑马河。</span></div><div class="quicktip"><b>节奏</b><span>专职司机负责驾驶，乘客以休息和观景为主，但保留正常午餐和途中活动时间。</span></div></div>
       <div class="roadbox"><div class="roadtitle">🛣 路上怎么走</div><div class="roadline">大柴旦 → 德令哈 → 茶卡方向 → 黑马河</div><ul class="roadnotes"><li>从大柴旦离开后继续穿行柴达木盆地，上午整体以开阔的高原荒漠景观为主。</li><li>德令哈作为当天重要的中途节点，建议在这里完成午餐、补水和休息。</li><li>德令哈之后继续向茶卡、黑马河方向前进，景观逐渐从柴达木荒漠过渡到高原草原和山地。</li><li>当天经过茶卡方向，但不安排茶卡盐湖游览，避免客流进一步拉长当天行程。</li><li>接近黑马河后进入青海湖区域。具体公路组合以当天导航和实时路况为准。</li></ul><div class="scenery"><span class="scene">柴达木盆地</span><span class="scene">高原草原</span><span class="scene">远山</span><span class="scene">青海湖</span></div></div>
-      <div class="stay"><b>🏨 住宿 · 已预订</b> · 曦和国际大酒店（黑马河）</div>
+      <div class="stay"><b>🏨 住宿 · 已预订</b> · 曦和国际大酒店（黑马河）<span class="stay-address">共和县黑马河镇加隆村01034号 · 靠近黑马河观日点</span></div>
     </section>
 
     <section class="panel detail" data-detail="6">
