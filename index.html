@@ -809,6 +809,95 @@
       .quicktips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .navdays { flex-wrap: nowrap; }
     }
+
+    /* Superdesign visual pass: clarify the travel-board hierarchy without adding decoration. */
+    :root {
+      --surface: #fff;
+      --surface-soft: #f3f6f3;
+      --ink-soft: #5f6862;
+      --sage-line: rgba(79, 128, 107, .22);
+      --shadow-lift: 0 8px 22px rgba(29, 29, 31, .055);
+    }
+    h1, h2, h3, .brief-main b, .event-body, .day-extra > summary, .overview-extra > summary { text-wrap: balance; }
+    .eyebrow {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 11px;
+      line-height: 1.3;
+      letter-spacing: .14em;
+    }
+    .hero {
+      padding-top: 28px;
+      padding-bottom: 28px;
+    }
+    .hero h1 { max-width: none; font-weight: 700; }
+    .hero p { display: block; max-width: 34rem; color: var(--ink-soft); white-space: normal; }
+    .calendar-panel { border-bottom-color: rgba(60, 60, 67, .16); }
+    .calendar { padding-top: 8px; padding-bottom: 10px; }
+    .daybtn { position: relative; transition: background-color .18s ease, color .18s ease; }
+    .daybtn.active::after {
+      position: absolute;
+      right: 50%;
+      bottom: 3px;
+      width: 16px;
+      height: 2px;
+      border-radius: 99px;
+      background: var(--green);
+      content: "";
+      transform: translateX(50%);
+    }
+    .route-map { box-shadow: var(--shadow-lift); }
+    .map-panel-head { padding: 15px 16px; }
+    .map-kicker { font-size: 15px; letter-spacing: -.01em; }
+    .map-status { color: var(--ink-soft); }
+    .map-toggle { background: var(--green-soft); border-color: var(--sage-line); }
+    .panel-title { font-weight: 700; }
+    .brief-row { box-shadow: var(--shadow-lift); }
+    .brief-date { display: grid; place-items: center; min-height: 28px; border-radius: 8px; background: var(--green-soft); }
+    .daynote { border-left: 3px solid #c7945f; background: var(--sand); }
+    .ticket-title { font-size: 14px; }
+    .wearbox {
+      border-color: var(--sage-line);
+      background: var(--surface-soft);
+    }
+    .wear-title { color: var(--green-dark); }
+    .wear-item { border: 1px solid rgba(79, 128, 107, .10); }
+    .detail-head {
+      padding: 17px 14px 14px 16px;
+      border-left: 3px solid var(--green);
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 247, 245, .94);
+      box-shadow: 0 8px 18px rgba(247, 247, 245, .86);
+    }
+    .detail h2 { font-weight: 700; overflow-wrap: anywhere; word-break: break-word; }
+    .route { color: var(--ink-soft); }
+    .chips { padding-top: 12px; }
+    .chip { border: 1px solid rgba(79, 128, 107, .12); background: var(--surface); }
+    .timeline { margin-top: 20px; }
+    .timeline::before { background: rgba(79, 128, 107, .22); }
+    .event { padding-bottom: 14px; }
+    .event::after { width: 10px; height: 10px; border-color: var(--bg); box-shadow: 0 0 0 1px var(--sage-line); }
+    .event .event-body { border: 1px solid rgba(60, 60, 67, .06); box-shadow: 0 4px 14px rgba(29, 29, 31, .045); }
+    .event.transport .event-body { border: 0; background: var(--surface-soft); }
+    .quicktips { gap: 10px; }
+    .quicktip { border: 1px solid rgba(79, 128, 107, .10); border-left: 3px solid var(--green); background: var(--surface); box-shadow: var(--shadow); }
+    .day-extra, .overview-extra { box-shadow: var(--shadow-lift); }
+    .day-extra > summary, .overview-extra > summary { min-height: 48px; display: flex; align-items: center; }
+    .day-extra > summary::after, .overview-extra > summary::after { margin-left: auto; }
+    .navdays { margin-top: 28px; }
+    .navdays button { color: var(--ink-soft); }
+    @media (max-width: 700px) {
+      .hero { padding-top: 16px; }
+      .detail-head { padding-left: 13px; }
+    }
+    @media (max-width: 379px) {
+      .hero h1 { max-width: 100%; font-size: 29px; letter-spacing: -.065em; text-wrap: balance; }
+      .quicktips { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 380px) {
+      .quicktips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
   </style>
 </head>
 <body>
