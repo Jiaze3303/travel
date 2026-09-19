@@ -401,7 +401,13 @@
     .event.food .event-body::before { content: '⌁'; color: #c18b55; }
     .event.stay .event-body::before { content: '⌂'; color: #8a73a4; }
     .event.transport .event-body::before { content: '↗'; color: #6d9bb2; }
-    .event.transport .event-body { background: #f7fbfd; border-color: rgba(81, 125, 149, .16); }
+    .event.transport .event-body {
+      min-height: 28px;
+      padding: 4px 12px;
+      border-style: dashed;
+      border-color: rgba(81, 125, 149, .24);
+      background: transparent;
+    }
     .event.transport::after { background: #6d9bb2; box-shadow: 0 0 0 1px #b9d1dc; }
     .event .time {
       display: block;
