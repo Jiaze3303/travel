@@ -679,8 +679,8 @@
           button.setAttribute('aria-pressed', String(selected));
           const isToday = actualView > 0 && buttonDay === actualView;
           button.classList.toggle('today', isToday);
-          if (selected) button.setAttribute('aria-current', 'true');
-          else if (isToday) button.setAttribute('aria-current', 'date');
+          if (isToday) button.setAttribute('aria-current', 'date');
+          else if (selected) button.setAttribute('aria-current', 'page');
           else button.removeAttribute('aria-current');
           if (selected && (scroll || current === initialView)) requestAnimationFrame(() => revealDayButton(button, scroll));
         });
