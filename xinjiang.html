@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f4f1">
+  <title>北疆环线 · 9天行程</title>
+  <style>
+    :root { color-scheme: light; --bg:#f4f4f1; --surface:#fff; --surface-soft:#fafaf7; --grouped:#f1f5f1; --ink:#20211f; --muted:#777b75; --green:#4f806b; --green-dark:#376653; --green-soft:#e8f1eb; --sand:#f7eee2; --line:rgba(42,56,47,.12); --radius:16px; --shadow:0 5px 20px rgba(33,42,35,.06); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Microsoft YaHei",sans-serif; -webkit-font-smoothing:antialiased; }
+    button,summary { font:inherit; touch-action:manipulation; }
+    button:focus-visible,summary:focus-visible { outline:3px solid rgba(79,128,107,.42); outline-offset:3px; }
+    .skip { position:absolute; left:12px; top:8px; z-index:20; transform:translateY(-140%); padding:10px 14px; border-radius:10px; background:var(--ink); color:#fff; }
+    .skip:focus { transform:none; }
+    .wrap { width:min(860px,100%); margin:0 auto; padding:0 16px calc(42px + env(safe-area-inset-bottom)); }
+    .hero { padding:26px 0 18px; }
+    .eyebrow { margin-bottom:7px; color:var(--green); font-size:12px; font-weight:800; letter-spacing:.12em; }
+    h1 { margin:0; font-size:clamp(30px,8vw,42px); line-height:1.14; letter-spacing:-.035em; }
+    .hero-sub { margin:9px 0 0; color:var(--muted); font-size:14px; line-height:1.55; }
+    .status { margin-top:14px; padding:11px 13px; border-left:3px solid #c7945f; border-radius:11px; background:var(--sand); color:#6e5947; font-size:13px; line-height:1.5; }
+    .calendar { position:sticky; top:0; z-index:10; margin:0 -16px; padding:8px 16px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:rgba(244,244,241,.92); backdrop-filter:blur(18px); }
+    .dates { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; }
+    .dates::-webkit-scrollbar { display:none; }
+    .daybtn { flex:0 0 64px; min-height:56px; padding:7px 5px; border:1px solid transparent; border-radius:13px; background:transparent; color:var(--muted); cursor:pointer; }
+    .daybtn .n,.daybtn .city { display:block; text-align:center; }
+    .daybtn .n { font-size:19px; font-weight:800; line-height:1.05; }
+    .daybtn .city { margin-top:4px; font-size:11px; white-space:nowrap; }
+    .daybtn[aria-pressed=true] { border-color:rgba(79,128,107,.5); background:var(--green-soft); color:var(--green-dark); }
+    .panel { margin-top:18px; }
+    .panel-title { margin:0 0 12px; font-size:22px; letter-spacing:-.02em; }
+    .overview-row { display:grid; grid-template-columns:50px minmax(0,1fr) auto; gap:12px; align-items:start; width:100%; min-height:68px; margin-bottom:9px; padding:13px 14px; border:1px solid var(--line); border-radius:14px; background:var(--surface); color:var(--ink); text-align:left; cursor:pointer; box-shadow:var(--shadow); }
+    .overview-row:hover { border-color:rgba(79,128,107,.3); background:var(--green-soft); }
+    .date-badge { display:grid; min-height:30px; place-items:center; border-radius:9px; background:var(--green-soft); color:var(--green-dark); font-size:12px; font-weight:800; }
+    .overview-main b { display:block; font-size:15px; line-height:1.4; }
+    .overview-main span { display:block; margin-top:2px; color:var(--muted); font-size:12px; line-height:1.45; }
+    .view-day { align-self:center; color:var(--green); font-size:12px; font-weight:800; white-space:nowrap; }
+    .route-strip { margin-top:14px; padding:14px; border:1px solid rgba(79,128,107,.15); border-radius:14px; background:var(--green-soft); }
+    .route-strip b { display:block; margin-bottom:7px; color:var(--green-dark); font-size:13px; }
+    .route-flow { display:flex; gap:6px; overflow-x:auto; color:var(--ink-soft); font-size:13px; line-height:1.4; scrollbar-width:none; }
+    .route-flow span { flex:0 0 auto; }
+    .route-flow i { color:var(--green); font-style:normal; }
+    .card { overflow:hidden; margin-top:12px; border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); box-shadow:var(--shadow); }
+    .card > summary { display:flex; align-items:center; min-height:52px; padding:14px 16px; font-size:15px; font-weight:800; cursor:pointer; list-style:none; }
+    .card > summary::-webkit-details-marker { display:none; }
+    .card > summary::after { margin-left:auto; color:var(--muted); content:'＋'; font-size:19px; }
+    .card[open] > summary::after { content:'−'; }
+    .card-body { padding:14px 16px 16px; border-top:1px solid var(--line); background:var(--surface-soft); }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .info-item { min-width:0; padding:12px; border:1px solid var(--line); border-radius:12px; background:var(--grouped); }
+    .info-item b { display:block; color:var(--green-dark); font-size:13px; line-height:1.4; }
+    .info-item span { display:block; margin-top:4px; color:#59615b; font-size:12px; line-height:1.6; overflow-wrap:anywhere; }
+    .budget { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .budget .info-item strong { display:block; margin-top:3px; font-size:17px; }
+    .detail { display:none; scroll-margin-top:84px; }
+    .detail.show { display:block; }
+    .detail-head { padding:18px 0 12px; border-left:2px solid var(--green); padding-left:14px; }
+    .date-line { color:var(--green); font-size:13px; font-weight:800; letter-spacing:.08em; }
+    h2 { margin:5px 0 4px; font-size:clamp(25px,7vw,33px); line-height:1.25; letter-spacing:-.03em; }
+    .route { color:var(--muted); font-size:14px; line-height:1.55; }
+    .chips { display:flex; gap:8px; overflow-x:auto; padding:2px 0 12px; scrollbar-width:none; }
+    .chip { flex:0 0 auto; padding:7px 10px; border:1px solid var(--line); border-radius:9px; background:var(--surface); color:var(--green-dark); font-size:12px; }
+    .daily-brief { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:4px 0 16px; }
+    .brief-item { padding:12px 13px; border:1px solid rgba(79,128,107,.16); border-radius:12px; background:var(--green-soft); }
+    .brief-item b { display:block; color:var(--green-dark); font-size:12px; }
+    .brief-item span { display:block; margin-top:4px; color:#59615b; font-size:13px; line-height:1.6; }
+    .timeline { position:relative; margin:4px 0 18px; }
+    .timeline::before { position:absolute; top:18px; bottom:18px; left:66px; width:2px; background:rgba(79,128,107,.22); content:""; transform:translateX(-50%); }
+    .event { display:grid; grid-template-columns:56px 20px minmax(0,1fr); gap:10px; padding-bottom:10px; }
+    .time { padding-top:13px; color:var(--green); font-size:12px; font-weight:800; line-height:1.35; text-align:right; overflow-wrap:anywhere; }
+    .dot { position:relative; z-index:1; width:11px; height:11px; margin:15px auto 0; border:2px solid var(--bg); border-radius:50%; background:var(--green); box-shadow:0 0 0 1px rgba(79,128,107,.26); }
+    .event-body { min-height:44px; padding:12px 14px; border:1px solid rgba(60,60,67,.07); border-radius:14px; background:var(--surface); color:var(--ink); font-size:14px; line-height:1.62; box-shadow:0 2px 10px rgba(29,29,31,.04); overflow-wrap:anywhere; }
+    .extras { overflow:hidden; margin-top:14px; border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); }
+    .extras > summary { display:flex; min-height:50px; align-items:center; padding:14px 16px; font-size:15px; font-weight:800; cursor:pointer; list-style:none; }
+    .extras > summary::-webkit-details-marker { display:none; }
+    .extras > summary::after { margin-left:auto; color:var(--muted); content:'＋'; font-size:19px; }
+    .extras[open] > summary::after { content:'−'; }
+    .extras-body { display:grid; gap:10px; padding:14px 16px 16px; border-top:1px solid var(--line); background:var(--surface-soft); }
+    .extras-row { padding:12px; border:1px solid var(--line); border-radius:12px; background:var(--grouped); color:#59615b; font-size:13px; line-height:1.6; }
+    .extras-row b { color:var(--green-dark); }
+    .nav { display:flex; gap:10px; margin-top:20px; padding-top:16px; border-top:1px solid var(--line); }
+    .nav button { flex:1; min-height:46px; border:1px solid var(--line); border-radius:12px; background:var(--surface); color:var(--green-dark); cursor:pointer; }
+    .nav button:disabled { color:#aaa; cursor:default; opacity:.55; }
+    .footer { margin-top:34px; color:var(--muted); font-size:12px; text-align:center; }
+    @media (max-width:480px) { .grid,.budget,.daily-brief { grid-template-columns:1fr; } .overview-row { grid-template-columns:45px minmax(0,1fr); } .view-day { grid-column:2; align-self:start; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">跳到主要内容</a>
+  <div class="wrap">
+    <header class="hero">
+      <div class="eyebrow">秋季 · 新疆北疆攻略</div>
+      <h1>北疆环线 · 9天行程</h1>
+      <div class="hero-sub">乌鲁木齐 → 阿勒泰 → 布尔津 → 禾木 → 喀纳斯 → 伊犁 → 那拉提 → 乌鲁木齐</div>
+      <div class="status" id="status" aria-live="polite">9/27–10/5 · 抵达乌鲁木齐 · 北疆环线</div>
+    </header>
+    <nav class="calendar" aria-label="每日行程导航"><div class="dates" id="dates">
+      <button class="daybtn" data-day="0" aria-label="总览" aria-pressed="true"><span class="n">⌂</span><span class="city">总览</span></button>
+      <button class="daybtn" data-day="1" aria-label="9月27日，乌鲁木齐" aria-pressed="false"><span class="n">27</span><span class="city">乌鲁木齐</span></button>
+      <button class="daybtn" data-day="2" aria-label="9月28日，布尔津" aria-pressed="false"><span class="n">28</span><span class="city">布尔津</span></button>
+      <button class="daybtn" data-day="3" aria-label="9月29日，禾木" aria-pressed="false"><span class="n">29</span><span class="city">禾木</span></button>
+      <button class="daybtn" data-day="4" aria-label="9月30日，喀纳斯" aria-pressed="false"><span class="n">30</span><span class="city">喀纳斯</span></button>
+      <button class="daybtn" data-day="5" aria-label="10月1日，奎屯" aria-pressed="false"><span class="n">1</span><span class="city">奎屯</span></button>
+      <button class="daybtn" data-day="6" aria-label="10月2日，伊宁" aria-pressed="false"><span class="n">2</span><span class="city">伊宁</span></button>
+      <button class="daybtn" data-day="7" aria-label="10月3日，那拉提" aria-pressed="false"><span class="n">3</span><span class="city">那拉提</span></button>
+      <button class="daybtn" data-day="8" aria-label="10月4日，乌鲁木齐" aria-pressed="false"><span class="n">4</span><span class="city">乌鲁木齐</span></button>
+      <button class="daybtn" data-day="9" aria-label="10月5日，返程" aria-pressed="false"><span class="n">5</span><span class="city">返程</span></button>
+    </div></nav>
+    <main id="main" tabindex="-1">
+      <section id="overview" class="panel" aria-labelledby="overview-title">
+        <h2 class="panel-title" id="overview-title">完整行程</h2>
+        <div class="route-strip"><b>路线顺序</b><div class="route-flow"><span>乌鲁木齐</span><i>→</i><span>阿勒泰</span><i>→</i><span>布尔津</span><i>→</i><span>禾木</span><i>→</i><span>喀纳斯</span><i>→</i><span>伊犁</span><i>→</i><span>那拉提</span></div></div>
+        <div id="overviewRows"></div>
+        <details class="card"><summary>门票与费用</summary><div class="card-body"><div class="budget"><div class="info-item"><b>预计车费</b><strong>14,600 元</strong><span>8人7天豪华大九座，含车辆服务及赛里木湖环湖</span></div><div class="info-item"><b>门票合计</b><strong>572 元</strong><span>按图片清单汇总，特殊证件以实际退差价为准</span></div></div></div></details>
+        <details class="card"><summary>门票列表</summary><div class="card-body grid" id="ticketOverview"></div></details>
+        <details class="card"><summary>酒店列表</summary><div class="card-body grid" id="hotelOverview"></div></details>
+      </section>
+      <div id="details"></div>
+    </main>
+    <footer class="footer">北疆环线 · 行程信息以当天景区公告、天气和道路情况为准</footer>
+  </div>
+  <script>
+    const days = [
+      {date:'9/27',city:'乌鲁木齐',title:'抵达乌鲁木齐',sub:'抵达后入住，调整状态，为第二天长途出发做准备。',route:'乌鲁木齐火车站 → 酒店',brief:['抵达后先办理入住，确认第二天出发时间。','晚上只安排休息和补给，不额外增加景点。'],events:[['到站后','抵达乌鲁木齐，前往酒店办理入住。'],['晚上','整理随身物品，准备水、零食和保暖层。']],hotel:'格林豪泰酒店（乌鲁木齐火车站）'},
+      {date:'9/28',city:'布尔津',title:'乌鲁木齐 → 布尔津',sub:'S21沙漠公路穿越，沿途观赏克拉美丽沙漠公园与乌伦古湖。',route:'乌鲁木齐 → S21沙漠公路 → 克拉美丽沙漠公园 → 乌伦古湖 → 布尔津',brief:['全天长途转场，途中安排正常午餐和休息。','沙漠公路风大、日晒强，水和防风衣物放在手边。'],events:[['早上','从乌鲁木齐出发，进入S21沙漠公路。'],['途中','经过克拉美丽沙漠公园，沿途欣赏荒漠、戈壁和开阔公路。'],['下午','途观乌伦古湖，视天气和停车条件安排短暂停留。'],['晚上','抵达布尔津，办理入住后休息。']],hotel:'布尔津美居大酒店'},
+      {date:'9/29',city:'禾木',title:'布尔津 → 禾木',sub:'经阿禾公路进入禾木景区，下午入住后留出时间看村落与河谷。',route:'布尔津 → 阿禾公路 → 禾木景区',brief:['禾木门票＋区间车：75元，按景区安排换乘。','山路弯道较多，途中不赶时间；抵达后优先办理入住。'],events:[['上午','从布尔津出发，沿阿禾公路进入禾木方向。'],['下午','抵达禾木景区，换乘区间车后办理入住。'],['傍晚','在禾木村落、白桦林和河谷附近轻松散步，留意日落。']],ticket:'禾木门票＋区间车 · 75元',hotel:'云驿·观山民宿'},
+      {date:'9/30',city:'喀纳斯',title:'禾木 → 喀纳斯 → 布尔津',sub:'全天游览喀纳斯湖与三湾，晚上回到布尔津童话小镇。',route:'禾木 → 喀纳斯湖 → 卧龙湾 → 月亮湾 → 神仙湾 → 布尔津',brief:['喀纳斯门票＋区间车：230元，按预约和区间车安排游览。','三湾步道注意保暖和防滑，下午按团队约定时间返程。'],events:[['上午','从禾木出发前往喀纳斯景区，换乘区间车。'],['白天','依次游览喀纳斯湖、卧龙湾、月亮湾和神仙湾。'],['傍晚','离开景区前往布尔津童话小镇，入住后休息。']],ticket:'喀纳斯门票＋区间车 · 230元',hotel:'布尔津美居大酒店'},
+      {date:'10/1',city:'奎屯',title:'布尔津 → 世界魔鬼城 → 奎屯',sub:'游览世界5A级魔鬼城景区，下午沿公路南下至奎屯。',route:'布尔津 → 世界5A级魔鬼城景区 → 奎屯',brief:['魔鬼城门票＋区间车：62元，按景区时段入园。','戈壁风沙较强，景区步行和乘车都要注意补水、防晒。'],events:[['上午','离开布尔津，前往世界5A级魔鬼城景区。'],['中午','乘景区区间车游览雅丹地貌，拍摄风蚀城堡和戈壁线条。'],['下午','继续前往奎屯，抵达后入住休息。']],ticket:'魔鬼城门票＋区间车 · 62元',hotel:'奎屯裕大酒店'},
+      {date:'10/2',city:'伊宁',title:'奎屯 → 赛里木湖 → 伊宁',sub:'赛里木湖环湖与果子沟观景，晚上进入伊宁城市休整。',route:'奎屯 → 赛里木湖环湖 → 果子沟观景大桥 → 六星街 → 伊宁',brief:['赛里木湖自驾票：70元，环湖根据天气和停车条件安排。','湖区风力和体感温度变化大，外套、帽子和水要随身携带。'],events:[['上午','从奎屯出发，前往赛里木湖。'],['白天','赛里木湖环湖，沿途欣赏湖面、草原和雪山倒影。'],['下午','经过果子沟观景大桥，随后前往伊宁六星街。'],['晚上','入住伊宁，晚餐后自由散步。']],ticket:'赛里木湖自驾票 · 70元',hotel:'伊宁呼勒佳酒店'},
+      {date:'10/3',city:'那拉提',title:'伊宁 → 那拉提空中草原',sub:'进入那拉提，下午茶、点心和民宿篝火互动安排在当天体验。',route:'伊宁 → 那拉提空中草原 → 下午茶与篝火互动 → 那拉提',brief:['那拉提河谷＋区间车：135元，按景区班次游览。','草原天气变化快，拍照与活动结束后及时回到集合点。'],events:[['上午','从伊宁出发，前往那拉提草原。'],['白天','游览空中草原和河谷景观，留出观景、拍照时间。'],['下午','参加下午茶、点心和民宿篝火互动。'],['晚上','入住那拉提，整理返程前物品。']],ticket:'那拉提河谷＋区间车 · 135元',hotel:'娜菲晚察／文明大酒店'},
+      {date:'10/4',city:'乌鲁木齐',title:'那拉提 → 乌鲁木齐',sub:'经巴音台和天山胜利隧道返回乌鲁木齐，全天以转场为主。',route:'那拉提 → 巴音台 → 天山胜利隧道 → 乌鲁木齐',brief:['全天返程转场，午餐和途中休息按路况安排。','长途车程保持补水和休息，抵达后只安排入住和整理行李。'],events:[['早上','从那拉提出发，前往巴音台方向。'],['途中','经过天山胜利隧道及山地公路，按安全停车点休息。'],['晚上','抵达乌鲁木齐，入住如家商旅酒店。']],hotel:'如家商旅酒店（乌鲁木齐南广场店）'},
+      {date:'10/5',city:'返程',title:'乌鲁木齐 → 返程',sub:'根据航班或车次安排送站，结束北疆环线。',route:'酒店 → 机场／车站 → 返程',brief:['提前确认返程航班或车次，预留市区到机场／车站时间。','检查证件、充电器和随身物品，按返程交通安排送站。'],events:[['上午','早餐后整理行李，确认房间和随身物品。'],['出发前','按航班或车次时间前往机场／车站。'],['返程','结束北疆环线，返回出发地。']]}
+    ];
+    const tickets = [{name:'禾木',value:'门票＋区间车 · 75元'},{name:'喀纳斯',value:'门票＋区间车 · 230元'},{name:'世界魔鬼城',value:'门票＋区间车 · 62元'},{name:'赛里木湖',value:'自驾票 · 70元'},{name:'那拉提河谷',value:'河谷＋区间车 · 135元'}];
+    const hotels = [{date:'9/27',name:'格林豪泰酒店',place:'乌鲁木齐火车站'},{date:'9/28、9/30',name:'布尔津美居大酒店',place:'布尔津'},{date:'9/29',name:'云驿·观山民宿',place:'禾木'},{date:'10/1',name:'奎屯裕大酒店',place:'奎屯'},{date:'10/2',name:'伊宁呼勒佳酒店',place:'伊宁'},{date:'10/3',name:'娜菲晚察／文明大酒店',place:'那拉提'},{date:'10/4',name:'如家商旅酒店',place:'乌鲁木齐南广场店'}];
+    const $ = s => document.querySelector(s); const overviewRows=$('#overviewRows'); const detailRoot=$('#details'); const buttons=[...document.querySelectorAll('.daybtn')];
+    const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function renderOverview(){ overviewRows.innerHTML=days.map((d,i)=>`<button class="overview-row" type="button" data-day="${i+1}" aria-label="${esc(d.date)}，查看${esc(d.title)}"><span class="date-badge">${esc(d.date)}</span><span class="overview-main"><b>${esc(d.title)}</b><span>${esc(d.sub)}</span></span><span class="view-day" aria-hidden="true">查看当天 →</span></button>`).join(''); $('#ticketOverview').innerHTML=tickets.map(t=>`<div class="info-item"><b>${esc(t.name)}</b><span>${esc(t.value)}</span></div>`).join(''); $('#hotelOverview').innerHTML=hotels.map(h=>`<div class="info-item"><b>${esc(h.date)} · ${esc(h.name)}</b><span>${esc(h.place)} · 出发前确认入住时间</span></div>`).join(''); }
+    function renderDetails(){ detailRoot.innerHTML=days.map((d,i)=>`<section class="detail" data-detail="${i+1}" aria-labelledby="detail-title-${i+1}"><div class="detail-head"><div class="date-line">${esc(d.date)} · 第${i+1}天</div><h2 id="detail-title-${i+1}">${esc(d.title)}</h2><div class="route">${esc(d.sub)}</div></div><div class="chips"><span class="chip">🚐 北疆环线</span>${d.ticket?`<span class="chip">🎫 ${esc(d.ticket)}</span>`:''}<span class="chip">🏨 ${esc(d.hotel||'返程日')}</span></div><div class="daily-brief"><div class="brief-item"><b>关键时间</b><span>${esc(d.brief[0])}</span></div><div class="brief-item"><b>注意事项</b><span>${esc(d.brief[1])}</span></div></div><div class="timeline">${d.events.map(e=>`<div class="event"><span class="time">${esc(e[0])}</span><span class="dot" aria-hidden="true"></span><div class="event-body">${esc(e[1])}</div></div>`).join('')}</div><details class="extras"><summary>路线、门票与住宿</summary><div class="extras-body"><div class="extras-row"><b>当天路线</b><br>${esc(d.route)}</div>${d.ticket?`<div class="extras-row"><b>门票</b><br>${esc(d.ticket)}；特殊证件或优待证按景区规则办理优惠。</div>`:''}<div class="extras-row"><b>住宿</b><br>${esc(d.hotel||'返程，不安排住宿')}</div></div></details><div class="nav"><button type="button" data-nav="${i}" ${i===0?'disabled':''}>← 前一天</button><button type="button" class="home" data-nav="0">回到总览</button><button type="button" data-nav="${i+2}" ${i===days.length-1?'disabled':''}>后一天 →</button></div></section>`).join(''); }
+    function show(day,update=true){ day=Math.max(0,Math.min(days.length,Number(day)||0)); document.body.classList.toggle('show-detail',day>0); $('#overview').hidden=day>0; document.querySelectorAll('.detail').forEach(d=>d.classList.toggle('show',Number(d.dataset.detail)===day)); buttons.forEach(b=>{const active=Number(b.dataset.day)===day;b.setAttribute('aria-pressed',String(active));}); $('#status').textContent=day?`${days[day-1].date} · ${days[day-1].title} · 查看当天重点和完整路线`:'9/27–10/5 · 抵达乌鲁木齐 · 北疆环线'; if(update){const u=new URL(location.href);u.searchParams.set('day',String(day));history.replaceState(null,'',u);} const active=buttons.find(b=>Number(b.dataset.day)===day); active?.scrollIntoView({inline:'center',block:'nearest'}); window.scrollTo({top:0,behavior:'smooth'}); }
+    renderOverview(); renderDetails(); document.addEventListener('click',e=>{const target=e.target.closest('[data-day],[data-nav]'); if(target){e.preventDefault();show(target.dataset.day??target.dataset.nav,true);}}); show(new URLSearchParams(location.search).get('day')||0,false);
+  </script>
+</body>
+</html>
