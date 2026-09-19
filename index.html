@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f5faf6">
+  <meta name="theme-color" content="#f7f7f5">
   <title>2026 国庆 · 青甘环线 · 8天行程</title>
+  <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <style>
     :root {
@@ -89,6 +90,7 @@
       gap: 12px;
       padding: 14px 16px;
     }
+    .map-panel-head > div { min-width: 0; flex: 1 1 auto; }
     .map-kicker { color: var(--green-dark); font-size: 14px; font-weight: 800; }
     .map-status { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
     .map-toggle {
@@ -110,6 +112,7 @@
       background: #e9efed;
     }
     .route-map.is-open #tripMap { display: block; }
+    .route-map.map-failed #tripMap { display: none; }
     .map-note {
       padding: 9px 16px 12px;
       color: var(--muted);
@@ -119,9 +122,9 @@
     .map-note a { color: var(--green-dark); text-decoration: underline; }
     .leaflet-container { font: inherit; }
     .leaflet-control-zoom a {
-      width: 32px !important;
-      height: 32px !important;
-      line-height: 32px !important;
+      width: 44px !important;
+      height: 44px !important;
+      line-height: 44px !important;
       border-radius: 8px !important;
       color: var(--ink) !important;
     }
@@ -539,6 +542,45 @@
     .navdays button:disabled { cursor: default; opacity: .38; }
     .footer { margin-top: 48px; padding: 12px; color: #98a59f; font-size: 10px; text-align: center; }
 
+    .skip-link {
+      position: fixed;
+      top: 8px;
+      left: 8px;
+      z-index: 100;
+      transform: translateY(-150%);
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .18s ease;
+    }
+    .skip-link:focus-visible { transform: translateY(0); outline: 3px solid var(--green); outline-offset: 2px; }
+    #main-content:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
+    .departure-note {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      margin: 12px 0 8px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--sand);
+      color: #6e5947;
+      font-size: 13px;
+    }
+    .departure-note b { color: #9a663b; white-space: nowrap; }
+    .map-fallback {
+      padding: 16px;
+      border-top: 1px solid var(--line);
+      background: #fbfaf6;
+      color: var(--muted);
+    }
+    .map-fallback[hidden] { display: none; }
+    .map-fallback b { display: block; margin-bottom: 6px; color: var(--ink); }
+    .map-fallback ol { margin: 8px 0 0; padding-left: 20px; line-height: 1.7; }
+    .map-fallback p { margin: 8px 0 0; font-size: 12px; }
+
     @media (max-width: 700px) {
       .wrap { padding: 24px 16px 96px; }
       .hero { padding-bottom: 32px; }
@@ -726,6 +768,8 @@
     html, body { overflow-x: clip; }
     img, svg, video { max-width: 100%; height: auto; }
     body { overflow-wrap: break-word; }
+    button, summary, a { touch-action: manipulation; -webkit-tap-highlight-color: rgba(79, 128, 107, .16); }
+    .hero p, .map-note, .map-fallback, .hotel-item, .ticket-item { overflow-wrap: anywhere; word-break: break-all; text-wrap: pretty; }
     .wrap {
       width: 100%;
       max-width: 720px;
@@ -737,6 +781,8 @@
     .map-toggle { padding: 10px 14px; }
     .daybtn { padding: 6px 4px; }
     .detail-head { overflow-wrap: anywhere; }
+    .detail { scroll-margin-top: calc(var(--calendar-sticky-height, 66px) + 16px); }
+    .detail-head { top: var(--calendar-sticky-height, 66px); }
     .timeline { min-width: 0; }
     .event .event-body { overflow-wrap: anywhere; }
     .quicktips { grid-template-columns: 1fr; }
@@ -745,7 +791,20 @@
     }
     .navdays { flex-wrap: wrap; }
     .navdays button { flex: 1 1 30%; }
+    .map-panel-head { align-items: flex-start; }
+    .map-toggle { flex: 0 0 auto; min-width: 44px; }
+    button:focus-visible, summary:focus-visible, a:focus-visible {
+      outline: 3px solid var(--green);
+      outline-offset: 2px;
+    }
+    @media (max-width: 700px) {
+      :root { --calendar-sticky-height: 66px; }
+      .map-panel-head { flex-wrap: wrap; }
+      .map-panel-head > div { flex: 1 1 100%; }
+      .map-toggle { width: 100%; }
+    }
     @media (min-width: 701px) {
+      :root { --calendar-sticky-height: 66px; }
       .wrap { padding: 56px 20px 64px; }
       .quicktips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .navdays { flex-wrap: nowrap; }
@@ -753,7 +812,8 @@
   </style>
 </head>
 <body>
-  <main class="wrap">
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <main class="wrap" id="main-content" tabindex="-1">
     <header class="hero">
       <div class="eyebrow">2026 · NATIONAL DAY ROAD TRIP</div>
       <h1>青甘环线 · 8天行程</h1>
@@ -762,29 +822,34 @@
     <section class="panel calendar-panel" aria-label="每日行程导航">
       <div class="calendar">
         <div class="dates">
-          <button class="daybtn overview" type="button" data-day="0"><span class="n">⌂</span><span class="city">总览</span></button>
-          <button class="daybtn" type="button" data-day="1"><span class="n">1</span><span class="city">张掖</span></button>
-          <button class="daybtn" type="button" data-day="2"><span class="n">2</span><span class="city">嘉峪关</span></button>
-          <button class="daybtn" type="button" data-day="3"><span class="n">3</span><span class="city">敦煌</span></button>
-          <button class="daybtn" type="button" data-day="4"><span class="n">4</span><span class="city">大柴旦</span></button>
-          <button class="daybtn" type="button" data-day="5"><span class="n">5</span><span class="city">黑马河</span></button>
-          <button class="daybtn" type="button" data-day="6"><span class="n">6</span><span class="city">西宁</span></button>
-          <button class="daybtn" type="button" data-day="7"><span class="n">7</span><span class="city">西安</span></button>
+          <button class="daybtn overview" type="button" data-day="0" aria-label="总览" aria-pressed="false"><span class="n" aria-hidden="true">⌂</span><span class="city">总览</span></button>
+          <button class="daybtn" type="button" data-day="1" aria-label="第1天，张掖" aria-pressed="false"><span class="n">1</span><span class="city">张掖</span></button>
+          <button class="daybtn" type="button" data-day="2" aria-label="第2天，嘉峪关" aria-pressed="false"><span class="n">2</span><span class="city">嘉峪关</span></button>
+          <button class="daybtn" type="button" data-day="3" aria-label="第3天，敦煌" aria-pressed="false"><span class="n">3</span><span class="city">敦煌</span></button>
+          <button class="daybtn" type="button" data-day="4" aria-label="第4天，大柴旦" aria-pressed="false"><span class="n">4</span><span class="city">大柴旦</span></button>
+          <button class="daybtn" type="button" data-day="5" aria-label="第5天，黑马河" aria-pressed="false"><span class="n">5</span><span class="city">黑马河</span></button>
+          <button class="daybtn" type="button" data-day="6" aria-label="第6天，西宁" aria-pressed="false"><span class="n">6</span><span class="city">西宁</span></button>
+          <button class="daybtn" type="button" data-day="7" aria-label="第7天，西安" aria-pressed="false"><span class="n">7</span><span class="city">西安</span></button>
         </div>
       </div>
     </section>
 
-    <section class="panel route-map" id="routeMapPanel" aria-label="青甘环线路线地图">
+    <section class="panel route-map" id="routeMapPanel" aria-labelledby="map-title">
       <div class="map-panel-head">
-        <div><div class="map-kicker">🗺 路线地图</div><span class="map-status" id="mapStatus">总览 · 点击查看主要地点与路线</span></div>
-        <button class="map-toggle" id="mapToggle" type="button" aria-expanded="false">打开地图</button>
+        <div><h2 class="map-kicker" id="map-title">路线地图</h2><span class="map-status" id="mapStatus" aria-live="polite">总览 · 点击查看主要地点与路线</span></div>
+        <button class="map-toggle" id="mapToggle" type="button" aria-controls="tripMap" aria-expanded="false">打开地图</button>
       </div>
       <div id="tripMap" role="img" aria-label="青甘环线示意地图"></div>
+      <div class="map-fallback" id="mapFallback" hidden role="status" aria-live="polite">
+        <b>地图暂时无法加载</b>
+        <ol id="mapFallbackRoute"></ol>
+        <p>可继续使用页面行程；地图恢复后再查看位置。</p>
+      </div>
       <div class="map-note">地图用于判断顺序和区域关系，线路为示意线；国庆车流、天气和当天导航优先。底图：高德地图。</div>
     </section>
 
     <section class="panel" id="overview">
-      <div class="panel-title">🧭 完整行程</div>
+      <h2 class="panel-title">完整行程</h2>
       <div class="brief">
         <div class="brief-row"><div class="brief-date">9/30</div><div class="brief-main"><b>西安 → 张掖西</b><span>T269 · 22:00出发 · 夜间火车</span></div></div>
         <div class="brief-row"><div class="brief-date">10/1</div><div class="brief-main"><b>张掖西 → 七彩丹霞 → 嘉峪关</b><span>与司机会合 · 约250–280km</span></div></div>
@@ -962,10 +1027,13 @@
   <script>
     (() => {
       const buttons = [...document.querySelectorAll('.daybtn[data-day]')];
+      const dates = document.querySelector('.dates');
       const details = [...document.querySelectorAll('.detail[data-detail]')];
       const routeMapPanel = document.querySelector('#routeMapPanel');
       const mapToggle = document.querySelector('#mapToggle');
       const mapStatus = document.querySelector('#mapStatus');
+      const mapFallback = document.querySelector('#mapFallback');
+      const mapFallbackRoute = document.querySelector('#mapFallbackRoute');
       let current = 0;
       const tripStart = '2026-09-30';
       const tripEnd = '2026-10-07';
@@ -986,7 +1054,15 @@
         if (key === tripStart) return 1;
         return Number(key.slice(-2));
       }
-      const initialView = getInitialView();
+      function getRequestedView() {
+        const raw = new URLSearchParams(window.location.search).get('day');
+        if (raw === null || raw.trim() === '') return null;
+        const value = Number(raw);
+        return Number.isInteger(value) && value >= 0 && value <= 7 ? value : null;
+      }
+      const requestedView = getRequestedView();
+      const initialView = requestedView ?? getInitialView();
+      const todayKey = shanghaiDateKey();
       let tripMap = null;
       let mapLayers = [];
       const mapPlaces = {
@@ -1054,9 +1130,29 @@
         return L.divIcon({ className: '', html: `<span class="map-marker" style="background:${color}">${place.icon}</span>`, iconSize: [28, 28], iconAnchor: [14, 14] });
       }
 
+      function renderMapFallback(day, reason = '地图暂时无法加载') {
+        const keys = dayRoutes[day] || dayRoutes[0];
+        if (mapFallbackRoute) {
+          mapFallbackRoute.innerHTML = keys.map(key => `<li>${mapPlaces[key]?.name || key}</li>`).join('');
+        }
+        if (mapFallback) mapFallback.hidden = false;
+        if (routeMapPanel) routeMapPanel.classList.add('map-failed');
+        if (mapStatus) mapStatus.textContent = `${reason} · 已显示文字路线`;
+        if (mapToggle) {
+          mapToggle.textContent = '地图暂时无法加载';
+          mapToggle.setAttribute('aria-expanded', 'true');
+        }
+      }
+
+      function clearMapFallback() {
+        if (mapFallback) mapFallback.hidden = true;
+        routeMapPanel?.classList.remove('map-failed');
+      }
+
       function updateMap(day) {
         const label = day === 0 ? '总览' : `第${day}天`;
         if (mapStatus) mapStatus.textContent = `${label} · 点击地图标记查看地点`;
+        if (mapFallback && !mapFallback.hidden) renderMapFallback(day, '地图暂时无法加载');
         if (!tripMap) return;
         mapLayers.forEach(layer => tripMap.removeLayer(layer));
         mapLayers = [];
@@ -1081,18 +1177,42 @@
       }
 
       function initTripMap() {
-        if (!window.L || tripMap) return;
-        tripMap = L.map('tripMap', { zoomControl: false, scrollWheelZoom: false, attributionControl: false });
-        L.control.zoom({ position: 'topright' }).addTo(tripMap);
-        L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', { subdomains: '1234', maxZoom: 18, attribution: '© 高德地图' }).addTo(tripMap);
-        updateMap(current);
+        if (tripMap) return true;
+        if (!window.L) {
+          renderMapFallback(current, '地图脚本未加载');
+          return false;
+        }
+        try {
+          clearMapFallback();
+          tripMap = L.map('tripMap', { zoomControl: false, scrollWheelZoom: false, attributionControl: false });
+          L.control.zoom({ position: 'topright' }).addTo(tripMap);
+          const tiles = L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', { subdomains: '1234', maxZoom: 18, attribution: '© 高德地图' });
+          tiles.on('tileerror', () => {
+            if (tripMap) {
+              tripMap.remove();
+              tripMap = null;
+            }
+            renderMapFallback(current, '地图底图未加载');
+          });
+          tiles.addTo(tripMap);
+          updateMap(current);
+          return true;
+        } catch (error) {
+          tripMap = null;
+          renderMapFallback(current);
+          return false;
+        }
       }
 
       function openMap() {
         routeMapPanel?.classList.add('is-open');
         mapToggle?.setAttribute('aria-expanded', 'true');
-        if (!tripMap) initTripMap();
-        requestAnimationFrame(() => tripMap?.invalidateSize());
+        const ready = initTripMap();
+        if (ready) {
+          if (mapToggle) mapToggle.textContent = '收起地图';
+          requestAnimationFrame(() => tripMap?.invalidateSize());
+        }
+        return ready;
       }
 
       function prepareEvent(event) {
@@ -1110,6 +1230,20 @@
         else if (/早餐|午饭|午餐|晚饭|晚餐/.test(text)) kind = 'food';
         else if (/出发|前往|返回|动车|车程|途中|抵达|进站|机场/.test(text)) kind = 'transport';
         event.classList.add(kind);
+      }
+
+      function markDecorativeIcons() {
+        document.querySelectorAll('.panel-title, .map-kicker, .ticket-title, .wear-title, .view-title, .roadtitle').forEach(node => {
+          const text = node.firstChild;
+          if (!text || text.nodeType !== Node.TEXT_NODE) return;
+          const match = text.textContent.match(/^(\S+)\s+/u);
+          if (!match || !/[\u{1F000}-\u{1FAFF}]/u.test(match[1])) return;
+          const icon = document.createElement('span');
+          icon.setAttribute('aria-hidden', 'true');
+          icon.textContent = match[1];
+          text.textContent = text.textContent.slice(match[0].length);
+          node.prepend(icon, ' ');
+        });
       }
 
       function foldOverviewExtras() {
@@ -1152,19 +1286,51 @@
         });
       }
 
-      function show(day, scroll = false) {
+      function addDepartureNote() {
+        if (todayKey !== tripStart) return;
+        const detail = details.find(item => Number(item.dataset.detail) === 1);
+        const head = detail?.querySelector('.detail-head');
+        if (!head || detail.querySelector('.departure-note')) return;
+        const note = document.createElement('aside');
+        note.className = 'departure-note';
+        note.setAttribute('role', 'note');
+        note.innerHTML = '<b>今晚出发</b><span>乘 T269 西安 → 张掖西，22:00 发车；明早进入第 1 天行程。</span>';
+        head.before(note);
+      }
+
+      function syncDayUrl(day) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('day', String(day));
+        window.history.replaceState(null, '', url);
+      }
+
+      function revealDayButton(button, smooth = false) {
+        if (!dates || !button) return;
+        const maxScroll = Math.max(0, dates.scrollWidth - dates.clientWidth);
+        const desired = button.offsetLeft - (dates.clientWidth - button.offsetWidth) / 2;
+        dates.scrollLeft = Math.max(0, Math.min(maxScroll, desired));
+        if (button.offsetLeft + button.offsetWidth > dates.scrollLeft + dates.clientWidth || button.offsetLeft < dates.scrollLeft) {
+          dates.scrollLeft = Math.max(0, Math.min(maxScroll, button.offsetLeft));
+        }
+      }
+
+      function show(day, scroll = false, syncUrl = false) {
         current = Math.max(0, Math.min(7, Number(day)));
         document.body.classList.toggle('show-detail', current !== 0);
         buttons.forEach(button => {
           const buttonDay = Number(button.dataset.day);
+          const selected = buttonDay === current;
           button.classList.toggle('active', buttonDay === current);
+          button.setAttribute('aria-pressed', String(selected));
           const isToday = initialView > 0 && buttonDay === initialView;
           button.classList.toggle('today', isToday);
           if (isToday) button.setAttribute('aria-current', 'date');
           else button.removeAttribute('aria-current');
+          if (selected && (scroll || current === initialView)) requestAnimationFrame(() => revealDayButton(button, scroll));
         });
         details.forEach(detail => detail.classList.toggle('show', Number(detail.dataset.detail) === current));
         updateMap(current);
+        if (syncUrl) syncDayUrl(current);
         if (scroll) {
           const target = current === 0 ? document.querySelector('#overview') : details.find(detail => Number(detail.dataset.detail) === current);
           target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1176,16 +1342,18 @@
         const day = Number(detail.dataset.detail);
         const nav = document.createElement('div');
         nav.className = 'navdays';
-        nav.innerHTML = `<button type="button" ${day === 1 ? 'disabled' : ''}>← 前一天</button><button class="home-button" type="button">⌂ 回到总览</button><button type="button" ${day === 7 ? 'disabled' : ''}>后一天 →</button>`;
+        nav.innerHTML = `<button type="button" aria-label="${day === 1 ? '没有前一天' : `前往第${day - 1}天`}" ${day === 1 ? 'disabled' : ''}>← 前一天</button><button class="home-button" type="button" aria-label="回到总览">⌂ 回到总览</button><button type="button" aria-label="${day === 7 ? '没有后一天' : `前往第${day + 1}天`}" ${day === 7 ? 'disabled' : ''}>后一天 →</button>`;
         const navButtons = nav.querySelectorAll('button');
-        navButtons[0].addEventListener('click', () => show(day - 1, true));
-        navButtons[1].addEventListener('click', () => show(0, true));
-        navButtons[2].addEventListener('click', () => show(day + 1, true));
+        navButtons[0].addEventListener('click', () => show(day - 1, true, true));
+        navButtons[1].addEventListener('click', () => show(0, true, true));
+        navButtons[2].addEventListener('click', () => show(day + 1, true, true));
         detail.appendChild(nav);
       });
 
       foldOverviewExtras();
       foldExtras();
+      markDecorativeIcons();
+      addDepartureNote();
       if (window.innerWidth > 700) initTripMap();
       mapToggle?.addEventListener('click', () => {
         if (routeMapPanel?.classList.contains('is-open')) {
@@ -1194,10 +1362,9 @@
           mapToggle.textContent = '打开地图';
         } else {
           openMap();
-          mapToggle.textContent = '收起地图';
         }
       });
-      buttons.forEach(button => button.addEventListener('click', () => show(button.dataset.day, true)));
+      buttons.forEach(button => button.addEventListener('click', () => show(button.dataset.day, true, true)));
       show(initialView);
     })();
   </script>
