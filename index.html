@@ -1061,7 +1061,8 @@
         return Number.isInteger(value) && value >= 0 && value <= 7 ? value : null;
       }
       const requestedView = getRequestedView();
-      const initialView = requestedView ?? getInitialView();
+      const actualView = getInitialView();
+      const initialView = requestedView ?? actualView;
       const todayKey = shanghaiDateKey();
       let tripMap = null;
       let mapLayers = [];
@@ -1322,7 +1323,7 @@
           const selected = buttonDay === current;
           button.classList.toggle('active', buttonDay === current);
           button.setAttribute('aria-pressed', String(selected));
-          const isToday = initialView > 0 && buttonDay === initialView;
+          const isToday = actualView > 0 && buttonDay === actualView;
           button.classList.toggle('today', isToday);
           if (isToday) button.setAttribute('aria-current', 'date');
           else button.removeAttribute('aria-current');
