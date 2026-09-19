@@ -13,14 +13,14 @@
       --surface: #FFFFFF;
       --surface-soft: #F6F8FB;
       --ink: #273241;
-      --ink-soft: #586D8D;
-      --muted: #7889A1;
+      --ink-soft: #526783;
+      --muted: #596A80;
       --line: rgba(57, 77, 106, .18);
       --green: #394D6A;
       --green-dark: #273241;
       --green-soft: #E7EDF5;
       --sand: #F7ECEF;
-      --accent: #A15E73;
+      --accent: #824A5B;
       --accent-soft: #F5E8EC;
       --shadow: 0 1px 2px rgba(39, 50, 65, .08);
       --shadow-lift: 0 10px 26px rgba(39, 50, 65, .1);
@@ -48,7 +48,7 @@
     .hero { padding: 24px 0; }
     .eyebrow { display: block; margin-bottom: 8px; color: var(--green); font-size: 12px; font-weight: 800; line-height: 1.3; letter-spacing: .14em; }
     .hero h1 { max-width: none; margin: 0 0 6px; font-size: clamp(30px, 7vw, 40px); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
-    .trip-status { display: inline-flex; align-items: center; min-height: 32px; margin: 0 0 14px; padding: 6px 10px; border: 1px solid rgba(156, 88, 105, .22); border-radius: 999px; background: var(--accent-soft); color: #824A5B; font-size: 13px; font-weight: 700; }
+    .trip-status { display: inline-flex; align-items: center; min-height: 32px; margin: 0 0 14px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--green-soft); color: var(--green); font-size: 13px; font-weight: 700; }
     .panel { margin-bottom: 20px; overflow: hidden; border: 0; border-radius: 16px; background: transparent; }
     .calendar-panel { position: sticky; top: env(safe-area-inset-top, 0); z-index: 50; margin-right: -20px; margin-left: -20px; border-bottom: 1px solid var(--line); border-radius: 0; background: var(--material); box-shadow: 0 1px 0 rgba(255, 255, 255, .7); backdrop-filter: saturate(180%) blur(18px); -webkit-backdrop-filter: saturate(180%) blur(18px); }
     .calendar { padding: 8px 20px 10px; }
@@ -113,10 +113,10 @@
     .daily-brief-item span { display: block; color: var(--ink-soft); font-size: 13px; line-height: 1.55; overflow-wrap: anywhere; text-wrap: pretty; }
     .detail { display: none; margin-bottom: 64px; overflow: visible; border: 0; border-radius: 0; background: transparent; }
     .detail.show { display: block; }
-    .detail-head { position: sticky; top: calc(var(--calendar-h) + env(safe-area-inset-top, 0)); z-index: 8; padding: 17px 14px 14px 16px; border-bottom: 1px solid var(--line); border-left: 2px solid var(--green); background: rgba(233, 238, 245, .95); box-shadow: 0 8px 18px rgba(39, 50, 65, .1); overflow-wrap: anywhere; }
+    .detail-head { position: relative; padding: 17px 14px 14px 16px; border-bottom: 1px solid var(--line); border-left: 2px solid var(--green); background: rgba(233, 238, 245, .95); box-shadow: none; overflow-wrap: anywhere; }
     .detail { scroll-margin-top: calc(var(--calendar-h) + 16px); }
     .date-line { color: var(--green); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
-    .detail h2 { margin: 4px 0 5px; font-size: clamp(24px, 6vw, 30px); font-weight: 700; line-height: 1.25; letter-spacing: -.02em; overflow-wrap: anywhere; word-break: normal; text-wrap: balance; }
+    .detail-head h2 { margin: 4px 0 5px; font-size: clamp(24px, 6vw, 30px); font-weight: 700; line-height: 1.25; letter-spacing: -.02em; overflow-wrap: anywhere; word-break: normal; text-wrap: balance; }
     .route { color: var(--ink-soft); font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
     .chips { display: flex; gap: 8px; overflow-x: auto; padding: 12px 0 0; scrollbar-width: none; }
     .chips::-webkit-scrollbar { display: none; }
@@ -125,9 +125,9 @@
     .timeline::before { position: absolute; top: 12px; bottom: 12px; left: calc(var(--time-col) + var(--gap) + var(--dot-col) / 2); width: 2px; background: rgba(57, 77, 106, .22); content: ""; transform: translateX(-50%); }
     .event { display: grid; grid-template-columns: var(--time-col) var(--dot-col) minmax(0, 1fr); column-gap: var(--gap); padding-bottom: 14px; font-size: 15px; line-height: 1.55; }
     .event:last-child { padding-bottom: 1px; }
-    .event .time { position: static; grid-column: 1; width: auto; padding-top: 12px; text-align: right; color: var(--green); font-size: 12px; font-weight: 800; line-height: 1.3; font-variant-numeric: tabular-nums; letter-spacing: .01em; overflow-wrap: anywhere; word-break: normal; }
-    .event::after { grid-column: 2; align-self: start; justify-self: center; width: 10px; height: 10px; margin-top: 14px; border: 2px solid var(--bg); border-radius: 50%; background: var(--green); box-shadow: 0 0 0 1px rgba(57, 77, 106, .22); content: ""; }
-    .event .event-body { grid-column: 3; min-height: 44px; padding: 12px 14px; border: 1px solid rgba(7, 22, 29, .09); border-radius: 14px; background: var(--surface); box-shadow: 0 1px 2px rgba(29, 29, 31, .05), 0 4px 14px rgba(29, 29, 31, .03); font-size: 15px; line-height: 1.55; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
+    .event .time { position: static; grid-row: 1; grid-column: 1; width: auto; padding-top: 12px; text-align: right; color: var(--green); font-size: 12px; font-weight: 800; line-height: 1.3; font-variant-numeric: tabular-nums; letter-spacing: .01em; overflow-wrap: anywhere; word-break: normal; }
+    .event::after { grid-row: 1; grid-column: 2; align-self: start; justify-self: center; width: 10px; height: 10px; margin-top: 14px; border: 2px solid var(--bg); border-radius: 50%; background: var(--green); box-shadow: 0 0 0 1px rgba(57, 77, 106, .22); content: ""; }
+    .event .event-body { grid-row: 1; grid-column: 3; min-height: 44px; padding: 12px 14px; border: 1px solid rgba(7, 22, 29, .09); border-radius: 14px; background: var(--surface); box-shadow: 0 1px 2px rgba(29, 29, 31, .05), 0 4px 14px rgba(29, 29, 31, .03); font-size: 15px; line-height: 1.55; overflow-wrap: anywhere; word-break: normal; text-wrap: pretty; }
     .event .event-body:active { transform: scale(.99); }
     .event.transport .event-body { min-height: 44px; padding: 12px 14px; border: 1px solid rgba(7, 22, 29, .09); border-radius: 14px; background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(29, 29, 31, .05), 0 4px 14px rgba(29, 29, 31, .03); }
     .event.transport::after { background: var(--green); }
@@ -135,8 +135,8 @@
     .day-extra { margin-top: 16px; }
     .day-extra > summary, .overview-extra > summary { display: flex; align-items: center; min-height: 48px; padding: 14px 16px; color: var(--ink); font-size: 15px; font-weight: 700; cursor: pointer; list-style: none; }
     .day-extra > summary::-webkit-details-marker, .overview-extra > summary::-webkit-details-marker { display: none; }
-    .day-extra > summary::after, .overview-extra > summary::after { margin-left: auto; color: var(--muted); content: '＋'; font-size: 19px; line-height: 1; }
-    .day-extra[open] > summary::after, .overview-extra[open] > summary::after { content: '−'; }
+    .day-extra > summary::after, .overview-extra > summary::after { margin-left: auto; color: var(--muted); content: none; font-size: 19px; line-height: 1; }
+    .day-extra[open] > summary::after, .overview-extra[open] > summary::after { content: none; }
     .day-extra > .wearbox, .day-extra > .viewbox, .day-extra > .roadbox, .day-extra > .stay { margin: 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; box-shadow: none; }
     .day-extra > .wearbox, .day-extra > .viewbox, .day-extra > .roadbox, .day-extra > .stay { background: var(--surface-soft); }
     .overview-extra { margin-top: 12px; }
@@ -152,7 +152,7 @@
     .stay:not(.event) { padding: 14px 16px; color: var(--ink-soft); font-size: 13px; line-height: 1.55; }
     .stay:not(.event) b { color: var(--green-dark); }
     .navdays { display: flex; flex-wrap: nowrap; justify-content: space-between; gap: 10px; margin-top: 28px; padding: 16px 0 24px; border-top: 1px solid var(--line); }
-    .navdays button { flex: 1 1 30%; min-height: 44px; padding: 10px 14px; border: 1px solid rgba(7, 22, 29, .11); border-radius: 12px; background: var(--material-strong); color: var(--ink-soft); font: inherit; cursor: pointer; box-shadow: var(--shadow); }
+    .navdays button { font-size: 14px; flex: 1 1 30%; min-height: 44px; padding: 10px 14px; border: 1px solid rgba(7, 22, 29, .11); border-radius: 12px; background: var(--material-strong); color: var(--ink-soft); font-family: inherit; cursor: pointer; box-shadow: var(--shadow); }
     .navdays .home-button { border-color: transparent; background: var(--green-soft); color: var(--green-dark); }
     .navdays button:disabled { cursor: default; opacity: .38; }
     .footer { margin-top: 48px; padding: 12px; color: var(--muted); font-size: 12px; text-align: center; }
@@ -176,12 +176,47 @@
       #tripMap { height: 260px; }
       .detail-head { padding-left: 13px; }
     }
-    @media (max-width: 480px) { .ticket-grid, .hotel-grid, .quicktips, .daily-brief { grid-template-columns: 1fr; } .brief-row { grid-template-columns: 42px minmax(0, 1fr); } .brief-action { grid-column: 2; grid-row: 2; margin-top: 2px; } .detail h2 { font-size: 22px; line-height: 1.3; } }
+    @media (max-width: 480px) { .ticket-grid, .hotel-grid, .quicktips, .daily-brief { grid-template-columns: 1fr; } .brief-row { grid-template-columns: 42px minmax(0, 1fr); } .brief-action { grid-column: 2; grid-row: 2; margin-top: 2px; } .detail-head h2 { font-size: 22px; line-height: 1.3; } }
     @media (max-width: 380px) { .hero h1 { font-size: 29px; letter-spacing: -.02em; } .calendar { padding-right: 8px; padding-left: 8px; } }
     @media (min-width: 701px) { html { overflow-y: scroll; } .route-map #tripMap { display: block; } .route-map .map-toggle { display: none; } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .event .event-body, .daybtn, .brief-row, .map-toggle, .navdays button, .day-extra > summary, .overview-extra > summary { transition: none; } .brief-row:active, .daybtn:active, .map-toggle:active, .navdays button:active, .day-extra > summary:active, .overview-extra > summary:active { transform: none; } }
     .section-label { display: none; }
 
+
+    .detail-head { background: transparent; }
+    .calendar-panel { box-shadow: none; }
+    .daybtn.active::after { background: var(--green); }
+    .daybtn.today .n::after { content: '当天'; display: block; font-size: 10px; color: var(--ink-soft); }
+    .daily-brief { gap: 0; background: var(--surface); border-radius: 12px; overflow: hidden; margin-bottom: 14px; }
+    .daily-brief-item { background: transparent; border: 0; border-radius: 0; }
+    .day-extra, .overview-extra { box-shadow: var(--shadow); }
+    .fold-icon { margin-left: auto; flex: 0 0 20px; width: 20px; height: 20px; transform: rotate(90deg); }
+    details[open] > summary .fold-icon { transform: rotate(-90deg); }
+    .stay-card { margin: 20px 0; padding: 16px; background: var(--surface); border-radius: 14px; }
+    .stay-card h3 { margin: 0 0 8px; font-size: 17px; }
+    .stay-card p { margin: 6px 0; }
+    .stay-address { user-select: text; font-size: 14px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .action { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--green-soft); color: var(--green); font: inherit; font-size: 14px; text-decoration: none; cursor: pointer; }
+    .action:hover { background: var(--surface-soft); }
+    .action:active { transform: translateY(1px); }
+    .copy-status { color: var(--ink-soft); font-size: 13px; }
+    .timing-label { display: block; width: fit-content; margin-bottom: 6px; font-size: 12px; color: var(--muted); }
+    .timing-label.hard { padding: 2px 8px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+    .supplement { margin: 10px 0 0; padding-left: 20px; color: var(--ink-soft); font-size: 14px; }
+    .supplement li + li { margin-top: 8px; }
+    .route-map.map-failed #tripMap { display: none !important; }
+    .route-map.map-failed .map-toggle { display: inline-flex; }
+    @media (max-width: 380px) {
+      .timeline { --time-col: 0px; --dot-col: 12px; --gap: 8px; }
+      .timeline::before { left: 6px; }
+      .event { grid-template-columns: 12px minmax(0,1fr); row-gap: 6px; }
+      .event .time { grid-column: 2; grid-row: 1; padding-top: 0; text-align: left; }
+      .event::after { grid-column: 1; grid-row: 1 / 3; margin-top: 4px; }
+      .event .event-body { grid-column: 2; grid-row: 2; }
+      .navdays { gap: 6px; }
+      .navdays button { padding: 10px 6px; font-size: 13px; }
+    }
   </style>
 </head>
 <body>
@@ -238,23 +273,23 @@
         <h3 class="ticket-title">🎫 门票与交通</h3>
         <div class="ticket-grid">
           <div class="ticket-item"><b>9/30 · 火车</b><span>西安 → 张掖西 · T269；按车票信息提前进站，夜间车程准备好水和眼罩。</span></div>
-          <div class="ticket-item"><b>10/1 · 七彩丹霞</b><span>下午13:45–17:00游览；按门票对应时段入园，观光车按所购票种乘坐。</span></div>
+          <div class="ticket-item"><b>10/1 · 七彩丹霞 · 已购买</b><span>下午13:45–17:00游览；按门票对应时段入园，观光车按所购票种乘坐。</span></div>
           <div class="ticket-item"><b>10/2 · 嘉峪关关城</b><span>国庆期间建议通过景区官方渠道提前购票或预约，按预约时段进入关城。</span></div>
           <div class="ticket-item"><b>10/3 · 莫高窟</b><span>13:15场次；至少提前30分钟抵达数字展示中心，建议12:30–12:45到达。</span></div>
-          <div class="ticket-item"><b>10/3 · 鸣沙山月牙泉</b><span>16:00–19:30入园时段；莫高窟结束后直接前往，按票面时段入园。</span></div>
-          <div class="ticket-item"><b>10/4 · 翡翠湖</b><span>下午游览盐湖；观光车或小火车按门票对应票种使用，景区内注意防风和防晒。</span></div>
+          <div class="ticket-item"><b>10/3 · 鸣沙山月牙泉 · 已购买</b><span>16:00–19:30入园时段；莫高窟结束后直接前往，按票面时段入园。</span></div>
+          <div class="ticket-item"><b>10/4 · 翡翠湖 · 已购买</b><span>下午游览盐湖；观光车或小火车按门票对应票种使用，景区内注意防风和防晒。</span></div>
           <div class="ticket-item"><b>10/5 · 青海湖</b><span>黑马河湖边公共观景按现场管理通行；如进入收费景区，按当天公告购票。</span></div>
-          <div class="ticket-item"><b>10/6 · 动车</b><span>西宁 → 西安；预留车辆交接和进站时间，提前查看车站与检票口信息。</span></div>
+          <div class="ticket-item"><b>10/6 · 动车</b><span>西宁 → 西安；车次与发车时间待确认。预留车辆交接和进站时间，提前查看车站与检票口信息。</span></div>
         </div>
         <div class="ticket-tip">景区开放时间、预约规则和交通接驳以官方渠道当天公告为准；长途转场日优先保证车程、补水和休息，不额外叠加远距离景点。</div>
       </div>
       <div class="hotelbox">
         <h3 class="ticket-title">🏨 住宿地址与入住提醒</h3>
         <div class="hotel-grid">
-          <div class="hotel-item"><b>10/1 · 嘉峪关</b><span>全季酒店（嘉峪关步行街店）<br>甘肃省嘉峪关市新华南路2199-1-18号，近和诚路</span><em>电话：0937-6788866</em></div>
+          <div class="hotel-item"><b>10/1 · 嘉峪关 · 已预订</b><span>全季酒店（嘉峪关步行街店）<br>甘肃省嘉峪关市新华南路2199-1-18号，近和诚路</span><em>电话：0937-6788866</em></div>
           <div class="hotel-item"><b>10/2–10/3 · 敦煌</b><span>Fonso·方所酒店（敦煌夜市商业街店）<br>甘肃省酒泉市敦煌市甘泉路197号</span><em>连续入住两晚 · 夜市商业街附近</em></div>
           <div class="hotel-item"><b>10/4 · 大柴旦</b><span>美豪丽致酒店（大柴旦店）<br>青海省海西州大柴旦人民西路与绍兴南街交叉口西北角</span><em>电话：0977-5967888 · 备好高原常用药</em></div>
-          <div class="hotel-item"><b>10/5 · 黑马河</b><span>曦和国际大酒店<br>青海省共和县黑马河镇加隆村01034号</span><em>靠近黑马河观日点 · 早起看湖预留时间</em></div>
+          <div class="hotel-item"><b>10/5 · 黑马河 · 已预订</b><span>曦和国际大酒店<br>青海省共和县黑马河镇加隆村01034号</span><em>靠近黑马河观日点 · 早起看湖预留时间</em></div>
         </div>
         <div class="ticket-tip">导航时直接搜索完整酒店名；长途日抵达后先办理入住，再安排晚餐、补水和休息。</div>
       </div>
@@ -275,7 +310,7 @@
 
     <section class="panel detail" data-detail="1">
       <div class="detail-head"><div class="date-line">10.01 · 周四</div><h2>张掖西 → 七彩丹霞 → 嘉峪关</h2><div class="route">下火车与司机会合，下午看丹霞，傍晚继续向西</div></div>
-      <div class="chips"><span class="chip">🚙 约250–280km</span><span class="chip">🎨 七彩丹霞</span><span class="chip">🏨 嘉峪关</span></div>
+      <div class="chips"><span class="chip">🚙 约250–280km</span><span class="chip">🎨 七彩丹霞 · 已购买</span><span class="chip">🏨 嘉峪关</span></div>
       <div class="daily-brief" aria-label="今日先看"><div class="daily-brief-item"><b>关键时间</b><span>11:31到张掖西；13:45–17:00游览七彩丹霞；17:00后前往嘉峪关。</span></div><div class="daily-brief-item"><b>注意事项</b><span>丹霞结束后直接西行，先补水再上车；傍晚降温，抓绒和冲锋衣放在手边。</span></div></div>
       <div class="wearbox"><h3 class="wear-title">🧥 穿衣节奏</h3><div class="wear-grid"><div class="wear-item"><b>11:31–13:00 · 到站、午饭、会合</b><span>长袖＋长裤；抓绒内胆和冲锋衣放在手边。</span></div><div class="wear-item"><b>13:45–17:00 · 七彩丹霞</b><span>长袖为主，风大时加冲锋衣外壳；有太阳时不必一开始就把抓绒穿死，方便随时脱。</span></div><div class="wear-item"><b>17:00–20:30 · 西行、入住</b><span>车内冷气或傍晚降温时加抓绒；到嘉峪关后若风大，外壳继续穿，秋裤看个人体感。</span></div></div></div>
       <div class="viewbox"><h3 class="view-title">📸 拍照与观景</h3><div class="view-grid"><div class="view-item"><b>七彩丹霞 · 13:45–17:00</b><span>优先看七彩虹霞台、最佳摄影点、七彩敖河台；下午侧光能把彩色层理拍出起伏。人多时先拍远景和山体纹理，再拍合影。</span></div><div class="view-item"><b>张掖 → 嘉峪关 · 17:00以后</b><span>车窗左／右侧都可留意河西绿洲、戈壁、远山和夕阳；只在服务区或合法停车点下车，不在高速路肩停留。</span></div></div><div class="view-note">景区内沿观景台步道拍摄，别翻越围栏、踩踏彩丘；车上拍摄请先征得司机同意，避免影响驾驶。</div></div>
@@ -332,7 +367,7 @@
 
     <section class="panel detail" data-detail="4">
       <div class="detail-head"><div class="date-line">10.04 · 周日</div><h2>敦煌 → 翡翠湖 → 大柴旦</h2><div class="route">公路观景日 · 中途正常休息补给</div></div>
-      <div class="chips"><span class="chip">🚙 约350km级</span><span class="chip">💚 翡翠湖</span><span class="chip">专职司机</span></div>
+      <div class="chips"><span class="chip">🚙 约350km级</span><span class="chip">💚 翡翠湖 · 已购买</span><span class="chip">专职司机</span></div>
       <div class="daily-brief" aria-label="今日先看"><div class="daily-brief-item"><b>关键时间</b><span>08:00敦煌出发；14:30–17:30游览翡翠湖；18:00左右抵达大柴旦入住。</span></div><div class="daily-brief-item"><b>注意事项</b><span>长途车程不赶时间，盐湖边风大温度低；帽子、手套和冲锋衣放在随手可取的位置。</span></div></div>
       <div class="wearbox"><h3 class="wear-title">🧥 穿衣节奏</h3><div class="wear-grid"><div class="wear-item"><b>07:30–12:30 · 敦煌出发、长途车程</b><span>长袖＋抓绒内胆，冲锋衣外壳放在随手可取的位置；清晨或山口风大时加外壳和秋裤。</span></div><div class="wear-item"><b>14:30–17:30 · 翡翠湖</b><span>盐湖边按抓绒＋冲锋衣穿，秋裤建议穿上；拍照或下车时抓绒帽子、手套都带着，风停有太阳再脱。</span></div><div class="wear-item"><b>18:00以后 · 大柴旦入住</b><span>回酒店后可脱冲锋衣，但保留抓绒；第二天早出发的衣物提前叠好放在行李上层。</span></div></div></div>
       <div class="viewbox"><h3 class="view-title">📸 拍照与观景</h3><div class="view-grid"><div class="view-item"><b>敦煌 → 大柴旦 · G3011沿线</b><span>留意阿克塞荒漠、当金山山口、戈壁公路和柴达木盆地的地貌转换；最适合在服务区、观景停车点或司机主动安排的安全地点下车。</span></div><div class="view-item"><b>翡翠湖 · 14:30–17:30</b><span>优先拍不同颜色盐池、盐壳纹理、远山倒影和长直线栈道；下午光线更柔，人物不要站到盐池边缘或盐壳上。</span></div><div class="view-item"><b>大柴旦夜晚</b><span>如果天气晴朗，可在酒店附近拍低光下的街景和星空氛围；不为拍照额外远行，保留体力给第二天。</span></div></div><div class="view-note">盐湖颜色受天气、光线和水位影响，现场优先服从景区步道和围栏管理。</div></div>
@@ -395,7 +430,7 @@
     <section class="panel detail" data-detail="7">
       <div class="detail-head"><div class="date-line">10.07 · 周三</div><h2>西安 → 深圳</h2><div class="route">返程日 · 不安排额外景点</div></div>
       <div class="chips"><span class="chip">✈️ 飞机返程</span><span class="chip">行程结束</span></div>
-      <div class="daily-brief" aria-label="今日先看"><div class="daily-brief-item"><b>关键时间</b><span>按航班时间前往机场，预留托运行李、安检和登机时间。</span></div><div class="daily-brief-item"><b>注意事项</b><span>返程日不安排额外景点；帽子、手套和秋裤收进行李，到深圳后按天气换装。</span></div></div>
+      <div class="daily-brief" aria-label="今日先看"><div class="daily-brief-item"><b>关键时间</b><span>返程航班与起飞时间待确认；按机票时间前往机场，预留托运行李、安检和登机时间。</span></div><div class="daily-brief-item"><b>注意事项</b><span>返程日不安排额外景点；帽子、手套和秋裤收进行李，到深圳后按天气换装。</span></div></div>
       <div class="wearbox"><h3 class="wear-title">🧥 穿衣节奏</h3><div class="wear-grid"><div class="wear-item"><b>出发去机场</b><span>长袖＋长裤，冲锋衣作为机场和路上的防风层；抓绒内胆放行李或随身包，按西安当天温度调整。</span></div><div class="wear-item"><b>飞行途中</b><span>把帽子、手套和秋裤收好，返程后按深圳天气换回轻薄衣物。</span></div></div></div>
       <div class="timeline"><div class="event"><span class="time">当天</span>根据航班时间前往机场，返回深圳。</div></div>
     </section>
@@ -474,7 +509,7 @@
         6: ['heimah', 'xining', 'xian'],
         7: ['xian', 'shenzhen']
       };
-      const routeColors = ['#699b87', '#6f9c8e', '#8a73a4', '#c18b55', '#5f8f83', '#9a8a66', '#a07b64', '#6d9b73'];
+      const routeColors = Array(8).fill('#394D6A');
 
       function updateTripStatus() {
         if (!tripStatus) return;
@@ -569,9 +604,9 @@
         });
         const coords = places.map(place => [place.lat, place.lng]);
         places.forEach(place => {
-          const marker = L.marker([place.lat, place.lng], { icon: mapIcon(place, routeColors[day] || routeColors[0]) })
+          const marker = L.marker([place.lat, place.lng], { icon: mapIcon(place, '#824A5B') })
             .addTo(tripMap)
-            .bindPopup(`<b>${place.name}</b><br><span style="color:#788a84">${label} · 路线参考点</span>`);
+            .bindPopup(`<b>${place.name}</b><br><span style="color:#5F7087">${label} · 路线参考点</span>`);
           mapLayers.push(marker);
         });
         if (coords.length > 1) {
@@ -610,6 +645,28 @@
         }
       }
 
+      let loadingMapScript = false;
+      function retryMap() {
+        if (window.L) { clearMapFallback(); openMap(); return; }
+        if (loadingMapScript) return;
+        loadingMapScript = true;
+        mapStatus.textContent = '正在重新加载地图';
+        mapToggle.disabled = true;
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        let finished = false;
+        const finish = success => {
+          if (finished) return;
+          finished = true; loadingMapScript = false; mapToggle.disabled = false;
+          if (success && window.L) { clearMapFallback(); openMap(); }
+          else renderMapFallback(current, '地图仍无法加载，请稍后重试');
+        };
+        script.onload = () => finish(true);
+        script.onerror = () => finish(false);
+        document.head.append(script);
+        setTimeout(() => finish(false), 12000);
+      }
+
       function openMap() {
         routeMapPanel?.classList.add('is-open');
         mapToggle?.setAttribute('aria-expanded', 'true');
@@ -639,11 +696,12 @@
       }
 
       const svgIconPaths = {
+        chevron: '<path d="m9 5 7 7-7 7"/>',
         home: '<path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>',
         ticket: '<path d="M5 5h14v14H5z"/><path d="M8 9h8M8 13h5"/>',
         hotel: '<path d="M4 20V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"/><path d="M4 14h16M8 9h2M14 9h2"/>',
         wear: '<path d="m8 5 4 3 4-3 4 3-3 5v7H7v-7L4 8z"/>',
-        view: '<circle cx="12" cy="12" r="4"/><path d="M3 12s3-6 9-6 9 6 9 6-3 6-9 6-9-6-9-6z"/>',
+        view: '<path d="M3 7h5l2-3h4l2 3h5v13H3z"/><circle cx="12" cy="13" r="4"/>',
         road: '<path d="M8 3 5 21M16 3l3 18M12 4v3M12 11v3M12 18v3"/>',
         car: '<path d="m5 16 1-6h12l1 6M4 16h16v3H4z"/><circle cx="7" cy="19" r="1"/><circle cx="17" cy="19" r="1"/>',
         palette: '<path d="M12 4a8 8 0 1 0 0 16h2a2 2 0 0 0 0-4h-1a2 2 0 0 1 0-4h3a5 5 0 0 0 0-8z"/><circle cx="7" cy="11" r=".8"/><circle cx="10" cy="7.5" r=".8"/><circle cx="15" cy="7.5" r=".8"/>',
@@ -704,20 +762,90 @@
       function foldExtras() {
         details.forEach(detail => {
           const timeline = detail.querySelector('.timeline');
-          if (!timeline || detail.querySelector('.day-extra')) return;
-          const quicktips = detail.querySelector('.quicktips');
-          if (quicktips) timeline.before(quicktips);
-          const extras = [...detail.children].filter(node => /^(wearbox|viewbox|roadbox|stay)$/.test(node.className));
-          if (!extras.length) return;
-          const fold = document.createElement('details');
-          fold.className = 'day-extra';
-          fold.open = window.innerWidth > 700;
-          const summary = document.createElement('summary');
-          summary.textContent = '穿衣、拍照与途中建议';
-          fold.appendChild(summary);
-          timeline.after(fold);
-          extras.forEach(node => fold.appendChild(node));
+          const tips = detail.querySelector('.quicktips');
+          const road = detail.querySelector('.roadbox');
+          if (tips) {
+            const list = document.createElement('ul'); list.className = 'supplement';
+            tips.querySelectorAll('.quicktip').forEach(tip => {
+              if (tip.querySelector('b').textContent === '今日重点') return;
+              const text = tip.querySelector('span').textContent;
+              if (road && road.textContent.includes(text)) return;
+              const li = document.createElement('li'); li.textContent = text; list.append(li);
+            });
+            if (road) road.append(list);
+            else if (list.children.length) { const box = document.createElement('div'); box.className='roadbox'; box.append(list); timeline.after(box); }
+            tips.remove();
+          }
+          const stay = detail.querySelector(':scope > .stay');
+          if (stay) { timeline.after(stay); enhanceStay(stay, Number(detail.dataset.detail)); }
+          const labels = {wearbox:'穿衣建议',viewbox:'拍照与观景',roadbox:'路上怎么走'};
+          let anchor = stay || timeline;
+          Object.entries(labels).forEach(([kind,label]) => {
+            const node = detail.querySelector(':scope > .' + kind); if (!node) return;
+            const fold = document.createElement('details'); fold.className='day-extra';
+            const summary=document.createElement('summary'); summary.textContent=label;
+            fold.append(summary,node); anchor.after(fold); anchor=fold;
+          });
         });
+      }
+
+      function enhanceStay(stay, day) {
+        const addressNode = stay.querySelector('.stay-address');
+        const raw = addressNode?.textContent || '';
+        const name = [...stay.childNodes].filter(n=>n.nodeType===Node.TEXT_NODE).map(n=>n.textContent).join('').replace(/^\s*·\s*/, '').trim();
+        const address = raw.split(' · ')[0];
+        const phone = raw.match(/电话([\d-]+)/)?.[1];
+        stay.className='stay stay-card'; stay.replaceChildren();
+        const title=document.createElement('h3'); title.textContent='今晚住宿 · 10/'+day;
+        const hotel=document.createElement('p'); hotel.textContent=day===6?'西安酒店 · 待确认':name;
+        const status=document.createElement('p'); status.className='copy-status';
+        status.textContent=[1,5].includes(day)?'已预订':'预订状态待确认';
+        const addr=document.createElement('span'); addr.className='stay-address'; addr.textContent=address || '酒店名称、地址待确认';
+        stay.append(title,hotel,status,addr);
+        if (!address) return;
+        const actions=document.createElement('div'); actions.className='actions';
+        const copy=document.createElement('button'); copy.type='button'; copy.className='action'; copy.textContent='复制地址'; copy.dataset.copyAddress='true';
+        const live=document.createElement('p'); live.className='copy-status'; live.setAttribute('aria-live','polite');
+        copy.addEventListener('click',async()=>{ try { await navigator.clipboard.writeText(name+' '+address); live.textContent='地址已复制'; } catch { live.textContent='复制未成功，请长按或选择上方完整地址复制。'; } });
+        const link=document.createElement('a'); link.className='action'; link.href='https://uri.amap.com/search?keyword='+encodeURIComponent(name+' '+address)+'&callnative=1'; link.textContent='高德导航（需联网）'; link.target='_blank'; link.rel='noopener';
+        actions.append(copy,link);
+        if(phone) { const tel=document.createElement('a'); tel.className='action'; tel.href='tel:'+phone; tel.textContent='拨打酒店电话'; actions.append(tel); }
+        stay.append(actions,live);
+      }
+
+      function enhanceGuide() {
+        document.querySelectorAll('summary').forEach(summary=>{const icon=createSvgIcon('chevron'); icon.classList.add('fold-icon'); summary.append(icon);});
+        document.querySelectorAll('.navdays').forEach(nav=>{const b=nav.querySelectorAll('button'); const prev=createSvgIcon('chevron'); prev.style.transform='rotate(180deg)'; b[0].prepend(prev); b[2].append(createSvgIcon('chevron'));});
+        details.forEach(detail=>detail.querySelectorAll('.event').forEach(event=>{
+          const body=event.querySelector('.event-body'); const text=body.textContent;
+          const day=Number(detail.dataset.detail); const time=event.querySelector('.time')?.textContent || '';
+          const label=document.createElement('span'); label.className='timing-label';
+          if(day===3 && /13:15/.test(time)) { label.textContent='预约场次 · 购票状态待确认'; label.classList.add('hard'); }
+          else if(day===3 && /16:00/.test(time)) { label.textContent='入园时段 16:00–19:30 · 已购买'; label.classList.add('hard'); }
+          else if(day===1 && /11:31/.test(time)) { label.textContent='列车到站时间 · 以票面为准'; label.classList.add('hard'); }
+          else if(/若|如果|视体力|可选/.test(text)) label.textContent='可选';
+          else label.textContent='预计';
+          if(day===6 && /动车/.test(text)) {label.textContent='车次与发车时间待确认';label.classList.add('hard');}
+          if(day===7) {label.textContent='航班与起飞时间待确认';label.classList.add('hard');}
+          body.prepend(label);
+        }));
+        const footer=document.querySelector('.footer');
+        const save=document.createElement('button'); save.type='button'; save.className='action'; save.textContent='保存离线攻略'; save.id='saveOffline';
+        const updated=document.createElement('p'); updated.textContent='行程资料整理：2026-09-19 · 车次、航班等待确认项目请以出行凭证为准。';
+        footer.append(updated,save); save.addEventListener('click',saveOffline);
+      }
+
+      function saveOffline() {
+        const clone=document.documentElement.cloneNode(true);
+        clone.querySelectorAll('script, link, .calendar-panel, .navdays, #routeMapPanel, #saveOffline, [data-copy-address], .skip-link').forEach(n=>n.remove());
+        clone.querySelector('body').classList.remove('show-detail');
+        clone.querySelectorAll('.detail').forEach(n=>{n.classList.add('show');n.style.display='block';});
+        clone.querySelectorAll('details').forEach(n=>n.open=true);
+        clone.querySelectorAll('.brief-row').forEach(button=>{const row=document.createElement('div'); row.className=button.className; row.innerHTML=button.innerHTML; row.querySelector('.brief-action')?.remove(); button.replaceWith(row);});
+        const note=document.createElement('p');note.textContent='离线攻略 · 全部行程已展开。高德导航需要联网，地图请回到在线页面查看。';
+        clone.querySelector('.hero').append(note);
+        const blob=new Blob(['<!doctype html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'});
+        const url=URL.createObjectURL(blob); const a=document.createElement('a');a.href=url;a.download='青甘环线-离线攻略.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);
       }
 
       function addDepartureNote() {
@@ -765,6 +893,12 @@
           if (selected && (scroll || current === initialView)) requestAnimationFrame(() => revealDayButton(button, scroll));
         });
         details.forEach(detail => detail.classList.toggle('show', Number(detail.dataset.detail) === current));
+        if (current) {
+          const detail=details.find(d=>Number(d.dataset.detail)===current);
+          detail.querySelector('.daily-brief').after(routeMapPanel);
+        } else document.querySelector('#overview').before(routeMapPanel);
+        document.querySelector('#map-title').textContent=current?'今日路线地图':'路线地图';
+        requestAnimationFrame(()=>tripMap?.invalidateSize());
         updateMap(current);
         updateMapToggleLabel();
         updateTripStatus();
@@ -780,7 +914,7 @@
         const day = Number(detail.dataset.detail);
         const nav = document.createElement('div');
         nav.className = 'navdays';
-        nav.innerHTML = `<button type="button" aria-label="${day === 1 ? '没有前一天' : `前往第${day - 1}天`}" ${day === 1 ? 'disabled' : ''}>← 前一天</button><button class="home-button" type="button" aria-label="回到总览"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>回到总览</button><button type="button" aria-label="${day === 7 ? '没有后一天' : `前往第${day + 1}天`}" ${day === 7 ? 'disabled' : ''}>后一天 →</button>`;
+        nav.innerHTML = `<button type="button" aria-label="${day === 1 ? '没有前一天' : `前往第${day - 1}天`}" ${day === 1 ? 'disabled' : ''}>前一天</button><button class="home-button" type="button" aria-label="回到总览"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>回到总览</button><button type="button" aria-label="${day === 7 ? '没有后一天' : `前往第${day + 1}天`}" ${day === 7 ? 'disabled' : ''}>后一天</button>`;
         const navButtons = nav.querySelectorAll('button');
         navButtons[0].addEventListener('click', () => show(day - 1, true, true));
         navButtons[1].addEventListener('click', () => show(0, true, true));
@@ -791,6 +925,7 @@
       foldOverviewExtras();
       foldExtras();
       markDecorativeIcons();
+      enhanceGuide();
       addDepartureNote();
       briefRows.forEach(row => row.addEventListener('click', () => show(row.dataset.day, true, true)));
       const calendarPanel = document.querySelector('.calendar-panel');
@@ -807,8 +942,7 @@
       if (window.innerWidth > 700) initTripMap();
       mapToggle?.addEventListener('click', () => {
         if (mapFallback && !mapFallback.hidden) {
-          clearMapFallback();
-          openMap();
+          retryMap();
           return;
         }
         if (routeMapPanel?.classList.contains('is-open')) {
