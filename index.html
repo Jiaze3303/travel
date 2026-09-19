@@ -834,7 +834,8 @@
         const copy=document.createElement('button'); copy.type='button'; copy.className='action'; copy.textContent='复制地址'; copy.dataset.copyAddress='true';
         const live=document.createElement('p'); live.className='copy-status'; live.setAttribute('aria-live','polite');
         copy.addEventListener('click',async()=>{ try { await navigator.clipboard.writeText(name+' '+address); live.textContent='地址已复制'; } catch { live.textContent='复制未成功，请长按或选择上方完整地址复制。'; } });
-        const link=document.createElement('a'); link.className='action'; link.href='https://uri.amap.com/search?keyword='+encodeURIComponent(name+' '+address)+'&callnative=1'; link.textContent='导航到酒店'; link.target='_blank'; link.rel='noopener';
+        const hotelSearchNames = {1:'全季酒店（嘉峪关步行街店）',2:'Fonso·方所酒店（敦煌夜市商业街店）',3:'Fonso·方所酒店（敦煌夜市商业街店）',4:'美豪丽致酒店（大柴旦店）',5:'曦和国际大酒店（黑马河）'};
+        const link=document.createElement('a'); link.className='action'; link.href='https://uri.amap.com/search?keyword='+encodeURIComponent(hotelSearchNames[day] || name)+'&callnative=1'; link.textContent='导航到酒店'; link.target='_blank'; link.rel='noopener';
         actions.append(copy,link);
         if(phone) { const tel=document.createElement('a'); tel.className='action'; tel.href='tel:'+phone; tel.textContent='联系酒店'; actions.append(tel); }
         stay.append(actions,live);
