@@ -3,28 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#E3E8F2">
+  <meta name="theme-color" content="#E9EEF5">
   <title>2026 国庆 · 青甘环线 · 8天行程</title>
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <style>
     :root {
-      --bg: #E3E8F2;
+      --bg: #E9EEF5;
       --surface: #FFFFFF;
-      --surface-soft: #F4F7FB;
-      --ink: #2A313D;
-      --ink-soft: #556B8F;
-      --muted: #687996;
+      --surface-soft: #F6F8FB;
+      --ink: #273241;
+      --ink-soft: #586D8D;
+      --muted: #7889A1;
       --line: rgba(57, 77, 106, .18);
       --green: #394D6A;
-      --green-dark: #2A313D;
-      --green-soft: #E8EDF5;
-      --sand: #F1E3E8;
-      --accent: #9C5869;
-      --accent-soft: #F2E3E8;
-      --shadow: 0 1px 2px rgba(42, 49, 61, .1);
-      --shadow-lift: 0 10px 26px rgba(42, 49, 61, .12);
-      --grouped-bg: #E9EEF5;
+      --green-dark: #273241;
+      --green-soft: #E7EDF5;
+      --sand: #F7ECEF;
+      --accent: #A15E73;
+      --accent-soft: #F5E8EC;
+      --shadow: 0 1px 2px rgba(39, 50, 65, .08);
+      --shadow-lift: 0 10px 26px rgba(39, 50, 65, .1);
+      --grouped-bg: #EDF2F7;
       --material: rgba(253, 254, 255, .84);
       --material-strong: rgba(253, 254, 255, .96);
       --swift-radius: 16px;
@@ -113,7 +113,7 @@
     .daily-brief-item span { display: block; color: var(--ink-soft); font-size: 13px; line-height: 1.55; overflow-wrap: anywhere; text-wrap: pretty; }
     .detail { display: none; margin-bottom: 64px; overflow: visible; border: 0; border-radius: 0; background: transparent; }
     .detail.show { display: block; }
-    .detail-head { position: sticky; top: calc(var(--calendar-h) + env(safe-area-inset-top, 0)); z-index: 8; padding: 17px 14px 14px 16px; border-bottom: 1px solid var(--line); border-left: 2px solid var(--green); background: rgba(227, 232, 242, .95); box-shadow: 0 8px 18px rgba(42, 49, 61, .12); overflow-wrap: anywhere; }
+    .detail-head { position: sticky; top: calc(var(--calendar-h) + env(safe-area-inset-top, 0)); z-index: 8; padding: 17px 14px 14px 16px; border-bottom: 1px solid var(--line); border-left: 2px solid var(--green); background: rgba(233, 238, 245, .95); box-shadow: 0 8px 18px rgba(39, 50, 65, .1); overflow-wrap: anywhere; }
     .detail { scroll-margin-top: calc(var(--calendar-h) + 16px); }
     .date-line { color: var(--green); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
     .detail h2 { margin: 4px 0 5px; font-size: clamp(24px, 6vw, 30px); font-weight: 700; line-height: 1.25; letter-spacing: -.02em; overflow-wrap: anywhere; word-break: normal; text-wrap: balance; }
