@@ -10,22 +10,22 @@
   <style>
     :root {
       --bg: #DADEF7;
-      --surface: #D0D7E1;
-      --surface-soft: #E3E7EF;
+      --surface: #FDFEFF;
+      --surface-soft: #F4F7FB;
       --ink: #2A313D;
       --ink-soft: #556B8F;
       --muted: #687996;
       --line: rgba(57, 77, 106, .18);
       --green: #394D6A;
       --green-dark: #2A313D;
-      --green-soft: #C5CFDF;
+      --green-soft: #E8EDF5;
       --sand: #F1E3E8;
       --accent: #9C5869;
       --shadow: 0 1px 2px rgba(42, 49, 61, .1);
       --shadow-lift: 0 10px 26px rgba(42, 49, 61, .12);
-      --grouped-bg: #D0D7E1;
-      --material: rgba(208, 215, 225, .84);
-      --material-strong: rgba(208, 215, 225, .96);
+      --grouped-bg: #E9EEF5;
+      --material: rgba(253, 254, 255, .84);
+      --material-strong: rgba(253, 254, 255, .96);
       --swift-radius: 16px;
       --calendar-h: 66px;
     }
@@ -33,6 +33,7 @@
     html { scroll-behavior: smooth; background: var(--bg); }
     body { margin: 0; overflow-x: clip; min-height: 100vh; background: var(--bg); color: var(--ink); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     img, svg, video { max-width: 100%; height: auto; }
+    .ui-icon { display: inline-block; width: 1.05em; height: 1.05em; margin-right: .28em; vertical-align: -.16em; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     button, summary, a { touch-action: manipulation; -webkit-tap-highlight-color: rgba(57, 77, 106, .16); }
     button:focus-visible, summary:focus-visible, a:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
     .brief-row, .daybtn, .map-toggle, .navdays button, .day-extra > summary, .overview-extra > summary { transition: transform .18s cubic-bezier(.2, .8, .2, 1), background-color .18s ease, box-shadow .18s ease, border-color .18s ease; }
@@ -79,6 +80,7 @@
     .leaflet-container { font: inherit; }
     .leaflet-control-zoom a { width: 44px !important; height: 44px !important; line-height: 44px !important; border-radius: 8px !important; color: var(--ink) !important; }
     .map-marker { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 2px 8px rgba(36, 58, 52, .22); color: #fff; font-size: 13px; }
+    .map-marker .ui-icon { width: 16px; height: 16px; margin: 0; stroke: currentColor; }
     #overview { display: block; margin-top: 20px; }
     body.show-detail #overview { display: none; }
     .panel-title { margin: 0; padding: 0 0 14px; font-size: 23px; font-weight: 700; letter-spacing: -.025em; }
@@ -191,7 +193,7 @@
     <section class="panel calendar-panel" aria-label="每日行程导航">
       <div class="calendar">
         <div class="dates">
-          <button class="daybtn overview" type="button" data-day="0" aria-label="总览" aria-pressed="false"><span class="n" aria-hidden="true">⌂</span><span class="city">总览</span></button>
+          <button class="daybtn overview" type="button" data-day="0" aria-label="总览" aria-pressed="false"><span class="n" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="city">总览</span></button>
           <button class="daybtn" type="button" data-day="1" aria-label="第1天，张掖" aria-pressed="false"><span class="n">1</span><span class="city">张掖</span></button>
           <button class="daybtn" type="button" data-day="2" aria-label="第2天，嘉峪关" aria-pressed="false"><span class="n">2</span><span class="city">嘉峪关</span></button>
           <button class="daybtn" type="button" data-day="3" aria-label="第3天，敦煌" aria-pressed="false"><span class="n">3</span><span class="city">敦煌</span></button>
@@ -447,19 +449,19 @@
       let tripMap = null;
       let mapLayers = [];
       const mapPlaces = {
-        xian: { name: '西安', lat: 34.3416, lng: 108.9398, icon: '🚉' },
-        zhangye: { name: '张掖西', lat: 39.1526, lng: 100.0444, icon: '🚉' },
-        danxia: { name: '七彩丹霞', lat: 38.9248, lng: 100.1167, icon: '🎨' },
-        jiayuguan: { name: '嘉峪关关城', lat: 39.8025, lng: 98.2038, icon: '🏯' },
-        dunhuang: { name: '敦煌', lat: 40.1421, lng: 94.6618, icon: '🏨' },
-        mogao: { name: '莫高窟', lat: 40.0422, lng: 94.8092, icon: '🪷' },
-        crescent: { name: '鸣沙山月牙泉', lat: 40.0871, lng: 94.6664, icon: '🌙' },
-        emerald: { name: '大柴旦翡翠湖', lat: 37.0266, lng: 95.3576, icon: '💎' },
-        dachaidan: { name: '大柴旦', lat: 37.8500, lng: 95.3000, icon: '🏨' },
-        delingha: { name: '德令哈', lat: 37.3695, lng: 97.3708, icon: '☕' },
-        heimah: { name: '黑马河', lat: 36.7167, lng: 99.1000, icon: '🌊' },
-        xining: { name: '西宁', lat: 36.6171, lng: 101.7782, icon: '🚉' },
-        shenzhen: { name: '深圳', lat: 22.5431, lng: 114.0579, icon: '✈️' }
+        xian: { name: '西安', lat: 34.3416, lng: 108.9398, icon: 'train' },
+        zhangye: { name: '张掖西', lat: 39.1526, lng: 100.0444, icon: 'train' },
+        danxia: { name: '七彩丹霞', lat: 38.9248, lng: 100.1167, icon: 'palette' },
+        jiayuguan: { name: '嘉峪关关城', lat: 39.8025, lng: 98.2038, icon: 'landmark' },
+        dunhuang: { name: '敦煌', lat: 40.1421, lng: 94.6618, icon: 'hotel' },
+        mogao: { name: '莫高窟', lat: 40.0422, lng: 94.8092, icon: 'temple' },
+        crescent: { name: '鸣沙山月牙泉', lat: 40.0871, lng: 94.6664, icon: 'moon' },
+        emerald: { name: '大柴旦翡翠湖', lat: 37.0266, lng: 95.3576, icon: 'gem' },
+        dachaidan: { name: '大柴旦', lat: 37.8500, lng: 95.3000, icon: 'hotel' },
+        delingha: { name: '德令哈', lat: 37.3695, lng: 97.3708, icon: 'coffee' },
+        heimah: { name: '黑马河', lat: 36.7167, lng: 99.1000, icon: 'lake' },
+        xining: { name: '西宁', lat: 36.6171, lng: 101.7782, icon: 'train' },
+        shenzhen: { name: '深圳', lat: 22.5431, lng: 114.0579, icon: 'plane' }
       };
       const dayRoutes = {
         0: ['xian', 'zhangye', 'danxia', 'jiayuguan', 'dunhuang', 'crescent', 'emerald', 'heimah', 'xining', 'shenzhen'],
@@ -527,7 +529,9 @@
       }
 
       function mapIcon(place, color) {
-        return L.divIcon({ className: '', html: `<span class="map-marker" style="background:${color}">${place.icon}</span>`, iconSize: [28, 28], iconAnchor: [14, 14] });
+        const icon = createSvgIcon(place.icon);
+        icon.classList.add('map-ui-icon');
+        return L.divIcon({ className: '', html: `<span class="map-marker" style="background:${color}">${icon.outerHTML}</span>`, iconSize: [28, 28], iconAnchor: [14, 14] });
       }
 
       function renderMapFallback(day, reason = '地图暂时无法加载') {
@@ -633,15 +637,43 @@
         event.classList.add(kind);
       }
 
+      const svgIconPaths = {
+        home: '<path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>',
+        ticket: '<path d="M5 5h14v14H5z"/><path d="M8 9h8M8 13h5"/>',
+        hotel: '<path d="M4 20V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"/><path d="M4 14h16M8 9h2M14 9h2"/>',
+        wear: '<path d="m8 5 4 3 4-3 4 3-3 5v7H7v-7L4 8z"/>',
+        view: '<circle cx="12" cy="12" r="4"/><path d="M3 12s3-6 9-6 9 6 9 6-3 6-9 6-9-6-9-6z"/>',
+        road: '<path d="M8 3 5 21M16 3l3 18M12 4v3M12 11v3M12 18v3"/>',
+        car: '<path d="m5 16 1-6h12l1 6M4 16h16v3H4z"/><circle cx="7" cy="19" r="1"/><circle cx="17" cy="19" r="1"/>',
+        palette: '<path d="M12 4a8 8 0 1 0 0 16h2a2 2 0 0 0 0-4h-1a2 2 0 0 1 0-4h3a5 5 0 0 0 0-8z"/><circle cx="7" cy="11" r=".8"/><circle cx="10" cy="7.5" r=".8"/><circle cx="15" cy="7.5" r=".8"/>',
+        landmark: '<path d="M4 20h16M6 20V9h12v11M4 9l8-5 8 5M9 20v-6h6v6"/>',
+        temple: '<path d="M4 20h16M6 20v-8h12v8M4 12h16M7 12l5-5 5 5M9 20v-5h6v5"/>',
+        desert: '<path d="M3 19c3-5 6-5 9-2s6 3 9-2"/><path d="M12 4v8M9 7l3-3 3 3"/>',
+        moon: '<path d="M19 15A7 7 0 0 1 9 5a7 7 0 1 0 10 10z"/>',
+        gem: '<path d="m4 8 4-4h8l4 4-8 12zM4 8h16M8 4l4 4 4-4"/>',
+        coffee: '<path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4zM16 10h2a2 2 0 0 1 0 4h-2M8 4v2M12 3v3"/>',
+        lake: '<path d="M3 9c2 2 4 2 6 0s4-2 6 0 4 2 6 0M3 15c2 2 4 2 6 0s4-2 6 0 4 2 6 0"/>',
+        train: '<rect x="6" y="4" width="12" height="14" rx="2"/><path d="M9 18 7 21M15 18l2 3M8 8h8M8 12h2M14 12h2"/>',
+        plane: '<path d="m3 12 18-5-6 6 6 4-18-2 6-3z"/>',
+        food: '<path d="M6 3v8M9 3v8M6 8h3M7.5 11v10M16 3v18M16 3c3 2 3 6 0 8"/>'
+      };
+      const svgTokenMap = { '🎫':'ticket', '🏨':'hotel', '🧥':'wear', '📸':'view', '🛣':'road', '🚙':'car', '🎨':'palette', '🏛':'landmark', '🏯':'landmark', '🏜':'desert', '🪷':'temple', '🌙':'moon', '💎':'gem', '☕':'coffee', '🌊':'lake', '🚉':'train', '🚆':'train', '✈️':'plane', '🍽':'food', '💚':'lake' };
+      function createSvgIcon(token) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('aria-hidden', 'true');
+        svg.classList.add('ui-icon');
+        svg.innerHTML = svgIconPaths[svgTokenMap[token] || token] || '<circle cx="12" cy="12" r="7"/>';
+        return svg;
+      }
+
       function markDecorativeIcons() {
-        document.querySelectorAll('.panel-title, .map-kicker, .ticket-title, .wear-title, .view-title, .roadtitle, .chip').forEach(node => {
+        document.querySelectorAll('.panel-title, .map-kicker, .ticket-title, .wear-title, .view-title, .roadtitle, .chip, .stay b').forEach(node => {
           const text = node.firstChild;
           if (!text || text.nodeType !== Node.TEXT_NODE) return;
           const match = text.textContent.match(/^(\S+)\s+/u);
           if (!match || !/[\u{1F000}-\u{1FAFF}]/u.test(match[1])) return;
-          const icon = document.createElement('span');
-          icon.setAttribute('aria-hidden', 'true');
-          icon.textContent = match[1];
+          const icon = createSvgIcon(match[1]);
           text.textContent = text.textContent.slice(match[0].length);
           node.prepend(icon, ' ');
         });
@@ -747,7 +779,7 @@
         const day = Number(detail.dataset.detail);
         const nav = document.createElement('div');
         nav.className = 'navdays';
-        nav.innerHTML = `<button type="button" aria-label="${day === 1 ? '没有前一天' : `前往第${day - 1}天`}" ${day === 1 ? 'disabled' : ''}>← 前一天</button><button class="home-button" type="button" aria-label="回到总览">⌂ 回到总览</button><button type="button" aria-label="${day === 7 ? '没有后一天' : `前往第${day + 1}天`}" ${day === 7 ? 'disabled' : ''}>后一天 →</button>`;
+        nav.innerHTML = `<button type="button" aria-label="${day === 1 ? '没有前一天' : `前往第${day - 1}天`}" ${day === 1 ? 'disabled' : ''}>← 前一天</button><button class="home-button" type="button" aria-label="回到总览"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>回到总览</button><button type="button" aria-label="${day === 7 ? '没有后一天' : `前往第${day + 1}天`}" ${day === 7 ? 'disabled' : ''}>后一天 →</button>`;
         const navButtons = nav.querySelectorAll('button');
         navButtons[0].addEventListener('click', () => show(day - 1, true, true));
         navButtons[1].addEventListener('click', () => show(0, true, true));
