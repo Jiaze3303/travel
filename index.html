@@ -145,10 +145,14 @@
       padding: 10px 24px 12px;
     }
     .dates {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
+      display: flex;
       gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
+    .dates::-webkit-scrollbar { display: none; }
+    .dates .daybtn { flex: 0 0 58px; }
+    .dates .daybtn.overview { flex-basis: 60px; }
     .daybtn {
       min-width: 0;
       min-height: 43px;
@@ -417,7 +421,6 @@
     }
     .event .event-body { cursor: default; }
     .event .event-body:active { transform: scale(.99); background: #fff; box-shadow: 0 3px 8px rgba(36, 58, 52, .09); }
-    .event.is-expanded .event-body { max-height: none; }
     .event .event-body::before {
       content: '•';
       display: inline-block;
@@ -572,21 +575,13 @@
       .detail-head { top: 55px; padding-top: 16px; }
       .cover { border-radius: 12px; }
       .timeline { margin-top: 16px; }
-      .event .event-body {
-        display: -webkit-box;
-        overflow: hidden;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        cursor: pointer;
-      }
-      .event.is-expanded .event-body { display: block; }
       .day-extra { margin-top: 16px; }
       .day-extra > summary { padding: 13px 14px; }
     }
     @media (max-width: 390px) {
       .calendar { padding-right: 6px; padding-left: 6px; }
       .dates { gap: 3px; }
-      .daybtn { min-height: 45px; }
+      .dates .daybtn { flex-basis: 52px; min-height: 45px; }
       .timeline { padding-left: 76px; }
       .timeline::before { left: 58px; }
       .event .time { left: -76px; width: 46px; }
@@ -637,6 +632,7 @@
     .calendar { padding: 10px 20px 12px; }
     .daybtn { border-radius: 10px; }
     .daybtn.active { border-color: transparent; background: var(--green-soft); color: var(--green-dark); }
+    .daybtn.today { box-shadow: inset 0 0 0 2px rgba(0, 113, 227, .24); }
     .route-map { border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); }
     #overview { margin-top: 16px; }
     .panel-title { padding: 0 0 16px; font-size: 22px; letter-spacing: -.025em; }
@@ -703,15 +699,6 @@
         font-size: 14px;
         line-height: 1.45;
       }
-      .event:not(.is-expanded) .event-body::after {
-        position: absolute;
-        right: 12px;
-        bottom: 9px;
-        color: #8e8e93;
-        content: '›';
-        font-size: 18px;
-        line-height: 1;
-      }
       .event.transport .event-body { padding: 8px 28px 8px 12px; }
     }
     .overview-extra {
@@ -746,9 +733,7 @@
       max-height: none;
       overflow: visible;
       cursor: default;
-      -webkit-line-clamp: unset;
     }
-    .event:not(.is-expanded) .event-body::after { display: none; }
     @media (max-width: 700px) {
       .event .event-body {
         padding: 11px 12px;
@@ -776,6 +761,7 @@
           <button class="daybtn" type="button" data-day="4"><span class="n">4</span><span class="city">大柴旦</span></button>
           <button class="daybtn" type="button" data-day="5"><span class="n">5</span><span class="city">黑马河</span></button>
           <button class="daybtn" type="button" data-day="6"><span class="n">6</span><span class="city">西宁</span></button>
+          <button class="daybtn" type="button" data-day="7"><span class="n">7</span><span class="city">西安</span></button>
         </div>
       </div>
     </section>
@@ -979,6 +965,26 @@
       const mapToggle = document.querySelector('#mapToggle');
       const mapStatus = document.querySelector('#mapStatus');
       let current = 0;
+      const tripStart = '2026-09-30';
+      const tripEnd = '2026-10-07';
+      function shanghaiDateKey(date = new Date()) {
+        const parts = new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'Asia/Shanghai',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        }).formatToParts(date);
+        const values = {};
+        parts.forEach(part => { if (part.type !== 'literal') values[part.type] = part.value; });
+        return `${values.year}-${values.month}-${values.day}`;
+      }
+      function getInitialView(date = new Date()) {
+        const key = shanghaiDateKey(date);
+        if (key < tripStart || key > tripEnd) return 0;
+        if (key === tripStart) return 1;
+        return Number(key.slice(-2));
+      }
+      const initialView = getInitialView();
       let tripMap = null;
       let mapLayers = [];
       const mapPlaces = {
@@ -1107,8 +1113,12 @@
       function foldOverviewExtras() {
         const overview = document.querySelector('#overview');
         if (!overview || overview.querySelector('.overview-extra')) return;
-        const labels = ['旅行节奏', '票务状态', '住宿地址', '行前核对', '穿衣总原则'];
-        const blocks = [...overview.children].filter(node => /^(daynote|ticketbox|hotelbox|wearbox)$/.test(node.className));
+        const labels = ['票务状态', '住宿地址', '行前核对', '穿衣总原则'];
+        let daynoteCount = 0;
+        const blocks = [...overview.children].filter(node => {
+          if (node.className === 'daynote') return daynoteCount++ > 0;
+          return /^(ticketbox|hotelbox|wearbox)$/.test(node.className);
+        });
         blocks.forEach((node, index) => {
           const fold = document.createElement('details');
           fold.className = 'overview-extra';
@@ -1125,7 +1135,7 @@
         details.forEach(detail => {
           const timeline = detail.querySelector('.timeline');
           if (!timeline || detail.querySelector('.day-extra')) return;
-          const extras = [...detail.children].filter(node => /^(wearbox|viewbox|quicktips|roadbox|stay)$/.test(node.className));
+          const extras = [...detail.children].filter(node => /^(wearbox|viewbox|roadbox|stay)$/.test(node.className));
           if (!extras.length) return;
           const fold = document.createElement('details');
           fold.className = 'day-extra';
@@ -1141,7 +1151,14 @@
       function show(day, scroll = false) {
         current = Math.max(0, Math.min(7, Number(day)));
         document.body.classList.toggle('show-detail', current !== 0);
-        buttons.forEach(button => button.classList.toggle('active', Number(button.dataset.day) === current));
+        buttons.forEach(button => {
+          const buttonDay = Number(button.dataset.day);
+          button.classList.toggle('active', buttonDay === current);
+          const isToday = initialView > 0 && buttonDay === initialView;
+          button.classList.toggle('today', isToday);
+          if (isToday) button.setAttribute('aria-current', 'date');
+          else button.removeAttribute('aria-current');
+        });
         details.forEach(detail => detail.classList.toggle('show', Number(detail.dataset.detail) === current));
         updateMap(current);
         if (scroll) {
@@ -1177,7 +1194,7 @@
         }
       });
       buttons.forEach(button => button.addEventListener('click', () => show(button.dataset.day, true)));
-      show(0);
+      show(initialView);
     })();
   </script>
 </body>
